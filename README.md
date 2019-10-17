@@ -1,2 +1,2 @@
-# Gym_Manager
+# app_gym_manager
 College project
