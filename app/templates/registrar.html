@@ -1,0 +1,58 @@
+{% extends 'base.html'%}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="container-fluid">
+    <div class="row">
+        {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
+        <div class="col-10">
+
+            
+            <div id="validation" class="">
+                <div class="card-content">
+                    <h4 class="card-title">Form with validation</h4>
+                    <form>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input id="name4" type="text" class="validate">
+                                <label for="name4">Name</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">email</i>
+                                <input id="email4" type="email" class="validate">
+                                <label for="email4">Email</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">lock_outline</i>
+                                <input id="password5" type="password" class="validate">
+                                <label for="password5">Password</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">question_answer</i>
+                                <textarea id="message4" class="materialize-textarea validate"></textarea>
+                                <label for="message4">Message</label>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <button class="btn cyan waves-effect waves-light right" type="submit"
+                                            name="action">Submit
+                                        <i class="material-icons right">send</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}

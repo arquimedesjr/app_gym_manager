@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>cpf</th>
+        <th>email</th>
+        <th>dataNascimento</th>
+        <th>ação</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for aluno in lista %}
+    <tr>
+        <td>{{ aluno.nome }}</td>
+        <td>{{ aluno.cpf }}</td>
+        <td>{{ aluno.email }}</td>
+        <td>{{ aluno.dataNascimento }}</td>
+
+        <td>
+            <a href="{% url 'editar_aluno' pk=aluno.pk %}">
+                <i class="material-icons">edit</i>
+            </a>
+            <a href="{% url 'remover_aluno' pk=aluno.pk %}">
+                <i class="material-icons">delete</i>
+            </a>
+        </td>
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'cadastrar_aluno' %}">
+    <button type="submit" class="btn btn-primary">
+        Cadastrar
+    </button>
+</a>
+
+{% endblock content %}

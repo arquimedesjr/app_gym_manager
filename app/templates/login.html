@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titlePage %}
+Faça o Login
+{%endblock%}
+{% block css %}
+<style>
+    html {
+        overflow: hidden;
+    }
+</style>
+{%endblock%}
+
+{% block content %}
+<div class="container-fluid" id="pageLogin">
+    <div class="container"> 
+        <div class="row">
+            <div class="col-12 col-lg-6 mx-auto">
+                <img src="{% static 'img/logotipo-cia-life.svg' %}" alt="Logotipo Cia Life" class="mb-5 img-fluid mx-auto d-flex">
+                <div class="bg-white py-5 px-4 rounded " id="mosaic">
+                    <h1 class="mb-0 pb-2 title"> Seja bem vindo </h1>
+                    <p class="mb-0 subtitle">Faça o login preenchendo os dados abaixo.</p>
+                    <form class="pt-4" method="post" action=".?next={{ redirect_to }}">
+                        {% csrf_token %}
+                         <div class="form-group mb-0 border">
+                            <div class="w-100 px-2 py-3" id="user">
+                                <label class="mb-1 pl-2" for="username">E-mail</label>
+                                <input type="text" class="form-control border-0 pl-2" id="username" name="username" onfocus="inputBorderLogin($(this))" onblur="resetUnputBorderLogin($(this))" aria-describedby="Nome do usuário" placeholder="Ex: contato@seunome.com.br">
+                            </div>
+                        </div>
+                        <div class="form-group border border-top-0">
+                            <div class="w-100 px-2 py-3" id="senha">
+                                <label class="mb-1 pl-2" for="password">Senha</label>
+                                <input type="password" class="form-control border-0 pl-2" name="password" id="password" onfocus="inputBorderLogin($(this))" onblur="resetUnputBorderLogin($(this))" aria-describedby="Senha de acesso ao Sistema" placeholder="**********">
+                            </div>
+                        </div>
+                        <div class="row justify-content-between">
+                            <div class="col-12 col-sm-7">
+                               <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="manterConectado" value="option1">
+                                    <label class="form-check-label" for="manterConectado">Mantenha-me conectado</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-5 pt-2 pt-sm-0">
+                                <a href="{% url 'esqueci_minha_senha' %}">Esqueceu sua senha?</a>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-wrap pt-3 pt-lg-4">
+                            <button  type="submit" class="btn btn-base-blue" name="login"> Login </button>
+                        </div>
+
+                        <div class="flex-column pt-4 d-none" id="loginSocial">
+                            <p class="mb-3"> Ou faça login com</p>
+                            <div class="d-flex">
+                                <img class="d-block-inline mr-3" src="{% static 'img/login-facebook.svg' %}">
+                                <img class="d-block-inline" src="{% static 'img/login-google.svg' %}">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <div>
+</div>
+
+{% block scripts %}
+<script src="{% static 'js/main.js' %}"> </script>
+{% endblock %}
+{% endblock content %}

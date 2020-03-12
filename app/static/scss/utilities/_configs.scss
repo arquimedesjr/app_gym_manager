@@ -1,0 +1,32 @@
+$color-blue: #2E3192;
+$color-yellow: #F0B413;
+$color-purple: #6264AD;
+$color-grey: #979797;
+$color-white: #fff;
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,500i,600,600i,700,800,900&display=swap');
+
+body, html {
+    font-family: 'Poppins', sans-serif;
+}
+.form-control {
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+h1 {
+    font-size: 2.63rem;
+    font-weight: 600;
+    @media(max-width: 650px) {
+        font-size: 2rem;
+    }
+}
+
+h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    @media(max-width: 650px) {
+        font-size: 1.7rem;
+    }
+}

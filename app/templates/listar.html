@@ -1,0 +1,51 @@
+  
+{% extends 'base.html' %}
+
+{% block content %}
+{% if request.user.is_staff %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
+            <div class="col-10">
+                <div class="col s12">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Mail</th>
+                            <th>Password</th>
+                            {% if request.user.is_superuser %}
+                            <th>Action</th>
+                            {% endif %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for usuario in lista %}
+                        <tr>
+                            <td>{{ usuario.username }}</td>
+                            <td>{{ usuario.email }}</td>
+                            {% if request.user.is_superuser %}
+                            <td>{{ usuario.password }}</td>
+                            <td>
+                                <a href="{% url 'remover_usuario' pk=usuario.pk %}">
+                                <i class="material-icons">delete</i>
+                                </a>
+                            </td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% if request.user.is_staff %}
+                    <a href="{% url 'registrar_usuario' %}">
+                        <button type="submit" class="btn btn-primary">
+                            Cadastrar
+                        </button>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div> 
+{% endif %}
+{% endblock content %}

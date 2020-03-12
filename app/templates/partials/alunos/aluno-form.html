@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block titlePage %} Cadastrar Aluno {% endblock %}
+{% block content %}
+
+{% if request.user.is_staff %}
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
+            <div class="col-10">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">
+                        Salvar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endif %} 
+
+{% endblock content %}
