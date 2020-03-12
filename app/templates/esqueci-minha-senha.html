@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titlePage %}
+Esqueci minha Senha
+{%endblock%}
+
+{% block content %}
+<div class="container-fluid" id="esqueci-minha-senha">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-10 col-lg-7 col-xl-6 mx-auto">
+                <img src="{% static 'img/logotipo-cia-life.svg' %}" alt="Logotipo Cia Life" class="mb-5 img-fluid mx-auto d-flex">
+                <div class="bg-white py-5 px-4 rounded" id="mosaic">
+                    <h1 class="mb-0 pb-2 title"> Esqueci minha senha </h1>
+                    <p class="mb-0 subtitle">Preencha os dados para recuperar sua senha</p>
+                    <form class="pt-4">
+                        <div class="form-row">
+                            <div class="col col-lg-6 form-group">
+                                <label class="mb-1" for="cpf">CPF</label>
+                                <input type="text" class="form-control" id="cpf" aria-describedby="cpf">
+                            </div>
+                            <div class="col-12 form-group">
+                                <label class="mb-1" for="email">Digite seu e-mail</label>
+                                <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Ex: contato@seunome.com.br">
+                            </div>
+                        </div>
+                        <div class="d-flex flex-wrap pt-3 pt-lg-4">
+                            <a href="#" class="btn btn-base-blue mr-sm-3 mb-3 mb-sm-0">Recuperar senha </a>
+                            <a href="{% url 'logar' %}" class="btn btn-base-blue-outline"> Voltar para o Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/libs/jqueryMask.min.js' %}"> </script>
+<script src="{% static 'js/libs/sweetalert.min.js' %}"> </script>
+{% endblock %}
