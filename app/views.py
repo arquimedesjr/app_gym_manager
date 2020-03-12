@@ -3,12 +3,15 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.forms import ModelForm
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
-
+from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
+from .models import *
+
+
 @login_required
 def registrar_usuario(request, template_name="registrar.html"):
     if request.method == "POST":
@@ -75,10 +78,60 @@ def remover_usuario(request, pk, template_name='delete.html'):
 
     return render(request, template_name, {'usuario': usuario})
 
+
 @login_required
 def index(request, template_name='index.html'):
     return render(request, template_name)
 
+
 def deslogar(request):
     logout(request)
     return HttpResponseRedirect(settings.LOGIN_URL)
+
+
+class AlunoForm(ModelForm):
+    class Meta:
+        model = Aluno
+        fields = ['nome', 'cpf', 'email', 'dataNascimento']
+
+
+def cadastrar_aluno(request, template_name='aluno/aluno_form.html'):
+    form = AlunoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('aluno_list')
+    return render(request, template_name, {'form': form})
+
+
+def listar_aluno(request, template_name="aluno/aluno_list.html"):
+    query = request.GET.get("busca")
+    if query:
+        aluno = Aluno.objects.filter(modelo__icontains=query)
+    else:
+        aluno = Aluno.objects.all()
+    alunos = {'lista': aluno}
+    return render(request, template_name, alunos)
+
+
+def editar_aluno(request, pk, template_name='aluno/aluno_form.html'):
+    aluno = get_object_or_404(Aluno, pk=pk)
+    if request.method == "POST":
+        form = AlunoForm(request.POST, instance=aluno)
+        if form.is_valid():
+            form.save()
+            return redirect('aluno_list')
+    else:
+        form = AlunoForm(instance=aluno)
+    return render(request, template_name, {'form': form})
+
+
+def remover_aluno(request, pk, template_name='aluno/aluno_delete.html'):
+    aluno = Aluno.objects.get(pk=pk)
+    if request.method == "POST":
+        aluno.delete()
+        return redirect('aluno_list')
+    return render(request, template_name, {'aluno': aluno})
+
+
+def resetar_senha(request, template_name='registration/password_reset_form.html'):
+    return render(request, template_name)

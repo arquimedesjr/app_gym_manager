@@ -30,16 +30,13 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'app.apps.AppConfig',
-    # 'django.admin.bootstrapped',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django.contrib.redirects',
-    # 'django.contrib.sites',
-    'crispy_forms',
+    # 'django-bootstrap-form',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +53,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'app_gym_manager.urls'
 LOGIN_URL = 'logar'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = '' # mail service smtp
+EMAIL_HOST_USER = '' # email id
+EMAIL_HOST_PASSWORD = '' #password
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 TEMPLATES = [
     {

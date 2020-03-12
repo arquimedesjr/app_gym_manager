@@ -1,108 +1,14 @@
 <!DOCTYPE html>
-<!--
-Template Name: Materialize - Material Design Admin Template
-Author: PixInvent
-Website: http://www.pixinvent.com/
-Contact: hello@pixinvent.com
-Follow: www.twitter.com/pixinvents
-Like: www.facebook.com/pixinvents
-Purchase: https://themeforest.net/item/materialize-material-design-admin-template/11446068?ref=pixinvent
-Renew Support: https://themeforest.net/item/materialize-material-design-admin-template/11446068?ref=pixinvent
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
-<html class="loading"
-      lang="en"
-      data-textdirection="ltr">
-<!-- BEGIN: Head-->
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="csrf-token" content="RuEJlQygGGuzgcX3D9IeH2GHutdF35EclIBqt551">
-
-    <title>User Login | Materialize - Material Design Admin Template</title>
-    <link rel="apple-touch-icon"
-          href="https://www.pixinvent.com/materialize-material-design-admin-template/laravel/demo-1/images/favicon/apple-touch-icon-152x152.png">
-    <link rel="shortcut icon" type="image/x-icon"
-          href="https://www.pixinvent.com/materialize-material-design-admin-template/laravel/demo-1/images/favicon/favicon-32x32.png">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <!-- Include core + vendor Styles -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" type="text/css"
-          href="https://www.pixinvent.com/materialize-material-design-admin-template/laravel/demo-1/vendors/vendors.min.css">
-    <!-- BEGIN: VENDOR CSS-->
-    <!-- END: VENDOR CSS-->
-    <!-- BEGIN: Page Level CSS-->
-    <link rel="stylesheet" type="text/css"
-          href="https://www.pixinvent.com/materialize-material-design-admin-template/laravel/demo-1/css/themes/vertical-modern-menu-template/materialize.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://www.pixinvent.com/materialize-material-design-admin-template/laravel/demo-1/css/themes/vertical-modern-menu-template/style.css">
-
-
-    <link rel="stylesheet" type="text/css"
-          href="https://www.pixinvent.com/materialize-material-design-admin-template/laravel/demo-1/css/pages/login.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://www.pixinvent.com/materialize-material-design-admin-template/laravel/demo-1/css/pages/register.css">
-
-    <!-- END: Page Level CSS-->
-    <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css"
-          href="https://www.pixinvent.com/materialize-material-design-admin-template/laravel/demo-1/css/laravel-custom.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://www.pixinvent.com/materialize-material-design-admin-template/laravel/demo-1/css/custom/custom.css">
-    <!-- END: Custom CSS-->
+    <title>Title</title>
 </head>
 <body>
 
-{% if request.user.is_authenticated %}
-<nav>
-    <div class="nav-wrapper">
-        <a href="{% url 'index' %}" class="brand-logo right">Logo</a>
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
-            <li><a href="{% url 'registrar_usuario' %}">Aluno</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
-        </ul>
-    </div>
-</nav>
-{% endif %}
 {% block content %}
 
 {% endblock %}
-<!-- BEGIN VENDOR JS-->
-<script src="https://www.pixinvent.com/materialize-material-design-admin-template/laravel/demo-1/js/vendors.min.js"></script>
-<!-- BEGIN VENDOR JS-->
-<!-- BEGIN PAGE VENDOR JS-->
-<!-- END PAGE VENDOR JS-->
-<!-- BEGIN THEME  JS-->
-<script src="https://www.pixinvent.com/materialize-material-design-admin-template/laravel/demo-1/js/plugins.js"></script>
-<script src="https://www.pixinvent.com/materialize-material-design-admin-template/laravel/demo-1/js/search.js"></script>
-<script src="https://www.pixinvent.com/materialize-material-design-admin-template/laravel/demo-1/js/custom/custom-script.js"></script>
-<!-- END THEME  JS-->
-<!-- BEGIN PAGE LEVEL JS-->
 
-<script
-        src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-<script>
-        $(document).ready(function() {
-            $('select').material_select();
-        });
-      {% if messages %}
-        {% for message in messages %}
-             $(document).ready(function() {
-                Materialize.toast('{{ message }}', 4000);
-            });
-        {% endfor %}
-    {% endif %}
-
-
-</script>
 </body>
 </html>
