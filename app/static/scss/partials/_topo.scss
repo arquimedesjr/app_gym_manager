@@ -1,4 +1,14 @@
 [data-section="topo-dashboard"] {
+    @media (min-width: 991px) {
+        border-bottom: 1px solid rgba(202, 203, 227, .3);
+    }
+    @media (max-width: 991px) {
+        #infoUser,
+        .col-4 {
+            border-bottom: 1px solid rgba(202, 203, 227, .3);
+        }
+    }
+
     form {
         input::placeholder {
             color: #fff;
@@ -17,4 +27,8 @@
             }
         }
     }
+    #infoUser {
+        border-left: 1px solid rgba(202, 203, 227, .3);
+    }
+
 }

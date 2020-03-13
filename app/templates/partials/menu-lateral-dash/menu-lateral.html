@@ -1,21 +1,28 @@
 {% load static %}
-        <div class="col-2 d-flex flex-column justify-content-between" style="height:100vh">
-            <nav class="py-3">
-                <a href="/dashboard"> <img src="{% static 'img/logotipo-cia-life.svg' %}" style="max-width: 60px" alt="Logotipo Cia Life" class="mx-auto d-flex img-fluid"> </a>
-                <ul class="list-group list-group-flush pt-3">
-                    <li class="list-group-item">
-                        <a href="{% url 'index' %}" class="btn btn-base-blue d-flex">Dashboard <i> </i> </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="{% url 'aluno_list' %}" class="">Alunos <i> </i> </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="{% url 'cadastrar_aluno' %}" class="">Cadastrar Alunos <i> </i> </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="#" class="">Dados Pessoais <i> </i> </a>
-                    </li>
-                </ul>
+        <div class="col-12 col-lg-2 d-flex flex-column justify-content-between" id="menuLat">
+            <nav class="py-3 px-0 navbar navbar-expand-lg">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#toggleNavBar" aria-controls="toggleNavBar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="toggleNavBar">
+                    <a href="/dashboard">
+                        <img src="{% static 'img/logotipo-cia-life.svg' %}" style="max-width: 60px" alt="Logotipo Cia Life" class="mx-auto d-flex img-fluid">
+                    </a>
+                    <ul class="list-group list-group-flush pt-3">
+                        <li class="list-group-item">
+                            <a href="{% url 'index' %}" class="btn btn-base-blue d-flex">Dashboard <i> </i> </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{% url 'aluno_list' %}" class="">Alunos <i> </i> </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="{% url 'cadastrar_aluno' %}" class="">Cadastrar Alunos <i> </i> </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="#" class="">Dados Pessoais <i> </i> </a>
+                        </li>
+                    </ul>
+                </div>
         </nav>
             <div class="d-flex justify-content-center pb-3">
                 <a class="text-center text-danger" href="{% url 'deslogar' %}"> 

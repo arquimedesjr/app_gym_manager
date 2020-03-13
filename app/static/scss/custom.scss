@@ -69,3 +69,71 @@
         }
     }
 }
+
+#content-dashboard {
+    background: linear-gradient(to bottom, #2e3192 300px, #fff 0);
+    background: -moz-linear-gradient(to bottom, #2e3192 300px, #fff 0);
+    background: -webkit-linear-gradient(to bottom, #2e3192 300px, #fff 0);
+    min-height: 100vh;
+}
+
+#sectionTitlePage {
+    padding-top: 2rem;
+    h1 {
+        font-size: 1.8rem;
+        font-weight: 500;
+        letter-spacing: .5px;
+    }
+    ul {
+        flex-direction: row;
+        li {
+            font-style: italic;
+            background-color: transparent;
+            position: relative;
+            a, a:hover {
+                color: #fff;
+            }
+            &:not(:first-child) {
+                padding-left: 2.5rem !important;
+                &::before {
+                    content: "/";
+                    position: absolute;
+                    top: 0;
+                    left: 15px;
+                }
+            }
+            &::before {
+                content: "/";
+                position: absolute;
+                top: 0;
+                left: 25px;
+            }
+        }
+    }
+}
+
+#menuLat {
+    min-height: 100vh;
+    box-shadow: 3px 0 70px 0px rgba(0,0,0,.16);
+    z-index: 1;
+    transition: .7s all ease-out;
+    background-color: #fff;
+    @media (max-width: 991px) {
+        position: fixed;
+        left: 0;
+        z-index: 99;
+        opacity: 0;
+        display: block;
+    }
+    nav {
+        flex-direction: column;
+        .collapse {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            ul {
+                width: 100%;
+            }
+        }
+    }
+}
