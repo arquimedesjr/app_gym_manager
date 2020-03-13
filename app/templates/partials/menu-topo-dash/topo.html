@@ -1,0 +1,27 @@
+{% load static %}
+
+<div class="row py-3" id="topo" data-section="topo-dashboard" style="background-color: #2E3192;">
+    <div class="col-5">
+        <form method="get" action="">
+            <div class="input-group mb-0">
+                <input type="text" class="form-control" placeholder="Pesquisar">
+                <div class="input-group-append">
+                  <button class="btn" type="button" style="min-width: auto;">
+                    <i class="fa fa-search text-white"></i>
+                  </button>
+                </div>
+              </div>
+        </form>
+    </div>
+    <div class="col-7 align-items-center d-flex justify-content-end">
+        <div class="dropdown show">
+            <a class="btn dropdown-toggle py-0 text-white" href="#" role="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="{% static 'img/img-user.png' %}" class="img-fluid pr-3" alt="Imagem do usuário Logado"> Dropdown link
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownUser">
+              <a class="dropdown-item" href="#">Meus dados pessoais</a>
+              <a class="dropdown-item" href="{% url 'deslogar' %}">Sair</a>
+            </div>
+          </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 
 @import "mixins/custom-mixins";
 @import "utilities/_configs";
-
+@import 'partials/topo';
 
 .btn {
     @include btn-base;

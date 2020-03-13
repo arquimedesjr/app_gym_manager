@@ -7,6 +7,7 @@
         <div class="row">
             {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
             <div class="col-10">
+                {% include 'partials/menu-topo-dash/topo.html' %}
                 <form method="post">{% csrf_token %}
                     <h4>Tem certeza que deseja excluir o veículo "{{ aluno.nome }}"?</h4>
                     <br/>
