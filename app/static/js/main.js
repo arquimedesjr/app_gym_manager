@@ -23,3 +23,11 @@ function resetUnputBorderLogin(e) {
         })
     }
 }
+
+function dropMenuMB(e) {
+    $('#menuLat').addClass('drop');
+}
+
+function dropMenuOff(e) {
+    $('#menuLat').removeClass('drop');
+}
