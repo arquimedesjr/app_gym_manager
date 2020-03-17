@@ -22,6 +22,12 @@ Faça o Login
                     <p class="mb-0 subtitle">Faça o login preenchendo os dados abaixo.</p>
                     <form class="pt-4" method="post" action=".?next={{ redirect_to }}">
                         {% csrf_token %}
+                        {% for message in messages %}
+                            <div class="alert alert-warning">
+                                <a class="close" href="#" data-dismiss="alert">×</a>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
                          <div class="form-group mb-0 border">
                             <div class="w-100 px-2 py-3" id="user">
                                 <label class="mb-1 pl-2" for="username">Usuário</label>
@@ -48,7 +54,9 @@ Faça o Login
                         <div class="d-flex flex-wrap pt-3 pt-lg-4">
                             <button  type="submit" class="btn btn-base-blue" name="login"> Login </button>
                         </div>
-
+                        {% for error in form.username.errors %}
+                            <p class="text-danger">{{ error }}</p>
+                        {% endfor %}
                         <div class="flex-column pt-4 d-none" id="loginSocial">
                             <p class="mb-3"> Ou faça login com</p>
                             <div class="d-flex">

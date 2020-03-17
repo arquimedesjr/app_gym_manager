@@ -52,8 +52,8 @@ def logar(request, template_name="login.html"):
             return HttpResponseRedirect(next)
 
         else:
-            messages.error(request, 'Usuário ou senha incorretos.')
-            return HttpResponseRedirect(settings.LOGIN_URL)
+            messages.error(request, 'Usuário ou senha informadas, estão incorretas.')
+            return redirect('logar')
 
     return render(request, template_name, {'redirect_to': next})
 
