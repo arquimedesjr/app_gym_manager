@@ -1,5 +1,5 @@
 # app_gym_manager
-![Alt Text](https://github.com/arquimedesjr/app_gym_manager/tree/master/app/static/img/logotipo-cia-life.svg)
+![Alt Text](https://user-images.githubusercontent.com/30847731/76859403-089a2b00-6838-11ea-802f-ee4b6643171a.PNG)
 
 versão python
 python -m django --versio
