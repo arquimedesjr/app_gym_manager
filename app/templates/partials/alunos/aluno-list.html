@@ -1,53 +1,118 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block titlePage %} Listar Alunos {% endblock %}
 {% block content %}
 
 {% if request.user.is_staff %}
-    <div class="container-fluid">
-        <div class="row">
-            {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
-            <div class="col-12 col-lg-10" id="content-dashboard">
-                {% include 'partials/menu-topo-dash/topo.html' %}
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>cpf</th>
-                        <th>email</th>
-                        <th>dataNascimento</th>
-                        <th>ação</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for aluno in lista %}
-                    <tr>
-                        <td>{{ aluno.nome }}</td>
-                        <td>{{ aluno.cpf }}</td>
-                        <td>{{ aluno.email }}</td>
-                        <td>{{ aluno.dataNascimento }}</td>
-                
-                        <td>
-                            <a href="{% url 'editar_aluno' pk=aluno.pk %}">
-                                <i class="material-icons">edit</i>
-                            </a>
-                            <a href="{% url 'remover_aluno' pk=aluno.pk %}">
-                                <i class="material-icons">delete</i>
-                            </a>
-                        </td>
-                
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                <a href="{% url 'cadastrar_aluno' %}">
-                    <button type="submit" class="btn btn-primary">
-                        Cadastrar
-                    </button>
-                </a>
-                
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
+        <div class="col-12 col-lg-10" id="content-dashboard">
+            {% include 'partials/menu-topo-dash/topo.html' %}
+            <section class="container-fluid">
+                <div class="row">
+                    <div class="col-12 text-white" id="sectionTitlePage">
+                        <h1 class="mb-3 mb-lg-4">Lista de alunos</h1>
+                        <ul class="list-group list-group-horizontal text-white bg-transparent">
+                            <li class="list-group-item border-0 p-0"><a href="{% url 'index' %}"><i class="fas fa-home pr-3"></i> Dashboard</a></li>
+                            <li class="list-group-item border-0 p-0"> Lista de alunos</li>
+                        </ul>
+                    </div>
+                    <div class="col-12" data-section="atalhos" id="">
+                        <div class="row px-0 pt-5">
+                            <div class="col-12 col-md-6 col-lg-10 mb-4">
+                                <div class="card">
+                                    <div class="card-header d-flex align-items-center justify-content-between">
+                                        <div class="title d-flex align-items-center">
+                                            <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
+                                            <h2 class="mb-0 h4">Todos os Alunos</h2>
+                                        </div>
+                                        <a href="{% url 'cadastrar_aluno' %}" class="btn btn-base-yellow">Adicionar Aluno</a>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12 col-md-7 col-lg-8">
+                                                <form method="get" action="">
+                                                    <div class="input-group mb-0">
+                                                        <input type="text" class="form-control" placeholder="Pesquisar">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-outline-secondary" type="button"
+                                                                style="min-width: auto;">
+                                                                Filtrar
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="col-12 col-md-5 col-lg-4">
+                                                <div class="paginacao">
+                                                    <span class="step-links d-flex align-items-center">
+                                                        {% if paginacao.has_previous %}
+                                                            <a class="btn btn-secondary" href="?page={{ paginacao.previous_page_number }}"><i class="fas fa-arrow-circle-left"></i></a>
+                                                        {% endif %}
+                                                    
+                                                        <span class="current">
+                                                            {{ paginacao.number }} de {{ paginacao.paginator.num_pages }}
+                                                        </span>
+                                                    
+                                                        {% if posts.has_next %}
+                                                            <a class="btn btn-secondary" href="?{{ paginacao.next_page_number }}"><i class="fas fa-arrow-circle-right"></i></a>
+                                                        {% endif %}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row px-0 pt-3" id="listAlunos" data-section="listAlunos">
+                                            <div class="col-12 py-3" id="listAlunosTopo">
+                                                <div class="row">
+                                                    <div class="col-12 col-lg-6">
+                                                        <h3 class="h6 mb-0">Nome</h3>
+                                                    </div>
+                                                    <div class="col-12 col-lg-2">
+                                                        <h3 class="h6 mb-0">CPF</h3>
+                                                    </div>
+                                                    <div class="col-12 col-lg-2">
+                                                        <h3 class="h6 mb-0">Objetivo</h3>
+                                                    </div>
+                                                    <div class="col-12 col-lg-2">
+                                                        <h3 class="h6 mb-0">Ação</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                {% for aluno in lista %}
+                                                <div class="row align-items-center border py-2 mb-2" id="listAlunosItem">
+                                                    <div class="col-12 col-lg-6">
+                                                        <p class="mb-0">{{ aluno.nome }}</p>
+                                                    </div>
+                                                    <div class="col-12 col-lg-2">
+                                                        <p class="mb-0">{{ aluno.cpf }}</p>
+                                                    </div>
+                                                    <div class="col-12 col-lg-2">
+                                                        <p class="mb-0">{{ aluno.dataNascimento }}</p>
+                                                    </div>
+                                                    <div class="col-12 col-lg-2">
+                                                        <a class="btn btn-sm btn-base-purple-light mr-3" href="{% url 'editar_aluno' pk=aluno.pk %}">
+                                                            <i class="material-icons">Ver detalhes</i>
+                                                        </a>
+                                                        <!-- <a class="btn btn-sm btn-outline-danger " href="{% url 'remover_aluno' pk=aluno.pk %}">
+                                                            <i class="material-icons">Excluir</i>
+                                                        </a> -->
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
+</div>
 {% endif %}
 
 {% endblock content %}

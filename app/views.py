@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Aluno
 from .forms import AlunoForm
+from django.core.paginator import Paginator
 
 # Create your views here.
 @login_required
@@ -103,7 +104,12 @@ def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
         aluno = Aluno.objects.filter(modelo__icontains=query)
     else:
         aluno = Aluno.objects.all()
-    alunos = {'lista': aluno}
+
+    paginator  = Paginator(aluno, 2)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    alunos = {'lista': aluno, 'paginacao': page_obj}
     return render(request, template_name, alunos)
 
 
