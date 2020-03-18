@@ -214,13 +214,10 @@
 [data-section="listAlunos"] {
     #listAlunosItem {
         transition: .7s all ease-out;
+        border: 1px solid #ececec;
         &:hover {
+            border-color: transparent;
             box-shadow: 0 5px 20px 4px rgba(0,0,0,.1);
         }
     }
-}
-
-
-[data-section="atalhos"] {
-
 }

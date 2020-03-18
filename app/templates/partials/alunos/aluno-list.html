@@ -65,7 +65,7 @@
                                         <div class="row px-0 pt-3" id="listAlunos" data-section="listAlunos">
                                             <div class="col-12 py-3" id="listAlunosTopo">
                                                 <div class="row">
-                                                    <div class="col-12 col-lg-6">
+                                                    <div class="col-12 col-lg-5">
                                                         <h3 class="h6 mb-0">Nome</h3>
                                                     </div>
                                                     <div class="col-12 col-lg-2">
@@ -74,16 +74,16 @@
                                                     <div class="col-12 col-lg-2">
                                                         <h3 class="h6 mb-0">Objetivo</h3>
                                                     </div>
-                                                    <div class="col-12 col-lg-2">
-                                                        <h3 class="h6 mb-0">Ação</h3>
+                                                    <div class="col-12 col-lg-3">
+                                                        <h3 class="h6 mb-0">Ações</h3>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 {% for aluno in lista %}
                                                 <div class="row align-items-center border py-2 mb-2" id="listAlunosItem">
-                                                    <div class="col-12 col-lg-6">
-                                                        <p class="mb-0">{{ aluno.nome }}</p>
+                                                    <div class="col-12 col-lg-5">
+                                                        <p class="mb-0" id="nomeUser">{{ aluno.nome }}</p>
                                                     </div>
                                                     <div class="col-12 col-lg-2">
                                                         <p class="mb-0">{{ aluno.cpf }}</p>
@@ -91,13 +91,15 @@
                                                     <div class="col-12 col-lg-2">
                                                         <p class="mb-0">{{ aluno.dataNascimento }}</p>
                                                     </div>
-                                                    <div class="col-12 col-lg-2">
-                                                        <a class="btn btn-sm btn-base-purple-light mr-3" href="{% url 'editar_aluno' pk=aluno.pk %}">
+                                                    <div class="col-12 col-lg-3">
+                                                        <a class="btn btn-sm btn-base-purple-light mr-3" style="min-width: auto;" href="{% url 'editar_aluno' pk=aluno.pk %}">
                                                             <i class="material-icons">Ver detalhes</i>
                                                         </a>
-                                                        <!-- <a class="btn btn-sm btn-outline-danger " href="{% url 'remover_aluno' pk=aluno.pk %}">
+                                                        <a class="btn btn-sm btn-outline-danger" href="{% url 'remover_aluno' pk=aluno.pk %}" style="min-width: auto;">
+                                                            <input type="hidden" value="{{ aluno.nome }}">
+                                                            <input type="hidden" id="actionUser" value="{{ aluno.pk }}">
                                                             <i class="material-icons">Excluir</i>
-                                                        </a> -->
+                                                        </a>
                                                     </div>
                                                 </div>
                                                 {% endfor %}
@@ -113,6 +115,52 @@
         </div>
     </div>
 </div>
+<!-- 
+<form method="get">
+    {% csrf_token %}
+    <h4>Tem certeza que deseja excluir o aluno?</h4>
+    <input type="hidden" name="">
+</form>
 {% endif %}
+
+{% block scripts %}
+<script>
+    function deleteUser(e) {
+        let user = $(e).find('input').val();
+        let action = $(e).find('#actionUser').val();
+        Swal.fire({
+            title: `Tem certeza que deseja excluir o usuário ${user}?`,
+            text: "Você não poderá voltar atrás depois disso",
+            icon: 'warning',
+            html: '',
+            showCancelButton: true,
+            confirmButtonColor: '#2E3192',
+            cancelButtonColor: '#d33',
+            confirmButtonText: `
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Remover</button>
+                </form>`,
+            cancelButtonText: 'Cancelar',
+            showClass: {
+                popup: 'animated fadeInDown faster'
+            },
+            hideClass: {
+                popup: 'animated fadeOutUp faster'
+            },
+            })
+            .then((result) => {
+                $('form').find('input').attr('name', action );
+                $('form').submit();
+                Swal.fire(
+                    'Excluído!',
+                    'success'
+                    )
+                debugger;
+            })
+            debugger;
+    }
+</script>
+{% endblock %} -->
 
 {% endblock content %}
