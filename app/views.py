@@ -139,6 +139,9 @@ def remover_aluno(request, pk, template_name='partials/alunos/aluno-delete.html'
         return redirect('aluno_list')
     return render(request, template_name, {'aluno': aluno})
 
+def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html'):
+    aluno = Aluno.objects.get(pk=pk)
+    return render(request, template_name, {'aluno': aluno })
 
 def resetar_senha(request, template_name='registration/password_reset_form.html'):
     return render(request, template_name)

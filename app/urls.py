@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^listar_aluno/', listar_aluno, name='aluno_list'),
     url(r'^editar_aluno/(?P<pk>[0-9]+)', editar_aluno, name='editar_aluno'),
     url(r'^remover_aluno/(?P<pk>[0-9]+)', remover_aluno, name='remover_aluno'),
+    url(r'^detalhes-do-aluno/(?P<pk>[0-9]+)', details_aluno, name='details_aluno'),
 
     # não definido
     url('registrar_usuario/$', registrar_usuario, name='registrar_usuario'),
