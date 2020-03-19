@@ -11,7 +11,7 @@ Dashboard Admin
         {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
         <div class="col-12 col-lg-10" id="content-dashboard">
             {% include 'partials/menu-topo-dash/topo.html' %}
-            <section class="container-fluid">
+            <section class="container-fluid px-0 px-sm-2">
                 <div class="row">
                     <div class="col-12 text-white" id="sectionTitlePage">
                         <h1 class="mb-3 mb-lg-4">Dashboard</h1>
@@ -46,7 +46,4 @@ Dashboard Admin
 {% endif %}
 
 
-{% block scripts %}
-<script src="{% static 'js/main.js' %}"></script>
-{% endblock %}
 {% endblock %}

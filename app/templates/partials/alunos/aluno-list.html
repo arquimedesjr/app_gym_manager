@@ -9,7 +9,7 @@
         {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
         <div class="col-12 col-lg-10" id="content-dashboard">
             {% include 'partials/menu-topo-dash/topo.html' %}
-            <section class="container-fluid">
+            <section class="container-fluid px-0 px-sm-2">
                 <div class="row">
                     <div class="col-12 text-white" id="sectionTitlePage">
                         <h1 class="mb-3 mb-lg-4">Lista de alunos</h1>
@@ -20,9 +20,9 @@
                     </div>
                     <div class="col-12" data-section="atalhos" id="">
                         <div class="row px-0 pt-5">
-                            <div class="col-12 col-md-6 col-lg-10 mb-4">
+                            <div class="col-12 mb-4">
                                 <div class="card">
-                                    <div class="card-header d-flex align-items-center justify-content-between">
+                                    <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
                                         <div class="title d-flex align-items-center">
                                             <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
                                             <h2 class="mb-0 h4">Todos os Alunos</h2>
@@ -62,10 +62,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row px-0 pt-3" id="listAlunos" data-section="listAlunos">
+                                        <div class="row px-0 pt-lg-3" id="listAlunos" data-section="listAlunos">
                                             <div class="col-12 py-3" id="listAlunosTopo">
-                                                <div class="row">
-                                                    <div class="col-12 col-lg-5">
+                                                <div class="row d-none d-lg-flex">
+                                                    <div class="col-12 col-lg-4">
                                                         <h3 class="h6 mb-0">Nome</h3>
                                                     </div>
                                                     <div class="col-12 col-lg-2">
@@ -74,24 +74,35 @@
                                                     <div class="col-12 col-lg-2">
                                                         <h3 class="h6 mb-0">Objetivo</h3>
                                                     </div>
-                                                    <div class="col-12 col-lg-3">
+                                                    <div class="col-12 col-lg-4">
                                                         <h3 class="h6 mb-0">Ações</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="row d-block d-lg-none">
+                                                    <div class="col-12 col-lg-5">
+                                                        <h3 class="h5 mb-0">Lista dos alunos</h3>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 {% for aluno in lista %}
-                                                <div class="row align-items-center py-2 mb-2" id="listAlunosItem">
-                                                    <div class="col-12 col-lg-5">
-                                                        <p class="mb-0" id="nomeUser">{{ aluno.nome }}</p>
+                                                <div class="row align-items-center py-2 mb-2 mx-0" id="listAlunosItem">
+                                                    <div class="col-12 col-lg-4 pb-2 pb-lg-0">
+                                                        <p class="mb-0" id="nomeUser">
+                                                            <span class="h6 font-weight-bold d-inlilne-block d-lg-none">Nome: </span>
+                                                            {{ aluno.nome }}</p>
                                                     </div>
-                                                    <div class="col-12 col-lg-2">
-                                                        <p class="mb-0">{{ aluno.cpf }}</p>
+                                                    <div class="col-12 col-lg-2 pb-2 pb-lg-0">
+                                                        <p class="mb-0">
+                                                            <span class="h6 font-weight-bold d-inline-block d-lg-none">CPF: </span>
+                                                            {{ aluno.cpf }}</p>
                                                     </div>
-                                                    <div class="col-12 col-lg-2">
-                                                        <p class="mb-0">{{ aluno.dataNascimento }}</p>
+                                                    <div class="col-12 col-lg-2 pb-2 pb-lg-0">
+                                                        <p class="mb-0">
+                                                            <span class="h6 font-weight-bold d-block d-lg-none">Objetivo: </span>
+                                                            {{ aluno.dataNascimento }}</p>
                                                     </div>
-                                                    <div class="col-12 col-lg-3">
+                                                    <div class="col-12 col-lg-4 pt-2 pt-lg-0">
                                                         <a class="btn btn-sm btn-base-purple-light mr-3" style="min-width: auto;" href="{% url 'editar_aluno' pk=aluno.pk %}">
                                                             Ver detalhes
                                                         </a>
