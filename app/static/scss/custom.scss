@@ -3,6 +3,11 @@
 @import "utilities/_configs";
 @import 'partials/topo';
 
+
+.swal2-icon.swal2-warning {
+    border-color: #f0b413 !important;
+color: #f0b413 !important;
+}
 .btn {
     @include btn-base;
     &.btn-base-blue {
@@ -41,8 +46,8 @@
     }
 
     &.btn-base-purple-light  {
-        background-color: $color-white;
-        color: $color-purple;
+        background-color: $color-purple;
+        color: $color-white;
         border-color: $color-purple;
         border-width: 2px;
         &:hover {

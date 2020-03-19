@@ -109,9 +109,12 @@ def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    # if request.method == "GET":
-    #     print(request.GET)
-    #     # return redirect('index')
+    if request.method == "POST":
+        data = request.POST.copy()
+        pkAluno = data.get('pkaluno')
+        aluno = Aluno.objects.get(pk=pkAluno)
+        aluno.delete()
+        return redirect('aluno_list')
             
     alunos = {'lista': aluno, 'paginacao': page_obj}
     return render(request, template_name, alunos)
