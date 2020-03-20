@@ -15,10 +15,10 @@ urlpatterns = [
     url('index/$', index, name='index'),
 
     # aluno
-    url('cadastrar_aluno/', cadastrar_aluno, name='cadastrar_aluno'),
-    url(r'^listar_aluno/', listar_aluno, name='aluno_list'),
-    url(r'^editar_aluno/(?P<pk>[0-9]+)', editar_aluno, name='editar_aluno'),
-    url(r'^remover_aluno/(?P<pk>[0-9]+)', remover_aluno, name='remover_aluno'),
+    url('cadastrar-aluno/', cadastrar_aluno, name='cadastrar_aluno'),
+    url(r'^listar-aluno/', listar_aluno, name='aluno_list'),
+    url(r'^editar-aluno/(?P<pk>[0-9]+)', editar_aluno, name='editar_aluno'),
+    url(r'^remover-aluno/(?P<pk>[0-9]+)', remover_aluno, name='remover_aluno'),
     url(r'^detalhes-do-aluno/(?P<pk>[0-9]+)', details_aluno, name='details_aluno'),
 
     # não definido

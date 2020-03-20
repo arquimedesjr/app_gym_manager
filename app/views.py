@@ -105,7 +105,7 @@ def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
     else:
         aluno = Aluno.objects.all()
 
-    paginator  = Paginator(aluno, 2)
+    paginator  = Paginator(aluno, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
