@@ -6,6 +6,8 @@
 
 
 ---
+# Config 
+
 ## Versão python
 
 ```python
@@ -13,38 +15,39 @@
 python -m django --versio
 
 ```
----
 
-
-criar venv
 ## Criar venv
 ```python
 
-
 virtualenv -p python3 venv
 ```
----
 
-acessar venv
+## Access venv
 
 ```
 .venv\Scripts\activate
 ```
-criar arquivo de dependencia do django
+
+## Create dependency file django
+
 ```
 pip freeze 
 ```
-create project 
+
+## Create project 
 ```
 django-admin.py startproject app
 python manage.py startapp projectApp
 ```
-start runserver
+
+## Start runserver
 ```
 python manage.py runserver
 ```
-Data Base Migrate
+
+## Data Base Migrate
 ```
 python manage.py migrate
 python manage.py makemigrations
 ```
+---
