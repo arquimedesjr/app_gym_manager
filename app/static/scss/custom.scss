@@ -203,7 +203,12 @@ color: #f0b413 !important;
                 color: #fff;
                 font-weight: 500;
                 letter-spacing: 1px;
-                font-size: 1.225rem;
+                @media (min-width: 991px) {
+                    font-size: 1rem;
+                }
+                @media (min-width: 1350px ) {
+                    font-size: 1.225rem;
+                }
             }
         }
 
