@@ -29,6 +29,12 @@
     }
     #infoUser {
         border-left: 1px solid rgba(202, 203, 227, .3);
+        .dropdown-menu {
+            &.show {
+                left: -30px;
+                top: 10px;
+            }
+        }
     }
 
 }

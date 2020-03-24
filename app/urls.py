@@ -8,20 +8,20 @@ urlpatterns = [
     url(r'^$', RedirectView.as_view(url='/logar/')),
     url('logar/$', logar, name='logar'),
     url('deslogar/$', deslogar, name='deslogar'),
-    url('esqueci-minha-senha/$', esqueci_minha_senha, name="esqueci_minha_senha"),
+    url('esqueci-minha-senha/$', esqueci_minha_senha, name="esqueci-minha-senha"),
     
     # Index Dashboard
     url('index/$', index, name='index'),
 
     # aluno
-    url('cadastrar_aluno/', cadastrar_aluno, name='cadastrar_aluno'),
-    url(r'^listar_aluno/', listar_aluno, name='aluno_list'),
-    url(r'^editar_aluno/(?P<pk>[0-9]+)', editar_aluno, name='editar_aluno'),
-    url(r'^remover_aluno/(?P<pk>[0-9]+)', remover_aluno, name='remover_aluno'),
+    url('cadastrar-aluno/', cadastrar_aluno, name='cadastrar-aluno'),
+    url(r'^listar-aluno/', listar_aluno, name='aluno-list'),
+    url(r'^editar-aluno/(?P<pk>[0-9]+)', editar_aluno, name='editar-aluno'),
+    url(r'^remover-aluno/(?P<pk>[0-9]+)', remover_aluno, name='remover-aluno'),
 
     # não definido
-    url('registrar_usuario/$', registrar_usuario, name='registrar_usuario'),
-    url('listar_usuario/$', listar_usuario, name='listar_usuario'),
-    url('remover_usuario/(?P<pk>[0-9]+)', remover_usuario, name='remover_usuario')
+    url('registrar-usuario/$', registrar_usuario, name='registrar-usuario'),
+    url('listar-usuario/$', listar_usuario, name='listar-usuario'),
+    url('remover-usuario/(?P<pk>[0-9]+)', remover_usuario, name='remover-usuario')
 
 ]
