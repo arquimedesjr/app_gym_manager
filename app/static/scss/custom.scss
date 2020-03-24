@@ -3,6 +3,11 @@
 @import "utilities/_configs";
 @import 'partials/topo';
 
+
+.swal2-icon.swal2-warning {
+    border-color: #f0b413 !important;
+color: #f0b413 !important;
+}
 .btn {
     @include btn-base;
     &.btn-base-blue {
@@ -26,7 +31,32 @@
             color: $color-white;
             border-color: $color-blue; 
         }
-    }   
+    }
+    
+    &.btn-base-yellow {
+        background-color: $color-yellow;
+        color: $color-white;
+        border-color: $color-yellow;
+        &:hover {
+            background-color: $color-yellow;
+            color: $color-white;
+            border-color: $color-yellow;
+            box-shadow: 0px 3px 15px 3px rgba(0,0,0,.2);
+        }
+    }
+
+    &.btn-base-purple-light  {
+        background-color: $color-purple;
+        color: $color-white;
+        border-color: $color-purple;
+        border-width: 2px;
+        &:hover {
+            background-color: $color-purple;
+            color: $color-white;
+            border-color: $color-purple;
+            box-shadow: 0px 3px 15px 3px rgba(46, 49, 146,.15);
+        }
+    }
 }
 
 #pageLogin {
@@ -173,7 +203,12 @@
                 color: #fff;
                 font-weight: 500;
                 letter-spacing: 1px;
-                font-size: 1.225rem;
+                @media (min-width: 991px) {
+                    font-size: 1rem;
+                }
+                @media (min-width: 1350px ) {
+                    font-size: 1.225rem;
+                }
             }
         }
 
@@ -186,6 +221,13 @@
 }
 
 
-[data-section="atalhos"] {
-
+[data-section="listAlunos"] {
+    #listAlunosItem {
+        transition: .7s all ease-out;
+        border: 1px solid #ececec;
+        &:hover {
+            border-color: transparent;
+            box-shadow: 0 5px 20px 4px rgba(0,0,0,.1);
+        }
+    }
 }

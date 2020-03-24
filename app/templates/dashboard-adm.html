@@ -11,13 +11,12 @@ Dashboard Admin
         {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
         <div class="col-12 col-lg-10" id="content-dashboard">
             {% include 'partials/menu-topo-dash/topo.html' %}
-            <section class="container-fluid">
+            <section class="container-fluid px-0 px-sm-2">
                 <div class="row">
                     <div class="col-12 text-white" id="sectionTitlePage">
                         <h1 class="mb-3 mb-lg-4">Dashboard</h1>
                         <ul class="list-group list-group-horizontal text-white bg-transparent">
-                            <li class="list-group-item border-0 p-0"><a href="{% url 'index' %}"><i class="fas fa-home pr-3"></i> Dashboard</a></li>
-                            <li class="list-group-item border-0 p-0"> Dashboard</li>
+                            <li class="list-group-item border-0 p-0"><i class="fas fa-home pr-3"></i> Dashboard</li>
                         </ul>
                     </div>
                     <div class="col-12" data-section="insights" id="cards">
@@ -33,7 +32,7 @@ Dashboard Admin
                                     </div>
                                     <div class="card-body py-4">
                                         <p class="mb-4">Visualize, adicione, edite, exclua ou acompanhe a evolução física dos alunos dentro do sistema.</p>
-                                        <a href="{% url 'aluno_list' %}" class="btn btn-base-blue">Ver alunos</a>
+                                        <a href="{% url 'aluno-list' %}" class="btn btn-base-blue">Ver alunos</a>
                                     </div>
                                   </div>
                             </div>
@@ -47,7 +46,4 @@ Dashboard Admin
 {% endif %}
 
 
-{% block scripts %}
-<script src="{% static 'js/main.js' %}"></script>
-{% endblock %}
 {% endblock %}

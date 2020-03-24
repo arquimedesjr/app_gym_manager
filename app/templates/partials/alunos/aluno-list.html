@@ -1,53 +1,178 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block titlePage %} Listar Alunos {% endblock %}
 {% block content %}
 
 {% if request.user.is_staff %}
-    <div class="container-fluid">
-        <div class="row">
-            {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
-            <div class="col-12 col-lg-10" id="content-dashboard">
-                {% include 'partials/menu-topo-dash/topo.html' %}
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>cpf</th>
-                        <th>email</th>
-                        <th>dataNascimento</th>
-                        <th>ação</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for aluno in lista %}
-                    <tr>
-                        <td>{{ aluno.nome }}</td>
-                        <td>{{ aluno.cpf }}</td>
-                        <td>{{ aluno.email }}</td>
-                        <td>{{ aluno.dataNascimento }}</td>
-                
-                        <td>
-                            <a href="{% url 'editar_aluno' pk=aluno.pk %}">
-                                <i class="material-icons">edit</i>
-                            </a>
-                            <a href="{% url 'remover_aluno' pk=aluno.pk %}">
-                                <i class="material-icons">delete</i>
-                            </a>
-                        </td>
-                
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                <a href="{% url 'cadastrar_aluno' %}">
-                    <button type="submit" class="btn btn-primary">
-                        Cadastrar
-                    </button>
-                </a>
-                
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
+        <div class="col-12 col-lg-10" id="content-dashboard">
+            {% include 'partials/menu-topo-dash/topo.html' %}
+            <section class="container-fluid px-0 px-sm-2">
+                <div class="row">
+                    <div class="col-12 text-white" id="sectionTitlePage">
+                        <h1 class="mb-3 mb-lg-4">Lista de alunos</h1>
+                        <ul class="list-group list-group-horizontal text-white bg-transparent">
+                            <li class="list-group-item border-0 p-0"><a href="{% url 'index' %}"><i class="fas fa-home pr-3"></i> Dashboard</a></li>
+                            <li class="list-group-item border-0 p-0"> Lista de alunos</li>
+                        </ul>
+                    </div>
+                    <div class="col-12" data-section="atalhos" id="">
+                        <div class="row px-0 pt-5">
+                            <div class="col-12 mb-4">
+                                <div class="card">
+                                    <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
+                                        <div class="title d-flex align-items-center">
+                                            <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
+                                            <h2 class="mb-0 h4">Todos os Alunos</h2>
+                                        </div>
+                                        <a href="{% url 'cadastrar-aluno' %}" class="btn btn-base-yellow">Adicionar Aluno</a>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-12 col-md-7 col-lg-8">
+                                                <form method="get" action="">
+                                                    <div class="input-group mb-0">
+                                                        <input type="text" class="form-control" placeholder="Pesquisar">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-outline-secondary" type="button"
+                                                                style="min-width: auto;">
+                                                                Filtrar
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="col-12 col-md-5 col-lg-4">
+                                                <div class="paginacao">
+                                                    <span class="step-links d-flex align-items-center">
+                                                        {% if paginacao.has_previous %}
+                                                            <a class="btn btn-secondary" href="?page={{ paginacao.previous_page_number }}"><i class="fas fa-arrow-circle-left"></i></a>
+                                                        {% endif %}
+                                                    
+                                                        <span class="current">
+                                                            {{ paginacao.number }} de {{ paginacao.paginator.num_pages }}
+                                                        </span>
+                                                    
+                                                        {% if posts.has_next %}
+                                                            <a class="btn btn-secondary" href="?{{ paginacao.next_page_number }}"><i class="fas fa-arrow-circle-right"></i></a>
+                                                        {% endif %}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row px-0 pt-lg-3" id="listAlunos" data-section="listAlunos">
+                                            <div class="col-12 py-3" id="listAlunosTopo">
+                                                <div class="row d-none d-lg-flex">
+                                                    <div class="col-12 col-lg-4">
+                                                        <h3 class="h6 mb-0">Nome</h3>
+                                                    </div>
+                                                    <div class="col-12 col-lg-2">
+                                                        <h3 class="h6 mb-0">CPF</h3>
+                                                    </div>
+                                                    <div class="col-12 col-lg-2">
+                                                        <h3 class="h6 mb-0">Objetivo</h3>
+                                                    </div>
+                                                    <div class="col-12 col-lg-4">
+                                                        <h3 class="h6 mb-0">Ações</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="row d-block d-lg-none">
+                                                    <div class="col-12 col-lg-5">
+                                                        <h3 class="h5 mb-0">Lista dos alunos</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                {% for aluno in lista %}
+                                                <div class="row align-items-center py-2 mb-2 mx-0" id="listAlunosItem">
+                                                    <div class="col-12 col-lg-4 pb-2 pb-lg-0">
+                                                        <p class="mb-0" id="nomeUser">
+                                                            <span class="h6 font-weight-bold d-inlilne-block d-lg-none">Nome: </span>
+                                                            {{ aluno.nome }}</p>
+                                                    </div>
+                                                    <div class="col-12 col-lg-2 pb-2 pb-lg-0">
+                                                        <p class="mb-0">
+                                                            <span class="h6 font-weight-bold d-inline-block d-lg-none">CPF: </span>
+                                                            {{ aluno.cpf }}</p>
+                                                    </div>
+                                                    <div class="col-12 col-lg-2 pb-2 pb-lg-0">
+                                                        <p class="mb-0">
+                                                            <span class="h6 font-weight-bold d-block d-lg-none">Objetivo: </span>
+                                                            {{ aluno.dataNascimento }}</p>
+                                                    </div>
+                                                    <div class="col-12 col-lg-4 pt-2 pt-lg-0">
+                                                        <a class="btn btn-sm btn-base-purple-light mr-3" style="min-width: auto;" href="{% url 'details_aluno' pk=aluno.pk %}">
+                                                            Ver detalhes
+                                                        </a>
+                                                        <a class="btn btn-sm btn-outline-danger" onclick="deleteUser($(this))" style="min-width: auto;">
+                                                            <input type="hidden" value="{{ aluno.nome }}">
+                                                            <input type="hidden" id="actionUser" value="{{ aluno.pk }}">
+                                                            Excluir
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
+</div>
+
+<form method="POST" class="d-none">
+    {% csrf_token %}
+    <h4>Tem certeza que deseja excluir o aluno?</h4>
+    <input type="hidden" id="pkAluno" value="" name="pkaluno">
+</form>
 {% endif %}
+
+
+{% block scripts %}
+<script>
+    function deleteUser(e) {
+        let user = $(e).find('input').val();
+        let action = $(e).find('#actionUser').val();
+        Swal.fire({
+            // title: `Tem certeza que deseja excluir o usuário ${user}?`,
+            html: `<h3 class="mb-3 h4"> Tem certeza que deseja excluir o usuário ${user}?</h3>
+                    <p class="mb-0"> Você não poderá voltar atrás dessa alteração.</p>`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#f0b413',
+            confirmButtonText: `Excluir`,
+            cancelButtonText: 'Cancelar',
+            showClass: {
+                popup: 'animated fadeInDown faster'
+            },
+            hideClass: {
+                popup: 'animated fadeOutUp faster'
+            },
+            })
+            .then((result) => {
+                if (result.value) {
+                    $('#pkAluno').val(action);
+                    Swal.fire( {
+                        icon: 'success',
+                        title: 'Aluno excluído com sucesso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    .then((result) => {
+                        $('form').submit();
+                    });
+                }
+            });
+    }
+</script>
+{% endblock %}
 
 {% endblock content %}
