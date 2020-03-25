@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Aluno
 from .forms import AlunoForm
+from django.core.paginator import Paginator
 
 # Create your views here.
 @login_required
@@ -52,8 +53,8 @@ def logar(request, template_name="login.html"):
             return HttpResponseRedirect(next)
 
         else:
-            messages.error(request, 'Usuário ou senha incorretos.')
-            return HttpResponseRedirect(settings.LOGIN_URL)
+            messages.error(request, 'Usuário ou senha informadas, estão incorretas.')
+            return redirect('logar')
 
     return render(request, template_name, {'redirect_to': next})
 
@@ -103,7 +104,19 @@ def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
         aluno = Aluno.objects.filter(modelo__icontains=query)
     else:
         aluno = Aluno.objects.all()
-    alunos = {'lista': aluno}
+
+    paginator  = Paginator(aluno, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    if request.method == "POST":
+        data = request.POST.copy()
+        pkAluno = data.get('pkaluno')
+        aluno = Aluno.objects.get(pk=pkAluno)
+        aluno.delete()
+        return redirect('aluno_list')
+            
+    alunos = {'lista': aluno, 'paginacao': page_obj}
     return render(request, template_name, alunos)
 
 
@@ -126,6 +139,9 @@ def remover_aluno(request, pk, template_name='partials/alunos/aluno-delete.html'
         return redirect('aluno_list')
     return render(request, template_name, {'aluno': aluno})
 
+def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html'):
+    aluno = Aluno.objects.get(pk=pk)
+    return render(request, template_name, {'aluno': aluno })
 
 def resetar_senha(request, template_name='registration/password_reset_form.html'):
     return render(request, template_name)
