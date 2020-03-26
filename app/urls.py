@@ -15,7 +15,7 @@ urlpatterns = [
     url('index/$', index, name='index'),
 
     # aluno
-    url('cadastrar-aluno/', cadastrar_aluno, name='cadastrar_aluno'),
+    url(r'^cadastrar-aluno/', cadastrar_aluno, name='cadastrar_aluno'),
     url(r'^listar-aluno/', listar_aluno, name='aluno_list'),
     url(r'^editar-aluno/(?P<pk>[0-9]+)', editar_aluno, name='editar_aluno'),
     url(r'^remover-aluno/(?P<pk>[0-9]+)', remover_aluno, name='remover_aluno'),
@@ -33,5 +33,4 @@ urlpatterns = [
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
     url(r'^reset/done/$', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
-
 ]

@@ -83,7 +83,7 @@ def index(request, template_name='dashboard-adm.html'):
 
 def deslogar(request):
     logout(request)
-    return HttpResponseRedirect(settings.LOGIN_URL)
+    return redirect(settings.LOGIN_URL)
 
 def esqueci_minha_senha(request):
     return render(request, 'esqueci-minha-senha.html')
@@ -120,7 +120,7 @@ def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
     return render(request, template_name, alunos)
 
 
-def editar_aluno(request, pk, template_name='partials/alunos/aluno-form.html'):
+def editar_aluno(request, pk, template_name='partials/alunos/aluno-edit.html'):
     aluno = get_object_or_404(Aluno, pk=pk)
     if request.method == "POST":
         form = AlunoForm(request.POST, instance=aluno)
@@ -130,6 +130,13 @@ def editar_aluno(request, pk, template_name='partials/alunos/aluno-form.html'):
     else:
         form = AlunoForm(instance=aluno)
     return render(request, template_name, {'form': form})
+
+# def editar_aluno(request, template_name='partials/alunos/aluno-edit.html'):
+#     form = AlunoForm(Request.POST or None)
+#     if form.is_valid():
+#         form.save()
+#         return redirect('aluno_list')
+#     return render(request, template_name, {'form': form})
 
 
 def remover_aluno(request, pk, template_name='partials/alunos/aluno-delete.html'):

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titlePage %} Editar Aluno {% endblock %}
+{% block content %}
+
+  <div class="container-fluid">
+      <div class="row">
+          {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
+          <div class="col-12 col-lg-10" id="content-dashboard">
+              {% include 'partials/menu-topo-dash/topo.html' %}
+              <section class="container-fluid px-0 px-sm-2">
+                  <div class="row">
+                      <div class="col-12 text-white" id="sectionTitlePage">
+                          <h1 class="mb-3 mb-lg-4">Editar Aluno</h1>
+                          <ul class="list-group list-group-horizontal text-white bg-transparent">
+                              <li class="list-group-item border-0 p-0"><a href="{% url 'index' %}"><i class="fas fa-home pr-3"></i> Dashboard</a></li>
+                              <li class="list-group-item border-0 p-0"> Editar aluno</li>
+                          </ul>
+                      </div>
+                      <div class="col-12" data-section="atalhos" id="">
+                          <div class="row px-0 pt-5">
+                              <div class="col-12 mb-4">
+                                  <div class="card">
+                                      <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
+                                          <div class="title d-flex align-items-center">
+                                              <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
+                                              <h2 class="mb-0 h4">Editar</h2>
+                                          </div>
+                                      </div>
+                                      <div class="card-body">
+                                          <form method="post">
+                                              {% csrf_token %}
+                                              {{ form.as_p }}
+                                              <button type="submit" class="btn btn-base-blue">
+                                                  Salvar
+                                              </button>
+                                          </form>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+          </div>
+      </div>
+  </div>
+
+{% endblock content %}

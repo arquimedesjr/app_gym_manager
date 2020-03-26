@@ -57,6 +57,13 @@ color: #f0b413 !important;
             box-shadow: 0px 3px 15px 3px rgba(46, 49, 146,.15);
         }
     }
+
+    &.btn-outline-danger {
+        color: $color-danger !important;
+        &:hover {
+            color: $color-white !important;
+        }
+    }
 }
 
 #pageLogin {
