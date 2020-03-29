@@ -32,11 +32,14 @@ virtualenv -p python3 venv
 
 ```
 pip freeze 
+pip install -r requirements.txt
+
 ```
 
 ## Create project 
 ```
 django-admin.py startproject app
+pip freeze > requirements.txt
 python manage.py startapp projectApp
 ```
 
