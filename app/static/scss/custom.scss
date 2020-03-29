@@ -57,6 +57,16 @@ color: #f0b413 !important;
             box-shadow: 0px 3px 15px 3px rgba(46, 49, 146,.15);
         }
     }
+<<<<<<< HEAD
+=======
+
+    &.btn-outline-danger {
+        color: $color-danger !important;
+        &:hover {
+            color: $color-white !important;
+        }
+    }
+>>>>>>> ae7b1fd1e9638209a655d517367622a33cd6bb58
 }
 
 #pageLogin {
