@@ -25,7 +25,7 @@ color: #f0b413 !important;
         background-color: $color-white;
         color: $color-blue;
         border-color: $color-blue;
-        border-width: 2px;
+        border-width: 1px;
         &:hover {
             background-color: $color-blue;
             color: $color-white;
@@ -57,8 +57,6 @@ color: #f0b413 !important;
             box-shadow: 0px 3px 15px 3px rgba(46, 49, 146,.15);
         }
     }
-<<<<<<< HEAD
-=======
 
     &.btn-outline-danger {
         color: $color-danger !important;
@@ -66,7 +64,6 @@ color: #f0b413 !important;
             color: $color-white !important;
         }
     }
->>>>>>> ae7b1fd1e9638209a655d517367622a33cd6bb58
 }
 
 #pageLogin {
@@ -232,7 +229,7 @@ color: #f0b413 !important;
 
 
 [data-section="listAlunos"] {
-    #listAlunosItem {
+    [data-id="listAlunosItem"] {
         transition: .7s all ease-out;
         border: 1px solid #ececec;
         &:hover {

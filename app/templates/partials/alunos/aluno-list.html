@@ -34,7 +34,7 @@
                                             <div class="col-12 col-md-7 col-lg-8">
                                                 <form method="get" action="">
                                                     <div class="input-group mb-0">
-                                                        <input type="text" class="form-control" placeholder="Pesquisar">
+                                                        <input type="text" id="filtro" name="filtro" class="form-control" placeholder="Pesquisar" onkeyup="filterUser($(this))">
                                                         <div class="input-group-append">
                                                             <button class="btn btn-outline-secondary" type="button"
                                                                 style="min-width: auto;">
@@ -86,7 +86,7 @@
                                             </div>
                                             <div class="col-12">
                                                 {% for aluno in lista %}
-                                                <div class="row align-items-center py-2 mb-2 mx-0" id="listAlunosItem">
+                                                <div class="row align-items-center py-2 mb-2 mx-0" data-id="listAlunosItem">
                                                     <div class="col-12 col-lg-3 pb-2 pb-lg-0">
                                                         <p class="mb-0" id="nomeUser">
                                                             <span class="h6 font-weight-bold d-inlilne-block d-lg-none">Nome: </span>
@@ -103,10 +103,10 @@
                                                             {{ aluno.dataNascimento }}</p>
                                                     </div>
                                                     <div class="col-12 col-lg-5 pt-2 pt-lg-0">
-                                                        <a class="btn btn-sm btn-base-purple-light mr-3" style="min-width: auto;" href="{% url 'details_aluno' pk=aluno.pk %}">
+                                                        <a class="btn btn-sm btn-base-purple-light mr-2" style="min-width: auto;" href="{% url 'details_aluno' pk=aluno.pk %}">
                                                             Ver detalhes
                                                         </a>
-                                                        <a class="btn btn-sm btn-outline-primary" href="{% url 'editar_aluno' pk=aluno.pk %}" style="min-width: auto;">Editar</a>
+                                                        <a class="btn btn-sm btn-base-blue-outline mr-2" href="{% url 'editar_aluno' pk=aluno.pk %}" style="min-width: auto;">Editar</a>
                                                         <a class="btn btn-sm btn-outline-danger" onclick="deleteUser($(this))" style="min-width: auto;">
                                                             <input type="hidden" value="{{ aluno.nome }}">
                                                             <input type="hidden" id="actionUser" value="{{ aluno.pk }}">
@@ -135,45 +135,9 @@
 </form>
 {% endif %}
 
+{% endblock content %}
+
 
 {% block scripts %}
-<script>
-    function deleteUser(e) {
-        let user = $(e).find('input').val();
-        let action = $(e).find('#actionUser').val();
-        Swal.fire({
-            // title: `Tem certeza que deseja excluir o usuário ${user}?`,
-            html: `<h3 class="mb-3 h4"> Tem certeza que deseja excluir o usuário ${user}?</h3>
-                    <p class="mb-0"> Você não poderá voltar atrás dessa alteração.</p>`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#f0b413',
-            confirmButtonText: `Excluir`,
-            cancelButtonText: 'Cancelar',
-            showClass: {
-                popup: 'animated fadeInDown faster'
-            },
-            hideClass: {
-                popup: 'animated fadeOutUp faster'
-            },
-            })
-            .then((result) => {
-                if (result.value) {
-                    $('#pkAluno').val(action);
-                    Swal.fire( {
-                        icon: 'success',
-                        title: 'Aluno excluído com sucesso',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    .then((result) => {
-                        $('form').submit();
-                    });
-                }
-            });
-    }
-</script>
+<script src="{% static 'js/usuarios.js' %}"></script>
 {% endblock %}
-
-{% endblock content %}

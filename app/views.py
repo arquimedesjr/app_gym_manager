@@ -131,14 +131,6 @@ def editar_aluno(request, pk, template_name='partials/alunos/aluno-edit.html'):
         form = AlunoForm(instance=aluno)
     return render(request, template_name, {'form': form})
 
-# def editar_aluno(request, template_name='partials/alunos/aluno-edit.html'):
-#     form = AlunoForm(Request.POST or None)
-#     if form.is_valid():
-#         form.save()
-#         return redirect('aluno_list')
-#     return render(request, template_name, {'form': form})
-
-
 def remover_aluno(request, pk, template_name='partials/alunos/aluno-delete.html'):
     aluno = Aluno.objects.get(pk=pk)
     if request.method == "POST":
