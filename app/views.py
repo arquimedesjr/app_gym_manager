@@ -83,7 +83,7 @@ def index(request, template_name='dashboard-adm.html'):
 
 def deslogar(request):
     logout(request)
-    return redirect(settings.LOGIN_URL)
+    return redirect('logar')
 
 def esqueci_minha_senha(request):
     return render(request, 'esqueci-minha-senha.html')

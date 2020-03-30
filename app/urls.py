@@ -8,7 +8,7 @@ urlpatterns = [
     #Login 
     url(r'^$', RedirectView.as_view(url='/logar/')),
     url('logar/$', logar, name='logar'),
-    url('deslogar/$', deslogar, name='deslogar'),
+    url(r'^$', deslogar, name='deslogar'),
     url('esqueci-minha-senha/$', esqueci_minha_senha, name="esqueci_minha_senha"),
     
     # Index Dashboard
