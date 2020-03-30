@@ -1,16 +1,17 @@
-from django.conf.urls import include, url
-from django.contrib import admin
-from django.views.generic import RedirectView
+from django.conf.urls import url
 from django.contrib.auth import views as auth_views
-from .views import *
+from django.views.generic import RedirectView
+from .views.aluno_views import *
+from .views.login_views import *
 
-urlpatterns = [
-    #Login 
+
+urlpatterns = (
+    # Login
     url(r'^$', RedirectView.as_view(url='/logar/')),
     url('logar/$', logar, name='logar'),
     url(r'^$', deslogar, name='deslogar'),
     url('esqueci-minha-senha/$', esqueci_minha_senha, name="esqueci_minha_senha"),
-    
+
     # Index Dashboard
     url('index/$', index, name='index'),
 
@@ -28,17 +29,31 @@ urlpatterns = [
 
     # Password Reset
     # url('^', include('django.contrib.auth.urls')),
-    url(r'^password_reset/$', auth_views.PasswordResetView.as_view(template_name='registration/password_reset_form.html'), name='password_reset'),
-    url(r'^password_reset/done/$', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
+    url(r'^password_reset/$',
+        auth_views.PasswordResetView.as_view(template_name='registration/password_reset_form.html'),
+        name='password_reset'),
+    url(r'^password_reset/done/$',
+        auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'),
+        name='password_reset_done'),
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
-    url(r'^reset/done/$', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
+        auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'),
+        name='password_reset_confirm'),
+    url(r'^reset/done/$',
+        auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),
+        name='password_reset_complete'),
 
     # Password Reset
     # url('^', include('django.contrib.auth.urls')),
-    url(r'^password_reset/$', auth_views.PasswordResetView.as_view(template_name='registration/password_reset_form.html'), name='password_reset'),
-    url(r'^password_reset/done/$', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
+    url(r'^password_reset/$',
+        auth_views.PasswordResetView.as_view(template_name='registration/password_reset_form.html'),
+        name='password_reset'),
+    url(r'^password_reset/done/$',
+        auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'),
+        name='password_reset_done'),
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
-    url(r'^reset/done/$', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
-]
+        auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'),
+        name='password_reset_confirm'),
+    url(r'^reset/done/$',
+        auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),
+        name='password_reset_complete'),
+)
