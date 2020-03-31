@@ -121,7 +121,31 @@ color: #f0b413 !important;
     background: -webkit-linear-gradient(to bottom, #2e3192 350px, #fff 0);
     min-height: 100vh;
 }
-
+#sectionDadosAluno {
+    ul {
+        flex-direction: row;
+        li {
+            font-style: italic;
+            background-color: transparent;
+            position: relative;
+            a, a:hover {
+                color: #fff;
+            }
+            &:not(:first-child) {
+                padding-left: 2.5rem !important;
+                &::before {
+                    content: "/";
+                    position: absolute;
+                    top: 0;
+                    left: 15px;
+                }
+            }
+            &::before {
+                content: "";
+            }
+        }
+    }
+}
 #sectionTitlePage {
     padding-top: 2rem;
     h1 {

@@ -11,7 +11,7 @@
                 {% include 'partials/menu-topo-dash/topo.html' %}
                 <section class="container-fluid px-0 px-sm-2">
                     <div class="row">
-                        <div class="col-12 text-white" id="sectionTitlePage">
+                        <div class="col-12 text-white d-none" id="sectionTitlePage">
                             <h1 class="mb-3 mb-lg-4">Detalhes do Aluno</h1>
                             <ul class="list-group list-group-horizontal text-white bg-transparent">
                                 <li class="list-group-item border-0 p-0"><a href="{% url 'index' %}"><i class="fas fa-home pr-3"></i> Dashboard</a></li>
@@ -19,9 +19,27 @@
                                 <li class="list-group-item border-0 p-0">Detalhes do {{ aluno.nome }}</li>
                             </ul>
                         </div>
-                        <div class="col-12" data-section="atalhos" id="">
+                        <div class="col-12 pt-3 pt-md-5" id="sectionDadosAluno">
+                            <div class="row px-0 align-items-center flex-wrap">
+                                <div class="col-md-8 col-lg-9 d-flex align-items-center">
+                                    <img src="{% static 'img/img-aluno.svg' %}" alt="Foto do {{ aluno.nome }}" title="Foto do {{ aluno.nome }}">
+                                    <div class="d-flex flex-column pl-3 pl-md-4">
+                                        <h2 class="mb-2 mb-md-3 text-white h4">{{ aluno.nome }} </h2>
+                                        <ul class="list-group list-group-horizontal text-white d-block font-italic">
+                                            <li class="list-group-item border-0 p-0 bg-transparent d-inline-block">18 anos</li>
+                                            <li class="list-group-item border-0 p-0 bg-transparent d-inline-block">1.87 de altura</li>
+                                            <li class="list-group-item border-0 p-0 bg-transparent d-inline-block">Iniciante</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-3 pt-3 pt-md-0 d-flex justify-content-md-end">
+                                     <a href="#" class="btn btn-base-yellow">Adicionar avaliação</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12" data-section="atalhos">
                             <div class="row px-0 pt-5">
-                                <div class="col-4 mb-4">
+                                <div class="col-md-6 col-lg-4 mb-4">
                                     <div class="card">
                                         <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
                                             <div class="title d-flex align-items-center">
@@ -34,6 +52,58 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6 col-lg-4 mb-4">
+                                    <div class="card">
+                                        <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
+                                            <div class="title d-flex align-items-center">
+                                                <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
+                                                <h2 class="mb-0 h4">Indice de IMC</h2>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="pie-chart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4 mb-4">
+                                    <div class="card">
+                                        <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
+                                            <div class="title d-flex align-items-center">
+                                                <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
+                                                <h2 class="mb-0 h4">Indice de IMC</h2>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="bar-chart-horizontal"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
+                                            <div class="title d-flex align-items-center">
+                                                <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
+                                                <h2 class="mb-0 h4">Indice de IMC</h2>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="line-chart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
+                                            <div class="title d-flex align-items-center">
+                                                <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
+                                                <h2 class="mb-0 h4">Indice de IMC</h2>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="bar-chart-grouped"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -42,9 +112,9 @@
         </div>
     </div>
 {% endif %} 
+{% endblock content %}
 
 {% block scripts %}
 <script src="{% static 'js/libs/charts.min.js' %}"></script>
 <script src="{% static 'js/aluno/charts.js' %}"></script>
 {% endblock scripts %}
-{% endblock content %}
