@@ -46,10 +46,18 @@ color: #f0b413 !important;
     }
 
     &.btn-base-purple-light  {
-        background-color: $color-purple;
-        color: $color-white;
-        border-color: $color-purple;
-        border-width: 2px;
+        background-color: $color-purple-light;
+        color: #2E3192;
+        border-color: $color-purple-light;
+        border-width: 0px;
+        &.white {
+            background: $color-white;
+            border-color: $color-purple;
+            border-width: 1px;
+            &:hover {
+                color: $color-purple;
+            }
+        }
         &:hover {
             background-color: $color-purple;
             color: $color-white;
@@ -151,7 +159,7 @@ color: #f0b413 !important;
 
 #menuLat {
     min-height: 100vh;
-    box-shadow: 3px 0 70px 0px rgba(0,0,0,.16);
+    box-shadow: 3px 0 10px -1px rgba(0,0,0,0.16);
     z-index: 1;
     transition: .7s all ease-out;
     background-color: #fff;

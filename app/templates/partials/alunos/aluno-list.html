@@ -19,7 +19,7 @@
                         </ul>
                     </div>
                     <div class="col-12" data-section="atalhos" id="">
-                        <div class="row px-0 pt-5">
+                        <div class="row px-0 pt-4">
                             <div class="col-12 mb-4">
                                 <div class="card">
                                     <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
@@ -71,10 +71,10 @@
                                                     <div class="col-12 col-lg-2">
                                                         <h3 class="h6 mb-0">CPF</h3>
                                                     </div>
-                                                    <div class="col-12 col-lg-2">
+                                                    <div class="col-12 col-lg-3">
                                                         <h3 class="h6 mb-0">Objetivo</h3>
                                                     </div>
-                                                    <div class="col-12 col-lg-5">
+                                                    <div class="col-12 col-lg-4">
                                                         <h3 class="h6 mb-0">Ações</h3>
                                                     </div>
                                                 </div>
@@ -97,17 +97,29 @@
                                                             <span class="h6 font-weight-bold d-inline-block d-lg-none">CPF: </span>
                                                             {{ aluno.cpf }}</p>
                                                     </div>
-                                                    <div class="col-12 col-lg-2 pb-2 pb-lg-0">
+                                                    <div class="col-12 col-lg-3 pb-2 pb-lg-0">
                                                         <p class="mb-0">
                                                             <span class="h6 font-weight-bold d-block d-lg-none">Objetivo: </span>
                                                             {{ aluno.dataNascimento }}</p>
                                                     </div>
-                                                    <div class="col-12 col-lg-5 pt-2 pt-lg-0">
-                                                        <a class="btn btn-sm btn-base-purple-light mr-2" style="min-width: auto;" href="{% url 'details_aluno' pk=aluno.pk %}">
-                                                            Ver detalhes
+                                                    <div class="col-12 col-lg-4 pt-2 pt-lg-0 d-flex align-items-center justify-content-between">
+                                                        <a class="btn btn-sm btn-base-purple-light" style="min-width: auto;" href="{% url 'details_aluno' pk=aluno.pk %}">
+                                                            Ver avaliação
                                                         </a>
-                                                        <a class="btn btn-sm btn-base-blue-outline mr-2" href="{% url 'editar_aluno' pk=aluno.pk %}" style="min-width: auto;">Editar</a>
-                                                        <a class="btn btn-sm btn-outline-danger" onclick="deleteUser($(this))" style="min-width: auto;">
+                                                    <div class="dropright pl-3 pl-lg-5">
+                                                        <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="4" height="20" viewBox="0 0 4 20"><circle cx="2" cy="2" r="2" fill="#828282"/><circle cx="2" cy="2" r="2" transform="translate(0 8)" fill="#828282"/><circle cx="2" cy="2" r="2" transform="translate(0 16)" fill="#828282"/></svg>
+                                                        </a>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                            <a class="dropdown-item"  href="{% url 'editar_aluno' pk=aluno.pk %}">Editar</a>
+                                                            <a class="dropdown-item" href="#" onclick="deleteUser($(this))">Detetar
+                                                               <input type="hidden" value="{{ aluno.nome }}">
+                                                                <input type="hidden" id="actionUser" value="{{ aluno.pk }}">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                        <a class="btn btn-sm btn-base-blue-outline mr-2 d-none" href="{% url 'editar_aluno' pk=aluno.pk %}" style="min-width: auto;">Editar</a>
+                                                        <a class="btn btn-sm btn-outline-danger d-none" onclick="deleteUser($(this))" style="min-width: auto;">
                                                             <input type="hidden" value="{{ aluno.nome }}">
                                                             <input type="hidden" id="actionUser" value="{{ aluno.pk }}">
                                                             Excluir
