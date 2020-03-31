@@ -9,3 +9,15 @@ class Aluno(models.Model):
     cpf = models.CharField(max_length=14, null=False)
     email = models.CharField(max_length=250, null=False)
     dataNascimento = models.CharField(max_length=250, null=False)
+
+
+class Ficha_fisica(models.Model):
+    medida_costas = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    medida_peito = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    medida_abdome = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    medida_tricpes = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    medida_biceps = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    medida_antibraco = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    medida_coxa = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    medida_panturrilha = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    medida_peso = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
