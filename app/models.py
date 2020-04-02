@@ -12,6 +12,7 @@ class Aluno(models.Model):
 
 
 class Ficha_fisica(models.Model):
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
     medida_costas = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     medida_peito = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     medida_abdome = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)

@@ -27,7 +27,7 @@
                                             <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
                                             <h2 class="mb-0 h4">Todos os Alunos</h2>
                                         </div>
-                                        <a href="{% url 'cadastrar_aluno' %}" class="btn btn-base-yellow">Adicionar Aluno</a>
+                                        <a href="{% url 'cadastrar_aluno' %}" class="btn btn-base-yellow mt-3 mt-sm-0">Adicionar Aluno</a>
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
@@ -71,10 +71,10 @@
                                                     <div class="col-12 col-lg-2">
                                                         <h3 class="h6 mb-0">CPF</h3>
                                                     </div>
-                                                    <div class="col-12 col-lg-3">
+                                                    <div class="col-12 col-lg-2">
                                                         <h3 class="h6 mb-0">Objetivo</h3>
                                                     </div>
-                                                    <div class="col-12 col-lg-4">
+                                                    <div class="col-12 col-lg-5">
                                                         <h3 class="h6 mb-0">Ações</h3>
                                                     </div>
                                                 </div>
@@ -86,7 +86,7 @@
                                             </div>
                                             <div class="col-12">
                                                 {% for aluno in lista %}
-                                                <div class="row align-items-center py-2 mb-2 mx-0" data-id="listAlunosItem">
+                                                <div class="row align-items-center py-2 mb-3 mb-lg-2 mx-0" data-id="listAlunosItem">
                                                     <div class="col-12 col-lg-3 pb-2 pb-lg-0">
                                                         <p class="mb-0" id="nomeUser">
                                                             <span class="h6 font-weight-bold d-inlilne-block d-lg-none">Nome: </span>
@@ -97,33 +97,44 @@
                                                             <span class="h6 font-weight-bold d-inline-block d-lg-none">CPF: </span>
                                                             {{ aluno.cpf }}</p>
                                                     </div>
-                                                    <div class="col-12 col-lg-3 pb-2 pb-lg-0">
+                                                    <div class="col-12 col-lg-2 pb-2 pb-lg-0">
                                                         <p class="mb-0">
                                                             <span class="h6 font-weight-bold d-block d-lg-none">Objetivo: </span>
                                                             {{ aluno.dataNascimento }}</p>
                                                     </div>
-                                                    <div class="col-12 col-lg-4 pt-2 pt-lg-0 d-flex align-items-center justify-content-between">
-                                                        <a class="btn btn-sm btn-base-purple-light" style="min-width: auto;" href="{% url 'details_aluno' pk=aluno.pk %}">
-                                                            Ver avaliação
-                                                        </a>
-                                                    <div class="dropright pl-3 pl-lg-5">
+                                                    <div class="col-12 col-lg-5 pt-2 pt-lg-0 d-lg-flex align-items-center justify-content-between">
+                                                        <div class="buttons">
+                                                            <a class="btn btn-sm btn-base-blue mr-2" style="min-width: auto;" href="{% url 'details_aluno' pk=aluno.pk %}">
+                                                                avaliações
+                                                            </a>
+                                                            <a class="btn btn-sm btn-base-blue-outline" style="min-width: auto;" href="{% url 'cadastrar_avaliacao_fisica' pk=aluno.pk %}">
+                                                                cadastrar avaliação
+                                                            </a>
+                                                        </div>
+                                                        <div class="dropright pl-3 pl-lg-4 d-none d-lg-block">
+                                                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="4" height="20" viewBox="0 0 4 20"><circle cx="2" cy="2" r="2" fill="#828282"/><circle cx="2" cy="2" r="2" transform="translate(0 8)" fill="#828282"/><circle cx="2" cy="2" r="2" transform="translate(0 16)" fill="#828282"/></svg>
+                                                            </a>
+                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                                <a class="dropdown-item"  href="{% url 'editar_aluno' pk=aluno.pk %}">Editar aluno</a>
+                                                                <a class="dropdown-item" href="#" onclick="deleteUser($(this))">Deletar aluno
+                                                                    <input type="hidden" value="{{ aluno.nome }}">
+                                                                    <input type="hidden" id="actionUser" value="{{ aluno.pk }}">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dropright absolute pl-3 pl-lg-4 d-block d-lg-none">
                                                         <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="4" height="20" viewBox="0 0 4 20"><circle cx="2" cy="2" r="2" fill="#828282"/><circle cx="2" cy="2" r="2" transform="translate(0 8)" fill="#828282"/><circle cx="2" cy="2" r="2" transform="translate(0 16)" fill="#828282"/></svg>
                                                         </a>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                            <a class="dropdown-item"  href="{% url 'editar_aluno' pk=aluno.pk %}">Editar</a>
-                                                            <a class="dropdown-item" href="#" onclick="deleteUser($(this))">Detetar
-                                                               <input type="hidden" value="{{ aluno.nome }}">
+                                                            <a class="dropdown-item"  href="{% url 'editar_aluno' pk=aluno.pk %}">Editar aluno</a>
+                                                            <a class="dropdown-item" href="#" onclick="deleteUser($(this))">Deletar aluno
+                                                                <input type="hidden" value="{{ aluno.nome }}">
                                                                 <input type="hidden" id="actionUser" value="{{ aluno.pk }}">
                                                             </a>
                                                         </div>
-                                                    </div>
-                                                        <a class="btn btn-sm btn-base-blue-outline mr-2 d-none" href="{% url 'editar_aluno' pk=aluno.pk %}" style="min-width: auto;">Editar</a>
-                                                        <a class="btn btn-sm btn-outline-danger d-none" onclick="deleteUser($(this))" style="min-width: auto;">
-                                                            <input type="hidden" value="{{ aluno.nome }}">
-                                                            <input type="hidden" id="actionUser" value="{{ aluno.pk }}">
-                                                            Excluir
-                                                        </a>
                                                     </div>
                                                 </div>
                                                 {% endfor %}

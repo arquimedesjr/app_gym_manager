@@ -264,9 +264,16 @@ color: #f0b413 !important;
     [data-id="listAlunosItem"] {
         transition: .7s all ease-out;
         border: 1px solid #ececec;
+        position: relative;
         &:hover {
             border-color: transparent;
             box-shadow: 0 5px 20px 4px rgba(0,0,0,.1);
+        }
+
+        .dropright.absolute {
+            position: absolute;
+            top: 15px;
+            right: 20px;
         }
     }
 }

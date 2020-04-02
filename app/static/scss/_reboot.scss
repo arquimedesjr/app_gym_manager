@@ -427,6 +427,9 @@ progress {
 [type="number"]::-webkit-inner-spin-button,
 [type="number"]::-webkit-outer-spin-button {
   height: auto;
+  appearance: none;
+  -webkit-appearance:none ;
+  -moz-appearance: none;
 }
 
 [type="search"] {
