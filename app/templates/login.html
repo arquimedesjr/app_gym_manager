@@ -16,11 +16,11 @@ Faça o Login
     <div class="container"> 
         <div class="row">
             <div class="col-12 col-lg-6 mx-auto">
-                <img src="{% static 'img/logotipo-cia-life.svg' %}" alt="Logotipo Cia Life" class="mb-5 img-fluid mx-auto d-flex">
-                <div class="bg-white py-5 px-4 rounded " id="mosaic">
+                <img src="{% static 'img/logotipo-cia-life.svg' %}" alt="Logotipo Cia Life" class="mb-2 mb-lg-5 img-fluid mx-auto d-flex">
+                <div class="bg-white py-3 py-lg-5 px-3 px-lg-4 rounded " id="mosaic">
                     <h1 class="mb-0 pb-2 title"> Seja bem vindo </h1>
                     <p class="mb-0 subtitle">Faça o login preenchendo os dados abaixo.</p>
-                    <form class="pt-4" method="post" action=".?next={{ redirect_to }}">
+                    <form class="pt-3 pt-md-4" method="post" action=".?next={{ redirect_to }}">
                         {% csrf_token %}
                         {% for message in messages %}
                             <div class="alert alert-warning">

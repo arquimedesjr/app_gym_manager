@@ -4,8 +4,8 @@ from django.shortcuts import redirect, render, get_object_or_404
 from ..forms import AlunoForm, CadastroAvaliacaoFisicaAluno
 from ..models import Aluno
 
-def cadastrar_avaliacao_fisica(request, pk, template_name='partials/alunos/add-avaliacao-fisica.html'):
-    aluno = get_object_or_404(Aluno, pk=pk)
+def cadastrar_avaliacao_fisica(request, template_name='partials/alunos/add-avaliacao-fisica.html'):
+    # aluno = get_object_or_404(Aluno, pk=pk)
     form = CadastroAvaliacaoFisicaAluno(request.POST)
     if request.method == "POST":
         if form.is_valid():

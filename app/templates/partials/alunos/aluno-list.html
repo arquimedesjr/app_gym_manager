@@ -4,7 +4,7 @@
 {% block content %}
 
 {% if request.user.is_staff %}
-<div class="container-fluid">
+<div class="container-fluid pageListarAlunos">
     <div class="row">
         {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
         <div class="col-12 col-lg-10" id="content-dashboard">
@@ -105,10 +105,10 @@
                                                     <div class="col-12 col-lg-5 pt-2 pt-lg-0 d-lg-flex align-items-center justify-content-between">
                                                         <div class="buttons">
                                                             <a class="btn btn-sm btn-base-blue mr-2" style="min-width: auto;" href="{% url 'details_aluno' pk=aluno.pk %}">
-                                                                avaliações
+                                                                Relatório Físico
                                                             </a>
-                                                            <a class="btn btn-sm btn-base-blue-outline" style="min-width: auto;" href="{% url 'cadastrar_avaliacao_fisica' pk=aluno.pk %}">
-                                                                cadastrar avaliação
+                                                            <a class="btn btn-sm btn-base-blue-outline" style="min-width: auto;" href="{% url 'cadastrar_avaliacao_fisica'%}">
+                                                                Avaliações
                                                             </a>
                                                         </div>
                                                         <div class="dropright pl-3 pl-lg-4 d-none d-lg-block">

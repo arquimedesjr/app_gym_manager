@@ -75,8 +75,15 @@ color: #f0b413 !important;
 }
 
 #pageLogin {
+    min-height: 100vh;
     @include bg-image;
     background-image: url(../img/bg-login.png);
+    @media (max-width: 991px) {
+        padding: 0 !important;
+        img {
+            max-width: 80px;
+        }
+    }
 }
 
 #criar-conta {
@@ -99,8 +106,13 @@ color: #f0b413 !important;
     form {
         label {
             font-weight: 500;
-            letter-spacing: .2;
+            letter-spacing: .2px;
             color: $color-blue;
+        }
+        .row.justify-content-between {
+            label, a {
+                font-size: .8rem;
+            }
         }
     }
     p {
@@ -109,7 +121,7 @@ color: #f0b413 !important;
             letter-spacing: .2px;
             font-size: 1.25rem;
                 @media(max-width: 650px) {
-                    font-size: 1rem;
+                    font-size: .8rem;
                 }
         }
     }
@@ -208,6 +220,34 @@ color: #f0b413 !important;
             width: 100%;
             ul {
                 width: 100%;
+                @media (max-width: 1240px) and (min-width: 991px) {
+                    * {
+                        font-size: 90%;
+                    }
+                }
+                li {
+                    padding: 0;
+                    &.active {
+                        background-color: transparentize($color-blue, .8); 
+                        border-color: transparentize($color-blue, .5);
+                        a {
+                            font-weight: 500;
+                            i {
+                                color: $color-blue;
+                            }
+                        }
+                    }
+                    a {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        color: $color-blue;
+                        padding: .75rem 1.25rem;
+                        &:hover {
+                            text-decoration: none;
+                        }
+                    }
+                }
             }
         }
     }

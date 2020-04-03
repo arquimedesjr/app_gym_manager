@@ -1,37 +1,51 @@
 {% load static %}
-        <div class="col-12 col-lg-2 d-flex flex-column justify-content-between px-0" id="menuLat">
-            <nav class="py-3 px-0 navbar navbar-expand-lg">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#toggleNavBar" aria-controls="toggleNavBar" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="toggleNavBar">
-                    <a href="/dashboard">
-                        <img src="{% static 'img/logotipo-cia-life.svg' %}" style="max-width: 60px" alt="Logotipo Cia Life" class="mx-auto d-flex img-fluid">
+<div class="col-12 col-lg-2 d-flex flex-column justify-content-between px-0" id="menuLat">
+    <nav class="py-3 px-0 navbar navbar-expand-lg">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#toggleNavBar" aria-controls="toggleNavBar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="toggleNavBar">
+            <a href="{% url 'index' %}">
+                <img src="{% static 'img/logotipo-cia-life.svg' %}" style="max-width: 60px" alt="Logotipo Cia Life" class="mx-auto d-flex img-fluid">
+            </a>
+            <ul class="list-group list-group-flush pt-3">
+                <li class="list-group-item" id="dashboard">
+                    <a href="{% url 'index' %}" class="list-item" >
+                        <span>Dashboard</span>    
+                        <i class="fas fa-home"></i>
                     </a>
-                    <ul class="list-group list-group-flush pt-3">
-                        <li class="list-group-item">
-                            <a href="{% url 'index' %}" class="btn btn-base-blue d-flex" >Dashboard </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="{% url 'aluno_list' %}" class="">Alunos 
-                                <i class="far fa-user  float-right"></i> </i> </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="{% url 'cadastrar_aluno' %}" class="">Cadastrar Alunos 
-                                <i class="far fa-edit float-right" ></i></i> 
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#" class="">Dados Pessoais 
-                                <i class="far fa-address-card  float-right" ></i></i> </a>
-                        </li>
-                    </ul>
-                </div>
-        </nav>
-            <div class="d-flex flex-column justify-content-center pb-3">
-                <a onclick="dropMenuOff($(this))" class="btn btn-base-blue-outline mb-4 d-block d-lg-none">Fechar menu</a>
-                <a class="text-center text-danger" href="{% url 'deslogar' %}"> 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20.193" height="27.766" viewBox="0 0 20.193 27.766"><path d="M7.786,29.766H10.31V27.241H7.786Zm5.048,0h2.524V27.241H12.834ZM15.359,2H12.834V14.621h2.524Zm4.493,3.079-1.83,1.83A7.556,7.556,0,1,1,10.159,6.9L8.342,5.079a10.1,10.1,0,1,0,11.51,0ZM17.883,29.766h2.524V27.241H17.883Z" transform="translate(-4 -2)" fill="#f12b2c"/></svg>
-                </a>
-            </div>
+                </li>
+                <li class="list-group-item" id="listar-alunos">
+                    <a href="{% url 'aluno_list' %}" class="list-item">
+                        <span>Alunos</span>
+                        <i class="fas fa-user"></i>
+                    </a>
+                </li>
+                <li class="list-group-item" id="cadastrar-alunos">
+                    <a href="{% url 'cadastrar_aluno' %}" class="list-item">
+                        <span>Adicionar Alunos</span>
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </li>
+                <li class="list-group-item" id="cadastrar-avaliacao-fisica">
+                    <a href="{% url 'cadastrar_avaliacao_fisica' %}" class="list-item">
+                        <span>Cadastrar Avaliação</span>    
+                        <i class="fas fa-chart-bar"></i>
+                    </a>
+                </li>
+                <li class="list-group-item d-none" id="dados-pessoais">
+                    <a href="#" class="">
+                        <span>Dados Pessoais</span>
+                        <i class="fas fa-user"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
+    </nav>
+    <div class="d-flex flex-column justify-content-center pb-3">
+        <a onclick="dropMenuOff($(this))" class="btn btn-base-blue-outline mb-4 d-block d-lg-none">Fechar menu</a>
+        <a class="text-center text-danger" href="{% url 'deslogar' %}"> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="20.193" height="27.766" viewBox="0 0 20.193 27.766"><path d="M7.786,29.766H10.31V27.241H7.786Zm5.048,0h2.524V27.241H12.834ZM15.359,2H12.834V14.621h2.524Zm4.493,3.079-1.83,1.83A7.556,7.556,0,1,1,10.159,6.9L8.342,5.079a10.1,10.1,0,1,0,11.51,0ZM17.883,29.766h2.524V27.241H17.883Z" transform="translate(-4 -2)" fill="#f12b2c"/></svg>
+        </a>
+    </div>
+</div>

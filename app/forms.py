@@ -10,4 +10,13 @@ class AlunoForm(ModelForm):
 class CadastroAvaliacaoFisicaAluno(ModelForm):
     class Meta:
         model = Ficha_fisica
-        fields = ['medida_costas', 'medida_peito', 'medida_abdome', 'medida_tricpes', 'medida_biceps', 'medida_antibraco', 'medida_coxa', 'medida_panturrilha', 'medida_peso']
+        fields = '__all__'
+
+    # def __init__(self, *args, **kwargs):
+    #     super(CadastroAvaliacaoFisicaAluno, self).__init__(*args, **kwargs)
+    #     self.fields['medida_costas'].widget.attrs.update({'class' : 'form-control'})
+
+    # def __init__(self, *args, **kwargs):
+    #     super(CadastroAvaliacaoFisicaAluno, self).__init__(*args, **kwargs)
+    #     for field in self.fields: 
+    #         field.widget.attrs.update({'class': 'form-control'})

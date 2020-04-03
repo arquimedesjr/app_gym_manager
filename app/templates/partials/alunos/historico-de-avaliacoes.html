@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titlePage %} Histórico de Avaliações {% endblock %}
+{% block content %}
+
+{% if request.user.is_staff %}
+<div class="container-fluid">
+    <div class="row">
+        {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
+        <div class="col-12 col-lg-10" id="content-dashboard">
+            {% include 'partials/menu-topo-dash/topo.html' %}
+            <section class="container-fluid px-0 px-sm-2">
+                <div class="row">
+                    <div class="col-12 text-white" id="sectionTitlePage">
+                        <h1 class="mb-3 mb-lg-4">Histórico de Avaliações</h1>
+                        <ul class="list-group list-group-horizontal text-white bg-transparent">
+                            <li class="list-group-item border-0 p-0">
+                              <a href="{% url 'index' %}">
+                                <i class="fas fa-home pr-3"></i> Dashboard
+                              </a>
+                            </li>
+                            <li class="list-group-item border-0 p-0">
+                              <a href="{% url 'aluno_list' %}">
+                                <i class="fas fa-home pr-3"></i> Lista de alunos
+                              </a>
+                            </li>
+                            <li class="list-group-item border-0 p-0">Histórico de avaliações</li>
+                        </ul>
+                    </div>
+                    <div class="col-12" data-section="atalhos" id="">
+                        <div class="row px-0 pt-4">
+                            <div class="col-12 mb-4">
+                              <h2 class="mb-0 h4 text-white">Veja todas as avaliações</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock content %}

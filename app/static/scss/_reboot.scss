@@ -308,7 +308,9 @@ th {
 label {
   // Allow labels to use `margin` for spacing.
   display: inline-block;
-  margin-bottom: .5rem;
+  margin-bottom: .3rem;
+  font-weight: 500;
+  letter-spacing: .2;
 }
 
 // Remove the default `border-radius` that macOS Chrome adds.

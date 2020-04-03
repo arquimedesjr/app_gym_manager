@@ -21,7 +21,7 @@ urlpatterns = (
     url(r'^editar-aluno/(?P<pk>[0-9]+)', editar_aluno, name='editar_aluno'),
     url(r'^remover-aluno/(?P<pk>[0-9]+)', remover_aluno, name='remover_aluno'),
     url(r'^detalhes-do-aluno/(?P<pk>[0-9]+)', details_aluno, name='details_aluno'),
-    url(r'^cadastro-de-avaliacao-fisica/(?P<pk>[0-9]+)', cadastrar_avaliacao_fisica, name='cadastrar_avaliacao_fisica'),
+    url(r'^cadastro-de-avaliacao-fisica/', cadastrar_avaliacao_fisica, name='cadastrar_avaliacao_fisica'),
 
 
     # não definido
