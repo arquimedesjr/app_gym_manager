@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, get_object_or_404
 
 from ..forms import AlunoForm
-from ..models import Aluno
+from ..models import Aluno, Ficha_fisica
 
 
 def cadastrar_aluno(request, template_name='partials/alunos/aluno-form.html'):
@@ -60,3 +60,8 @@ def remover_aluno(request, pk, template_name='partials/alunos/aluno-delete.html'
 def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html'):
     aluno = Aluno.objects.get(pk=pk)
     return render(request, template_name, {'aluno': aluno})
+
+def historico_avaliacao(request, pk, template_name='partials/alunos/historico-de-avaliacoes.html'):
+    entrys = Ficha_fisica.objects.filter(aluno_id=pk)
+    # avaliacoes = get_object_or_404(Ficha_fisica, aluno)
+    return render(request, template_name, {'avaliacoes': entrys })

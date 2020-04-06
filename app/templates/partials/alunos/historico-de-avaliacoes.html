@@ -32,6 +32,18 @@
                             <div class="col-12 mb-4">
                               <h2 class="mb-0 h4 text-white">Veja todas as avaliações</h2>
                             </div>
+                            {% for avaliacao in avaliacoes %}
+                              <div class="col-12 col-sm-6 col-md-4 mb-4">
+                                <div class="card">
+                                  <div class="card-header">
+                                    <h2 class="h5 mb-0">Avaliação {{ avaliacao.id }} </h2>
+                                  </div>
+                                  <div class="card-body">
+                                    <p class="text-danger">Criada em {{ avaliacao.created_at }}</p> 
+                                  </div>
+                                </div>
+                              </div>
+                            {% endfor %}  
                         </div>
                     </div>
                 </div>

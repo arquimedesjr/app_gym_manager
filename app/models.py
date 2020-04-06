@@ -36,3 +36,7 @@ class Ficha_fisica(TimeStampMixin, models.Model):
     medida_coxa = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     medida_panturrilha = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     medida_peso = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+
+    def __str__(self):
+        return ''
+    
