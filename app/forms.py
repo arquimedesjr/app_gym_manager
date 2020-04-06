@@ -15,4 +15,4 @@ class CadastroAvaliacaoFisicaAluno(ModelForm):
         model = Ficha_fisica
         fields = '__all__'
 
-        
+      
