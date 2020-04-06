@@ -10,6 +10,9 @@ class Aluno(models.Model):
     email = models.CharField(max_length=250, null=False)
     dataNascimento = models.CharField(max_length=250, null=False)
 
+    def __str__(self):
+        return self.nome
+
 
 class Ficha_fisica(models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)

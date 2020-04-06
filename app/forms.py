@@ -1,6 +1,7 @@
+from django import forms
 from django.forms import ModelForm
 from .models import Aluno, Ficha_fisica
-
+from django.contrib.auth.models import User, Group
 
 class AlunoForm(ModelForm):
     class Meta:
@@ -8,15 +9,10 @@ class AlunoForm(ModelForm):
         fields = ['nome', 'cpf', 'email', 'dataNascimento']
 
 class CadastroAvaliacaoFisicaAluno(ModelForm):
+    aluno = forms.ModelChoiceField(queryset=Aluno.objects.all())
+
     class Meta:
         model = Ficha_fisica
         fields = '__all__'
 
-    # def __init__(self, *args, **kwargs):
-    #     super(CadastroAvaliacaoFisicaAluno, self).__init__(*args, **kwargs)
-    #     self.fields['medida_costas'].widget.attrs.update({'class' : 'form-control'})
-
-    # def __init__(self, *args, **kwargs):
-    #     super(CadastroAvaliacaoFisicaAluno, self).__init__(*args, **kwargs)
-    #     for field in self.fields: 
-    #         field.widget.attrs.update({'class': 'form-control'})
+        
