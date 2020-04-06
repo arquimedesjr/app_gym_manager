@@ -127,6 +127,7 @@ color: #f0b413 !important;
     }
 }
 
+
 #content-dashboard {
     background: linear-gradient(to bottom, #2e3192 350px, #fff 0);
     background: -moz-linear-gradient(to bottom, #2e3192 350px, #fff 0);
@@ -299,6 +300,15 @@ color: #f0b413 !important;
     }
 }
 
+#pageDashboard {
+    [data-section="insights"] {
+        .col-12:first-child {
+            .card-footer {
+                
+            }
+        }
+    }
+}
 
 [data-section="listAlunos"] {
     [data-id="listAlunosItem"] {
