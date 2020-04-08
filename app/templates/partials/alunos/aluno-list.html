@@ -44,21 +44,29 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                            <div class="col-12 col-md-5 col-lg-4">
-                                                <div class="paginacao">
-                                                    <span class="step-links d-flex align-items-center">
-                                                        {% if paginacao.has_previous %}
-                                                            <a class="btn btn-secondary" href="?page={{ paginacao.previous_page_number }}"><i class="fas fa-arrow-circle-left"></i></a>
-                                                        {% endif %}
-                                                    
-                                                        <span class="current">
-                                                            {{ paginacao.number }} de {{ paginacao.paginator.num_pages }}
-                                                        </span>
-                                                    
-                                                        {% if posts.has_next %}
-                                                            <a class="btn btn-secondary" href="?{{ paginacao.next_page_number }}"><i class="fas fa-arrow-circle-right"></i></a>
-                                                        {% endif %}
-                                                    </span>
+                                            <div class="col-12 col-md-5 col-lg-4 pt-3 pt-md-0">
+                                                <div class="paginacao step-links row align-items-center">
+                                                    <div class="col-auto d-flex">
+                                                    {% if paginacao.has_previous %}
+
+                                                        <a class="btn btn-secondary" style="min-width: auto;" href="?page=1">1</a>
+                                                        <a class="btn btn-secondary" style="min-width: auto;" href="?page={{ page_obj.previous_page_number }}">
+                                                            <i class="fas fa-arrow-circle-left"></i>
+                                                        </a>
+                                                    {% endif %}
+                                                    </div>
+                                                
+                                                    <div class="col-auto d-flex">
+                                                        {{ paginacao.number }} de {{ paginacao.paginator.num_pages }}
+                                                    </div>
+                                                    <div class="col-auto d-flex">
+                                                    {% if paginacao.has_next %}
+                                                        <a class="btn btn-secondary" style="min-width: auto;" href="?page={{ paginacao.next_page_number }}">
+                                                            <i class="fas fa-arrow-circle-right"></i>
+                                                        </a>
+                                                        <a class="btn btn-secondary" style="min-width: auto;" href="?page={{ paginacao.paginator.num_pages }}">último</a>
+                                                    {% endif %}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -85,7 +93,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                {% for aluno in lista %}
+                                                {% for aluno in paginacao %}
                                                 <div class="row align-items-center py-2 mb-3 mb-lg-2 mx-0" data-id="listAlunosItem">
                                                     <div class="col-12 col-lg-3 pb-2 pb-lg-0">
                                                         <p class="mb-0" id="nomeUser">

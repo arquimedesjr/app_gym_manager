@@ -21,7 +21,6 @@ def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
         aluno = Aluno.objects.filter(modelo__icontains=query)
     else:
         aluno = Aluno.objects.all()
-
     paginator = Paginator(aluno, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -33,8 +32,7 @@ def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
         aluno.delete()
         return redirect('aluno_list')
 
-    alunos = {'lista': aluno, 'paginacao': page_obj}
-    return render(request, template_name, alunos)
+    return render(request, template_name, {'paginacao': page_obj})
 
 
 def editar_aluno(request, pk, template_name='partials/alunos/aluno-edit.html'):
