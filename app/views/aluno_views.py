@@ -21,7 +21,7 @@ def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
         aluno = Aluno.objects.filter(modelo__icontains=query)
     else:
         aluno = Aluno.objects.all()
-    paginator = Paginator(aluno, 10)
+    paginator = Paginator(aluno, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

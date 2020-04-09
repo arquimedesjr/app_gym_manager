@@ -44,27 +44,26 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                            <div class="col-12 col-md-5 col-lg-4 pt-3 pt-md-0">
+                                            <div class="col-12 col-md-5 col-lg-4 pt-3 pt-md-0 d-flex justify-content-md-end">
                                                 <div class="paginacao step-links row align-items-center">
-                                                    <div class="col-auto d-flex">
-                                                    {% if paginacao.has_previous %}
-
-                                                        <a class="btn btn-secondary" style="min-width: auto;" href="?page=1">1</a>
+                                                    <div class="col-auto d-flex px-2">
                                                         <a class="btn btn-secondary" style="min-width: auto;" href="?page={{ page_obj.previous_page_number }}">
-                                                            <i class="fas fa-arrow-circle-left"></i>
+                                                            <i class="fas fa-angle-left"></i>
                                                         </a>
-                                                    {% endif %}
                                                     </div>
-                                                
-                                                    <div class="col-auto d-flex">
-                                                        {{ paginacao.number }} de {{ paginacao.paginator.num_pages }}
+                                                    <div class="col-auto d-flex px-2">
+                                                        {% if paginacao.has_previous %}
+                                                        <a class="btn btn-secondary" style="min-width: auto;" href="?page=1">1</a>
+                                                        {% endif %}
+                                                        <a class="btn bg-blue text-white" style="min-width: auto;">{{ paginacao.number }} </a>
+                                                        <a class="btn btn-secondary" style="min-width: auto;">{{ paginacao.paginator.num_pages }}</a>
                                                     </div>
-                                                    <div class="col-auto d-flex">
+                                                    <div class="col-auto d-flex px-2">
                                                     {% if paginacao.has_next %}
                                                         <a class="btn btn-secondary" style="min-width: auto;" href="?page={{ paginacao.next_page_number }}">
-                                                            <i class="fas fa-arrow-circle-right"></i>
+                                                            <i class="fas fa-angle-right"></i>
                                                         </a>
-                                                        <a class="btn btn-secondary" style="min-width: auto;" href="?page={{ paginacao.paginator.num_pages }}">último</a>
+                                                        <a class="btn btn-secondary d-none" style="min-width: auto;" href="?page={{ paginacao.paginator.num_pages }}">último</a>
                                                     {% endif %}
                                                     </div>
                                                 </div>
