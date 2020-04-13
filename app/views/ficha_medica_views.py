@@ -1,9 +1,10 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render, get_object_or_404
-
-from ..forms import AlunoForm, CadastroAvaliacaoFisicaAluno
+from django.contrib.auth.decorators import login_required
+from ..forms import AlunoForm, CadastroAvaliacaoFisicaAluno, EditarFichaMedicaAluno
 from ..models import Aluno
 
+@login_required
 def cadastrar_avaliacao_fisica(request, template_name='partials/alunos/add-avaliacao-fisica.html'):
     # aluno = get_object_or_404(Aluno, pk=pk)
     form = CadastroAvaliacaoFisicaAluno(request.POST)
@@ -16,6 +17,9 @@ def cadastrar_avaliacao_fisica(request, template_name='partials/alunos/add-avali
             messages.error(request, 'Dados incorretos. Tente novamente')
             return redirect(template_name)
     return render(request, template_name, {'form': form })
+
+@login_required
 def editar_avaliacao(request, pk, template_name='partials/alunos/edit-avaliacao-fisica.html'):
-    form = Ficha_fisica.object.get(pk=pk)
+    form =  EditarFichaMedicaAluno(request.POST)
+    # form = Ficha_fisica.object.get(pk=pk)
     return render(request, template_name, {'form': form })

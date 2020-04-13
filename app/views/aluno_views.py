@@ -1,10 +1,10 @@
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, get_object_or_404
-
+from django.contrib.auth.decorators import login_required
 from ..forms import AlunoForm
 from ..models import Aluno, Ficha_fisica
 
-
+@login_required
 def cadastrar_aluno(request, template_name='partials/alunos/aluno-form.html'):
     form = AlunoForm(request.POST or None)
     if form.is_valid():
@@ -14,7 +14,7 @@ def cadastrar_aluno(request, template_name='partials/alunos/aluno-form.html'):
         'form': form
     })
 
-
+@login_required
 def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
     query = request.GET.get("busca")
     if query:
@@ -34,7 +34,7 @@ def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
 
     return render(request, template_name, {'paginacao': page_obj})
 
-
+@login_required
 def editar_aluno(request, pk, template_name='partials/alunos/aluno-edit.html'):
     aluno = get_object_or_404(Aluno, pk=pk)
     if request.method == "POST":
@@ -46,7 +46,7 @@ def editar_aluno(request, pk, template_name='partials/alunos/aluno-edit.html'):
         form = AlunoForm(instance=aluno)
     return render(request, template_name, {'form': form})
 
-
+@login_required
 def remover_aluno(request, pk, template_name='partials/alunos/aluno-delete.html'):
     aluno = Aluno.objects.get(pk=pk)
     if request.method == "POST":
@@ -54,12 +54,15 @@ def remover_aluno(request, pk, template_name='partials/alunos/aluno-delete.html'
         return redirect('aluno_list')
     return render(request, template_name, {'aluno': aluno})
 
-
+@login_required
 def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html'):
     aluno = Aluno.objects.get(pk=pk)
     return render(request, template_name, {'aluno': aluno})
 
+@login_required
 def historico_avaliacao(request, pk, template_name='partials/alunos/historico-de-avaliacoes.html'):
     entrys = Ficha_fisica.objects.filter(aluno_id=pk)
-    # avaliacoes = get_object_or_404(Ficha_fisica, aluno)
+    if request.method == "POST":
+        entrys.save()
+        return redirect(template_name)
     return render(request, template_name, {'avaliacoes': entrys })
