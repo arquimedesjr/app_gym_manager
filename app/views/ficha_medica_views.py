@@ -16,3 +16,6 @@ def cadastrar_avaliacao_fisica(request, template_name='partials/alunos/add-avali
             messages.error(request, 'Dados incorretos. Tente novamente')
             return redirect(template_name)
     return render(request, template_name, {'form': form })
+def editar_avaliacao(request, pk, template_name='partials/alunos/edit-avaliacao-fisica.html'):
+    form = Ficha_fisica.object.get(pk=pk)
+    return render(request, template_name, {'form': form })

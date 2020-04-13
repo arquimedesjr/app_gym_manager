@@ -23,6 +23,7 @@ urlpatterns = (
     url(r'^detalhes-do-aluno/(?P<pk>[0-9]+)', details_aluno, name='details_aluno'),
     url(r'^cadastro-de-avaliacao-fisica/', cadastrar_avaliacao_fisica, name='cadastrar_avaliacao_fisica'),
     url(r'^historico-de-avaliacoes/(?P<pk>[0-9]+)', historico_avaliacao, name='historico_avaliacao'),
+    url(r'^editar-avaliacao/(?P<pk>[0-9]+)', editar_avaliacao, name='editar_avaliacao'),
 
 
     # não definido

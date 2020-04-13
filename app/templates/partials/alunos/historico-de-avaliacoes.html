@@ -33,16 +33,40 @@
                               <h2 class="mb-0 h4 text-white">Veja todas as avaliações</h2>
                             </div>
                             {% for avaliacao in avaliacoes %}
+                            
                               <div class="col-12 col-sm-6 col-md-4 mb-4">
-                                <div class="card">
-                                  <div class="card-header">
-                                    <h2 class="h5 mb-0">Avaliação {{ avaliacao.id }} </h2>
-                                  </div>
-                                  <div class="card-body">
-                                    <p class="text-danger">Criada em {{ avaliacao.created_at }}</p> 
-                                  </div>
+                                  <div class="card-group">
+                                    <div class="card">
+                                      <div class="card-header">
+                                      <div class="row">
+                                        <div class="col">
+                                          <h1 class="h5 mb-0">Avaliação {{ avaliacao.id }} </h1>
+                                        </div>
+                                        <div class="col">
+                                          <div class="dropright pl-3 pl-lg-4 d-none d-lg-block">
+                                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <svg class="float-right" xmlns="http://www.w3.org/2000/svg" width="4" height="20" viewBox="0 0 4 20"><circle cx="2" cy="2" r="2" fill="#828282"/><circle cx="2" cy="2" r="2" transform="translate(0 8)" fill="#828282"/><circle cx="2" cy="2" r="2" transform="translate(0 16)" fill="#828282"/></svg>
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                              <a class="dropdown-item"  href="{% url 'editar_avaliacao' pk=ficha.pk %}">Editar</a>
+                                              <a class="dropdown-item" href="#" onclick="deleteUser($(this))">Deletar
+                                                  <input type="hidden" value="">
+                                                  <input type="hidden" id="actionUser" value="">
+                                              </a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>                                   
+                                    <div class="card-body">
+                                      <p class="text-warning">Criada em {{ avaliacao.created_at }}</p> 
+                                    </div>
+                                    <div class="card-footer" >
+                                      <a href="" class="btn btn-base-yellow float-right mt-3 mt-sm-0">Detalhes</a>
+                                    </div>
+                                  </div>   
                                 </div>
-                              </div>
+                              </div>                           
                             {% endfor %}  
                         </div>
                     </div>
