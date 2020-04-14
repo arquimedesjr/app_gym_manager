@@ -10,8 +10,8 @@ Esqueci minha Senha
         <div class="row">
             <div class="col-12 col-md-10 col-lg-7 col-xl-6 mx-auto">
                 <img src="{% static 'img/logotipo-cia-life.svg' %}" alt="Logotipo Cia Life" class="mb-5 img-fluid mx-auto d-flex">
-                <div class="bg-white py-5 px-4 rounded" id="mosaic">
-                    <h1 class="mb-0 pb-2 title"> Esqueci minha senha </h1>
+                <div class="bg-white py-3 py-lg-4 px-4 rounded" id="mosaic">
+                    <h1 class="mb-0 pb-2 h2 title"> Esqueci minha senha </h1>
                     <p class="mb-0 subtitle">Preencha os dados para recuperar sua senha</p>
                     <form class="pt-4">
                         <div class="form-row">
@@ -40,4 +40,5 @@ Esqueci minha Senha
 {% block scripts %}
 <script src="{% static 'js/libs/jqueryMask.min.js' %}"> </script>
 <script src="{% static 'js/libs/sweetalert.min.js' %}"> </script>
+<script src="{% static 'js/aluno/maskInputs.js' %}"></script>
 {% endblock %}

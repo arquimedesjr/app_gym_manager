@@ -17,8 +17,8 @@ Faça o Login
         <div class="row">
             <div class="col-12 col-lg-6 mx-auto">
                 <img src="{% static 'img/logotipo-cia-life.svg' %}" alt="Logotipo Cia Life" class="mb-2 mb-lg-5 img-fluid mx-auto d-flex">
-                <div class="bg-white py-3 py-lg-5 px-3 px-lg-4 rounded " id="mosaic">
-                    <h1 class="mb-0 pb-2 title"> Seja bem vindo </h1>
+                <div class="bg-white py-3 py-lg-4 px-3 px-lg-4 rounded " id="mosaic">
+                    <h1 class="mb-0 pb-2 h2 title">Seja bem vindo </h1>
                     <p class="mb-0 subtitle">Faça o login preenchendo os dados abaixo.</p>
                     <form class="pt-3 pt-md-4" method="post" action=".?next={{ redirect_to }}">
                         {% csrf_token %}
@@ -42,12 +42,12 @@ Faça o Login
                         </div>
                         <div class="row justify-content-between">
                             <div class="col-12 col-sm-7">
-                               <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="manterConectado" value="option1">
-                                    <label class="form-check-label" for="manterConectado">Mantenha-me conectado</label>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="manterConectado">
+                                    <label class="custom-control-label text-dark" for="manterConectado">Mantenha-me conectado</label>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-5 pt-2 pt-sm-0">
+                            <div class="col-12 col-sm-5 pt-2 pt-sm-0 text-sm-right">
                                 <a href="{% url 'esqueci_minha_senha' %}">Esqueceu sua senha?</a>
                             </div>
                         </div>
