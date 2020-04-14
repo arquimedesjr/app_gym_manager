@@ -63,6 +63,9 @@ def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html
 def historico_avaliacao(request, pk, template_name='partials/alunos/historico-de-avaliacoes.html'):
     entrys = Ficha_fisica.objects.filter(aluno_id=pk)
     if request.method == "POST":
-        entrys.save()
-        return redirect(template_name)
+        data = request.POST.copy()
+        pkFicha = data.get('pkavaliacao')
+        ficha = Ficha_fisica.objects.get(pk=pkFicha)
+        ficha.delete()
+        return redirect('/historico-de-avaliacoes/{0}'.format(pk))
     return render(request, template_name, {'avaliacoes': entrys })

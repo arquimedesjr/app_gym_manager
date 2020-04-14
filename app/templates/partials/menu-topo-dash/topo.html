@@ -19,7 +19,10 @@
     <div class="col-8 col-lg-3 offset-lg-4 align-items-center d-flex justify-content-end py-2 py-lg-3 order-1" id="infoUser">
         <div class="dropdown show">
             <a class="btn dropdown-toggle py-0 text-white" href="#" role="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="{% static 'img/img-user.png' %}" class="img-fluid pr-3" alt="Imagem do usuário Logado"> usuário
+                <img src="{% static 'img/img-user.png' %}" class="img-fluid pr-3" alt="Imagem do usuário Logado">
+                {% if user.is_authenticated %}
+                  <span>{{ user.get_username }}</span>
+                {% endif %}
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownUser">
               <a class="dropdown-item" href="#">Meus dados pessoais</a>
