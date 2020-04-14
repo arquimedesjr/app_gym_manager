@@ -6,10 +6,7 @@ class AlunoForm(ModelForm):
     class Meta:
         model = Aluno
         fields = ['nome', 'cpf', 'email', 'dataNascimento', 'sexo']
-        sexo= (
-            ('M', '1'),
-            ('F', '2'),
-        )
+       
         #sexo = forms.ModelChoiceField(queryset= sexo.objects.all())
 
 class CadastroAvaliacaoFisicaAluno(ModelForm):
