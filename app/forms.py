@@ -16,6 +16,7 @@ class CadastroAvaliacaoFisicaAluno(ModelForm):
         fields = '__all__'
 
 class EditarFichaMedicaAluno(ModelForm):
+    aluno = forms.ModelChoiceField(queryset=Aluno.objects.all())
     class Meta:
         model = Ficha_fisica
         fields = '__all__'        
