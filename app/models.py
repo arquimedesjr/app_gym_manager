@@ -13,7 +13,7 @@ class Aluno(models.Model):
     cpf = models.CharField(max_length=14, null=False)
     email = models.CharField(max_length=250, null=False)
     dataNascimento = models.CharField(max_length=250, null=False)
-    sexo = models.CharField(max_length=1, null=False, choices=tipoSexo, default= masculino)
+    sexo = models.CharField(max_length=1, null=False, choices=tipoSexo)
    
 
     def __str__(self):
