@@ -56,11 +56,8 @@
                                                       <div class="col-12 col-md-4">
                                                         <div class="form-group">
                                                           <label for="{{form.medida_costas.id_for_label}}">Sexo:</label>
-                                                          <select class="custom-select">
-                                                            <option value="" selected>Selecione...</option>  
-                                                            <option value="1">M</option> 
-                                                            <option value="2">F</option>
-                                                          </select>
+                                                            {{form.sexo|add_class:'form-control'}}
+                                                    
                                                                                                              
                                                         </div>
                                                       </div>
