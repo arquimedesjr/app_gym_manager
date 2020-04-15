@@ -22,6 +22,16 @@ body, html {
     background-color: inherit;
 }
 
+select.custom-select {
+    -webkit-appearance:none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+#pageLogin .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #F0B413;
+}
+
 h1 {
     font-size: 2.63rem;
     font-weight: 600;

@@ -34,7 +34,6 @@
                             </div>
                             {% if form == true %}
                               {% for avaliacao in avaliacoes %}
-                              
                                 <div class="col-12 col-sm-6 col-md-4 mb-4">
                                     <div class="card-group">
                                       <div class="card">
@@ -49,10 +48,9 @@
                                                   <svg class="float-right" xmlns="http://www.w3.org/2000/svg" width="4" height="20" viewBox="0 0 4 20"><circle cx="2" cy="2" r="2" fill="#828282"/><circle cx="2" cy="2" r="2" transform="translate(0 8)" fill="#828282"/><circle cx="2" cy="2" r="2" transform="translate(0 16)" fill="#828282"/></svg>
                                               </a>
                                               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item"  href="{% url 'editar_avaliacao' pk=avaliacao.pk %}">Editar</a>
-                                                <a class="dropdown-item" href="#" onclick="deleteUser($(this))">Deletar
-                                                    <input type="hidden" value="">
-                                                    <input type="hidden" id="actionUser" value="">
+                                                <a class="dropdown-item"  href="{% url 'editar_avaliacao' pk=avaliacao.pk %}">Editar Avaliação</a>
+                                                <a class="dropdown-item" href="#" onclick="deleteAvaliacao($(this))">Deletar
+                                                    <input type="hidden" id="actionUser" value="{{ avaliacao.pk }}">
                                                 </a>
                                               </div>
                                             </div>
@@ -79,6 +77,15 @@
         </div>
     </div>
 </div>
+
+<form method="POST" class="d-none">
+    {% csrf_token %}
+    <input type="hidden" id="pkavaliacao" value="" name="pkavaliacao">
+</form>
 {% endif %}
 
 {% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/usuarios.js' %}"></script>
+{% endblock %}

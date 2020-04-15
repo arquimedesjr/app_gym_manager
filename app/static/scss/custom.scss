@@ -111,7 +111,11 @@ color: #f0b413 !important;
         }
         .row.justify-content-between {
             label, a {
-                font-size: .8rem;
+                font-size: .9rem;
+            }
+            a {
+                letter-spacing: .2px;
+                color: transparentize($color-blue, .1);
             }
         }
     }
@@ -119,7 +123,7 @@ color: #f0b413 !important;
         &.subtitle {
             color: $color-grey;
             letter-spacing: .2px;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
                 @media(max-width: 650px) {
                     font-size: .8rem;
                 }
