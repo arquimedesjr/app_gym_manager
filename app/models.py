@@ -13,12 +13,7 @@ class Aluno(models.Model):
     cpf = models.CharField(max_length=14, null=False)
     email = models.CharField(max_length=250, null=False)
     dataNascimento = models.CharField(max_length=250, null=False)
-<<<<<<< HEAD
     sexo = models.CharField(max_length=1, null=False, choices=tipoSexo, default= masculino)
-=======
-    sexo = models.CharField(max_length=1, null=False, choices=tipoSexo)
-   
->>>>>>> 93f6f2a8e4811c0e51f930a5d35fadf55f1bcb8d
 
     def __str__(self):
         return self.nome
