@@ -21,4 +21,9 @@ class EditarFichaMedicaAluno(ModelForm):
         model = Ficha_fisica
         fields = '__all__'        
 
-      
+class RelatorioFisicoAluno(ModelForm):
+    form = forms.ModelChoiceField(Ficha_fisica.objects.all())
+    class Meta:
+        model = Ficha_fisica
+        fields = '__all__'
+        exclude = ['aluno']

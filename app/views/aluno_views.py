@@ -1,9 +1,9 @@
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from ..forms import AlunoForm
+from ..forms import AlunoForm, RelatorioFisicoAluno
 from ..models import Aluno, Ficha_fisica
-
+from django.db.models import Count
 @login_required
 def cadastrar_aluno(request, template_name='partials/alunos/aluno-form.html'):
     form = AlunoForm(request.POST or None)
@@ -57,11 +57,24 @@ def remover_aluno(request, pk, template_name='partials/alunos/aluno-delete.html'
 @login_required
 def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html'):
     aluno = Aluno.objects.get(pk=pk)
-    return render(request, template_name, {'aluno': aluno})
+    # entrys = Ficha_fisica.objects.filter(aluno_id=pk)[:1]
+    entrys = Ficha_fisica.objects.filter(aluno_id=pk)
+    form = RelatorioFisicoAluno()
+    if request.method == "POST":
+        data = request.POST.copy()
+        print(data.get('medida'))
+        redirect('/detalhes-aluno/{0}'.format(pk))
+    # print(entrys.medida_peso)
+    return render(request, template_name,
+                 {'aluno': aluno,
+                  'entrys': entrys,
+                  'form': form
+                 })
 
 @login_required
 def historico_avaliacao(request, pk, template_name='partials/alunos/historico-de-avaliacoes.html'):
     entrys = Ficha_fisica.objects.filter(aluno_id=pk)
+    count = Ficha_fisica.objects.annotate(Count('aluno_id'))
     if request.method == "POST":
         data = request.POST.copy()
         pkFicha = data.get('pkavaliacao')
@@ -69,3 +82,4 @@ def historico_avaliacao(request, pk, template_name='partials/alunos/historico-de
         ficha.delete()
         return redirect('/historico-de-avaliacoes/{0}'.format(pk))
     return render(request, template_name, {'avaliacoes': entrys })
+

@@ -14,7 +14,6 @@ class Aluno(models.Model):
     email = models.CharField(max_length=250, null=False)
     dataNascimento = models.CharField(max_length=250, null=False)
     sexo = models.CharField(max_length=1, null=False, choices=tipoSexo, default= masculino)
-   
 
     def __str__(self):
         return self.nome
@@ -25,9 +24,13 @@ class TimeStampMixin(models.Model):
 
     class Meta:
         abstract = True
-    
+
+    @property
+    def get_created(self):
+        return self.created_at.strftime("%m/%d/%Y")
+
     def __str__(self):
-        return self.created_at
+        return self.get_created
     
 
 class Ficha_fisica(TimeStampMixin, models.Model):
