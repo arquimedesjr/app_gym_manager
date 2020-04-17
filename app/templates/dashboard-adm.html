@@ -22,19 +22,56 @@ Dashboard Admin
                     <div class="col-12" data-section="insights" id="cards">
                         {% include 'partials/admin/insights.html' %}
                     </div>
+                    <div class="col-12">
+                        <div class="row px-0 pt-4">
+                            <div class="col-12 col-md-6">
+                                <div class="card bg-shadow">
+                                    <div class="card-header d-flex align-items-center">
+                                        <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
+                                        <h2 class="mb-0 h5">Cadastro dos alunos</h2>
+                                    </div>
+                                    <div class="card-body py-4"> 
+                                        <canvas id="chartAluno"></canvas> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="card bg-shadow">
+                                    <div class="card-header d-flex align-items-center">
+                                        <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
+                                        <h2 class="mb-0 h5">Avaliações</h2>
+                                    </div>
+                                    <div class="card-body py-4"> 
+                                        <canvas id="chartAvaliacao"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4 d-none">
+                                <div class="card bg-shadow">
+                                    <div class="card-header d-flex align-items-center">
+                                        <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
+                                        <h2 class="mb-0 h5">Alunos sem avaliação</h2>
+                                    </div>
+                                    <div class="card-body py-4"> 
+                                        <canvas id="chartAvaliacaoSemAluno"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-12" data-section="atalhos" id="">
                         <div class="row px-0 pt-4">
                             <div class="col-12 col-md-6 col-lg-4 mb-4">
                                 <div class="card">
                                     <div class="card-header d-flex align-items-center">
                                         <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
-                                        <h2 class="mb-0 h4">Alunos</h2>
+                                        <h2 class="mb-0 h5">Alunos</h2>
                                     </div>
                                     <div class="card-body py-4">
                                         <p class="mb-4">Visualize, adicione, edite, exclua ou acompanhe a evolução física dos alunos dentro do sistema.</p>
                                         <a href="{% url 'aluno_list' %}" class="btn btn-base-blue">Ver alunos</a>
                                     </div>
-                                  </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -44,6 +81,9 @@ Dashboard Admin
     </div>
 </div>
 {% endif %}
-
-
 {% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/libs/charts.min.js' %}"></script>
+<script src="{% static 'js/admin/chartsInsights.js' %}"></script>
+{% endblock scripts %}

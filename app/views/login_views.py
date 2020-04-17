@@ -4,7 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
-
+from django.db.models import Count
+from ..models import Aluno, Ficha_fisica
 
 # Create your views here.
 @login_required
@@ -76,7 +77,15 @@ def remover_usuario(request, pk, template_name='delete.html'):
 
 @login_required
 def index(request, template_name='dashboard-adm.html'):
-    return render(request, template_name)
+    aluno = Aluno.objects.count()
+    fichas = Ficha_fisica.objects.count()
+    # id_aluno = Aluno._meta.get_field('id')
+    # aluno_sem_ficha = Ficha_fisica.objects.exclude(aluno_id=id_aluno)
+    # print('--------------- {0}'.format(id_aluno))    
+    return render(request, template_name, 
+                    { 'aluno' : aluno,
+                      'fichas' : fichas,
+                     })
 
 
 def deslogar(request):
