@@ -96,7 +96,7 @@
         new Chart(document.getElementById("bar-chart-grouped"), {
             type: 'bar',
             data: {
-                labels: [{% for item in entrys  %} '{{item.created_at}}', {% endfor %}],
+                labels: [{% for item in entrys  %} '{{item.get_created}}', {% endfor %}],
                 datasets: [
                     {
                         label: "Direito",
