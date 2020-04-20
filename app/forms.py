@@ -49,4 +49,4 @@ class RelatorioFisicoAlunov2(forms.Form):
 
 class FilterAluno(forms.Form):
     campoFilter = forms.CharField( label=False ,max_length=100)
-    campoFilter.widget.attrs.update({'class': 'form-control'})
+    campoFilter.widget.attrs.update({'class': 'form-control', 'placeholder': 'Pesquisar aluno'})

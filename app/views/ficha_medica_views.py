@@ -6,6 +6,12 @@ from ..models import Aluno, Ficha_fisica
 
 @login_required
 def cadastrar_avaliacao_fisica(request, template_name='partials/alunos/add-avaliacao-fisica.html'):
+    # Filtrar Aluno
+    query = request.GET.get("campoFilter")
+    campoFiltro = FilterAluno()
+    if query:
+        return redirect(f'/listar-aluno/?campoFilter={query}')
+
     # aluno = get_object_or_404(Aluno, pk=pk)
     form = CadastroAvaliacaoFisicaAluno(request.POST)
 
@@ -16,10 +22,16 @@ def cadastrar_avaliacao_fisica(request, template_name='partials/alunos/add-avali
         else: 
             messages.error(request, 'Dados incorretos. Tente novamente')
             return redirect('cadastrar_avaliacao_fisica')
-    return render(request, template_name, {'form': form })
+    return render(request, template_name, {'form': form, 'filtro': campoFiltro })
 
 @login_required
 def editar_avaliacao(request, pk, template_name='partials/alunos/edit-avaliacao-fisica.html'):
+    # Filtrar Aluno
+    query = request.GET.get("campoFilter")
+    campoFiltro = FilterAluno()
+    if query:
+        return redirect(f'/listar-aluno/?campoFilter={query}')
+
     form =  EditarFichaMedicaAluno(request.POST)
     idficha = Ficha_fisica.objects.get(pk=pk)
     if request.method == "POST":
@@ -30,4 +42,4 @@ def editar_avaliacao(request, pk, template_name='partials/alunos/edit-avaliacao-
             messages.error(request, 'Os dados foram inseridos de forma incorreta.')
             redirect('/editar-avaliacao/{0}'.format(pk))
     # form = Ficha_fisica.object.get(pk=pk)
-    return render(request, template_name, {'form': form })
+    return render(request, template_name, {'form': form, 'filtro': campoFiltro })

@@ -10,22 +10,28 @@ from django.db import models
 
 @login_required
 def cadastrar_aluno(request, template_name='partials/alunos/aluno-form.html'):
+    # Filtrar Aluno
+    query = request.GET.get("campoFilter")
+    campoFiltro = FilterAluno()
+    if query:
+        return redirect(f'/listar-aluno/?campoFilter={query}')
+
     form = AlunoForm(request.POST or None)
     if form.is_valid():
         form.save()
         return redirect('aluno_list')
     return render(request, template_name, {
-        'form': form
+        'form': form,
+        'filtro': campoFiltro
     })
 
 @login_required
 def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
+    # Filtrar Aluno
     query = request.GET.get("campoFilter")
     campoFiltro = FilterAluno()
-    
-    # Filtrar Aluno
+
     if query:
-        # print(f'Dados input: {dados}')
         aluno = Aluno.objects.filter(nome__iexact=query)
     else:
         aluno = Aluno.objects.all()
@@ -46,6 +52,12 @@ def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
 
 @login_required
 def editar_aluno(request, pk, template_name='partials/alunos/aluno-edit.html'):
+    # Filtrar Aluno
+    query = request.GET.get("campoFilter")
+    campoFiltro = FilterAluno()
+    if query:
+        return redirect(f'/listar-aluno/?campoFilter={query}')
+
     aluno = get_object_or_404(Aluno, pk=pk)
     if request.method == "POST":
         form = AlunoForm(request.POST, instance=aluno)
@@ -54,7 +66,7 @@ def editar_aluno(request, pk, template_name='partials/alunos/aluno-edit.html'):
             return redirect('aluno_list')
     else:
         form = AlunoForm(instance=aluno)
-    return render(request, template_name, {'form': form})
+    return render(request, template_name, {'form': form, 'filtro': campoFiltro})
 
 @login_required
 def remover_aluno(request, pk, template_name='partials/alunos/aluno-delete.html'):
@@ -66,6 +78,12 @@ def remover_aluno(request, pk, template_name='partials/alunos/aluno-delete.html'
 
 @login_required
 def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html'):
+    # Filtrar Aluno
+    query = request.GET.get("campoFilter")
+    campoFiltro = FilterAluno()
+    if query:
+        return redirect(f'/listar-aluno/?campoFilter={query}')
+
     aluno = Aluno.objects.get(pk=pk)
     entrys = Ficha_fisica.objects.filter(aluno_id=pk).order_by('-created_at')[:5]
     form = RelatorioFisicoAluno()
@@ -84,10 +102,17 @@ def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html
                   'form': form,
                   'relatorio': relatorio,
                   'dados': dados,
+                  'filtro': campoFiltro
                  })
 
 @login_required
 def historico_avaliacao(request, pk, template_name='partials/alunos/historico-de-avaliacoes.html'):
+    # Filtrar Aluno
+    query = request.GET.get("campoFilter")
+    campoFiltro = FilterAluno()
+    if query:
+        return redirect(f'/listar-aluno/?campoFilter={query}')
+
     entrys = Ficha_fisica.objects.filter(aluno_id=pk)
     count = Ficha_fisica.objects.annotate(Count('aluno_id'))
     if request.method == "POST":
@@ -96,5 +121,5 @@ def historico_avaliacao(request, pk, template_name='partials/alunos/historico-de
         ficha = Ficha_fisica.objects.get(pk=pkFicha)
         ficha.delete()
         return redirect('/historico-de-avaliacoes/{0}'.format(pk))
-    return render(request, template_name, {'avaliacoes': entrys })
+    return render(request, template_name, {'avaliacoes': entrys, 'filtro': campoFiltro })
 

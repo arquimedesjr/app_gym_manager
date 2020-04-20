@@ -6,10 +6,16 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Count
 from ..models import Aluno, Ficha_fisica
-
+from ..forms import FilterAluno
 # Create your views here.
 @login_required
 def registrar_usuario(request, template_name="registrar.html"):
+    # Filtrar Aluno
+    query = request.GET.get("campoFilter")
+    campoFiltro = FilterAluno()
+    if query:
+        return redirect(f'/listar-aluno/?campoFilter={query}')
+
     if request.method == "POST":
         username = request.POST['username']
         email = request.POST['email']
@@ -28,13 +34,19 @@ def registrar_usuario(request, template_name="registrar.html"):
 
         return redirect('/app/listar_usuario/')
     else:
-        return render(request, template_name)
+        return render(request, template_name, {'filtro': campoFiltro})
 
 
 @login_required
 def listar_usuario(request, template_name="listar.html"):
+    # Filtrar Aluno
+    query = request.GET.get("campoFilter")
+    campoFiltro = FilterAluno()
+    if query:
+        return redirect(f'/listar-aluno/?campoFilter={query}')
+
     usuarios = User.objects.all()
-    usuario = {'lista': usuarios}
+    usuario = {'lista': usuarios, 'filtro': campoFiltro}
     return render(request, template_name, usuario)
 
 
@@ -58,6 +70,12 @@ def logar(request, template_name="login.html"):
 
 @login_required
 def remover_usuario(request, pk, template_name='delete.html'):
+    # Filtrar Aluno
+    query = request.GET.get("campoFilter")
+    campoFiltro = FilterAluno()
+    if query:
+        return redirect(f'/listar-aluno/?campoFilter={query}')
+
     user = request.user
     if user.has_perm('user.delete_user'):
         try:
@@ -77,6 +95,12 @@ def remover_usuario(request, pk, template_name='delete.html'):
 
 @login_required
 def index(request, template_name='dashboard-adm.html'):
+    # Filtrar Aluno
+    query = request.GET.get("campoFilter")
+    campoFiltro = FilterAluno()
+    if query:
+        return redirect(f'/listar-aluno/?campoFilter={query}')
+
     aluno = Aluno.objects.count()
     fichas = Ficha_fisica.objects.count()
     # id_aluno = Aluno._meta.get_field('id')
@@ -85,6 +109,7 @@ def index(request, template_name='dashboard-adm.html'):
     return render(request, template_name, 
                     { 'aluno' : aluno,
                       'fichas' : fichas,
+                      'filtro': campoFiltro
                      })
 
 
