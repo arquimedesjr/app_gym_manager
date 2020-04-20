@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from ..forms import AlunoForm, RelatorioFisicoAluno, RelatorioFisicoAlunov2
+from ..forms import AlunoForm, RelatorioFisicoAluno, RelatorioFisicoAlunov2, FilterAluno
 from ..models import Aluno, Ficha_fisica
 from django.db.models import Count
 from django.http import JsonResponse
@@ -20,15 +20,21 @@ def cadastrar_aluno(request, template_name='partials/alunos/aluno-form.html'):
 
 @login_required
 def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
-    query = request.GET.get("busca")
+    query = request.GET.get("campoFilter")
+    campoFiltro = FilterAluno()
+    
+    # Filtrar Aluno
     if query:
-        aluno = Aluno.objects.filter(modelo__icontains=query)
+        # print(f'Dados input: {dados}')
+        aluno = Aluno.objects.filter(nome__iexact=query)
     else:
         aluno = Aluno.objects.all()
     paginator = Paginator(aluno, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    print(f'Query: {query}')
 
+    # Excluir Aluno
     if request.method == "POST":
         data = request.POST.copy()
         pkAluno = data.get('pkaluno')
@@ -36,7 +42,7 @@ def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
         aluno.delete()
         return redirect('aluno_list')
 
-    return render(request, template_name, {'paginacao': page_obj})
+    return render(request, template_name, {'paginacao': page_obj, 'filtro': campoFiltro})
 
 @login_required
 def editar_aluno(request, pk, template_name='partials/alunos/aluno-edit.html'):

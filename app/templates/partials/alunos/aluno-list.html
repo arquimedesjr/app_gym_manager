@@ -32,11 +32,12 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-12 col-md-7 col-lg-8">
-                                                <form method="get" action="">
+                                                <form method="GET" action="">
                                                     <div class="input-group mb-0">
-                                                        <input type="text" id="filtro" name="filtro" class="form-control" placeholder="Pesquisar" onkeyup="filterUser($(this))">
+                                                        
+                                                        {{filtro}}
                                                         <div class="input-group-append">
-                                                            <button class="btn btn-secondary" type="button"
+                                                            <button class="btn btn-secondary" type="submit"
                                                                 style="min-width: auto;">
                                                                 Filtrar
                                                             </button>

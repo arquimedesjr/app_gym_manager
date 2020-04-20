@@ -45,3 +45,8 @@ campos_choices = [
 class RelatorioFisicoAlunov2(forms.Form):
       campos = forms.ChoiceField(choices=campos_choices, required=False)
       campos.widget.attrs.update({'class': 'form-control'})
+
+
+class FilterAluno(forms.Form):
+    campoFilter = forms.CharField( label=False ,max_length=100)
+    campoFilter.widget.attrs.update({'class': 'form-control'})
