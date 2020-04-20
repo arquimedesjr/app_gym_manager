@@ -1,9 +1,13 @@
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from ..forms import AlunoForm, RelatorioFisicoAluno
+from ..forms import AlunoForm, RelatorioFisicoAluno, RelatorioFisicoAlunov2
 from ..models import Aluno, Ficha_fisica
 from django.db.models import Count
+from django.http import JsonResponse
+from django.db import models
+
+
 @login_required
 def cadastrar_aluno(request, template_name='partials/alunos/aluno-form.html'):
     form = AlunoForm(request.POST or None)
@@ -57,18 +61,23 @@ def remover_aluno(request, pk, template_name='partials/alunos/aluno-delete.html'
 @login_required
 def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html'):
     aluno = Aluno.objects.get(pk=pk)
-    # entrys = Ficha_fisica.objects.filter(aluno_id=pk)[:1]
-    entrys = Ficha_fisica.objects.filter(aluno_id=pk)
+    entrys = Ficha_fisica.objects.filter(aluno_id=pk).order_by('-created_at')[:5]
     form = RelatorioFisicoAluno()
+    relatorio = RelatorioFisicoAlunov2()
+    dados = None
     if request.method == "POST":
         data = request.POST.copy()
-        print(data.get('medida'))
+        campos = data.get('campos')
+        dados = list(Ficha_fisica.objects.filter(aluno_id=pk).values_list(f'{campos}', flat=False))[:5]
+        print(f'Dados: {dados}')
         redirect('/detalhes-aluno/{0}'.format(pk))
-    # print(entrys.medida_peso)
+
     return render(request, template_name,
                  {'aluno': aluno,
                   'entrys': entrys,
-                  'form': form
+                  'form': form,
+                  'relatorio': relatorio,
+                  'dados': dados,
                  })
 
 @login_required

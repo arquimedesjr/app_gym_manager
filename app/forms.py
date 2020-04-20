@@ -27,3 +27,21 @@ class RelatorioFisicoAluno(ModelForm):
         model = Ficha_fisica
         fields = '__all__'
         exclude = ['aluno']
+
+
+campos_choices = [
+    ('medida_peito', 'Medida do peito'),
+    ('medida_costas', 'Medida das costas'),
+    ('medida_abdome', 'Medida do Abdomem'),
+    ('medida_tricpes', 'Medida dos tríceps'),
+    ('medida_biceps', 'Medida dos bíceps'),
+    ('medida_antibraco', 'Medida dos Antebraços'),
+    ('medida_coxa', 'Medida das coxas'),
+    ('medida_panturrilha', 'Medida Panturrilha'),
+    ('medida_peso', 'Peso'),
+    ('percentual_gordura', 'Percentual de Gordura')
+]
+
+class RelatorioFisicoAlunov2(forms.Form):
+      campos = forms.ChoiceField(choices=campos_choices, required=False)
+      campos.widget.attrs.update({'class': 'form-control'})

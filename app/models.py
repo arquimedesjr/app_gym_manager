@@ -27,7 +27,7 @@ class TimeStampMixin(models.Model):
 
     @property
     def get_created(self):
-        return self.created_at.strftime("%m/%d/%Y")
+        return self.created_at.strftime("%d/%m/%Y")
 
     def __str__(self):
         return self.get_created
