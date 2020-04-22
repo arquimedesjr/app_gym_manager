@@ -18,7 +18,7 @@ def cadastrar_avaliacao_fisica(request, template_name='partials/alunos/add-avali
     if request.method == "POST":
         if form.is_valid():
             form.save()
-            redirect('aluno_list')
+            redirect('/listar-aluno')
         else: 
             messages.error(request, 'Dados incorretos. Tente novamente')
             return redirect('cadastrar_avaliacao_fisica')

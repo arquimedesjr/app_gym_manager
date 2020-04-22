@@ -20,10 +20,9 @@ def cadastrar_aluno(request, template_name='partials/alunos/aluno-form.html'):
     if form.is_valid():
         form.save()
         return redirect('aluno_list')
-    return render(request, template_name, {
-        'form': form,
-        'filtro': campoFiltro
-    })
+    else:
+        form = AlunoForm()
+    return render(request, template_name, { 'form': form, 'filtro': campoFiltro })
 
 @login_required
 def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
@@ -93,6 +92,7 @@ def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html
         data = request.POST.copy()
         campos = data.get('campos')
         dados = list(Ficha_fisica.objects.filter(aluno_id=pk).values_list(f'{campos}', flat=False))[:5]
+        print(f'Filtro: {campos}')
         print(f'Dados: {dados}')
         redirect('/detalhes-aluno/{0}'.format(pk))
 

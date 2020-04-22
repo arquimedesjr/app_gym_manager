@@ -27,7 +27,7 @@
                                     <div class="d-flex flex-column pl-3 pl-md-4">
                                         <h2 class="mb-2 mb-md-3 text-white h4">{{ aluno.nome }} </h2>
                                         <ul class="list-group list-group-horizontal text-white d-block font-italic">
-                                            <li class="list-group-item border-0 p-0 bg-transparent d-inline-block">18 anos</li>
+                                            <li class="list-group-item border-0 p-0 bg-transparent d-inline-block">{{aluno.idade}} anos</li>
                                             <li class="list-group-item border-0 p-0 bg-transparent d-inline-block">1,87 de altura</li>
                                             <li class="list-group-item border-0 p-0 bg-transparent d-inline-block">Iniciante</li>
                                         </ul>
@@ -45,14 +45,8 @@
                                         <div class="card-body">
                                         <h2 class="mb-3 h5 text-blue">Selecione o músculo</h2>
                                         <form action="" method="POST">
-                                         {% csrf_token %}
-                                         {{relatorio}}
-                                         {% comment %} {% for dic in dados  %}
-                                            {% for item in dic  %}
-                                                <p>{{item}}</p>
-                                            {% endfor %} 
-                                        {% endfor %} {% endcomment %}
-                                            {% comment %} {{form}} {% endcomment %}
+                                            {% csrf_token %}
+                                            {{relatorio}}
                                             <button type="submit" class="btn btn-base-purple-light mt-3">Filtrar</button>
                                         </form>
                                         </div>

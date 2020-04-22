@@ -5,9 +5,7 @@ from .models import Aluno, Ficha_fisica
 class AlunoForm(ModelForm):
     class Meta:
         model = Aluno
-        fields = ['nome', 'cpf', 'email', 'dataNascimento', 'sexo']
-       
-        #sexo = forms.ModelChoiceField(queryset= sexo.objects.all())
+        fields = '__all__'
 
 class CadastroAvaliacaoFisicaAluno(ModelForm):
     aluno = forms.ModelChoiceField(queryset=Aluno.objects.all())
