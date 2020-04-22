@@ -204,6 +204,9 @@ color: #f0b413 !important;
     z-index: 1;
     transition: .7s all ease-out;
     background-color: #fff;
+    height: 100%;
+    position: sticky;
+    top: 0;
 
     @media (max-width: 991px) {
         position: fixed;
