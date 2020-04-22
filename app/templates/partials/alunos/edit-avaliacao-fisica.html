@@ -14,14 +14,14 @@
             <section class="container-fluid px-0 px-sm-2">
                 <div class="row">
                     <div class="col-12 text-white" id="sectionTitlePage">
-                        <h1 class="mb-3 mb-lg-4">Cadastrar Avaliação</h1>
+                        <h1 class="mb-3 mb-lg-4">Editar Avaliação</h1>
                         <ul class="list-group list-group-horizontal text-white bg-transparent">
                             <li class="list-group-item border-0 p-0">
                               <a href="{% url 'index' %}">
                                 <i class="fas fa-home pr-3"></i> Dashboard
                               </a>
                             </li>
-                            <li class="list-group-item border-0 p-0">Cadastro de Avaliação</li>
+                            <li class="list-group-item border-0 p-0">Editar Avaliação</li>
                         </ul>
                     </div>
                     <div class="col-12" data-section="atalhos" id="">
@@ -48,13 +48,13 @@
                                           {% endfor %}
                                         <div class="col-12 col-md-6 col-lg-4">
                                             <div class="form-group">
-                                              <label for="{{form.medida_costas.id_for_label}}">Peso:</label>
+                                              <label for="{{form.medida_peso.id_for_label}}">Peso:</label>
                                               {{form.medida_peso|add_class:'form-control' }}
                                             </div>
                                           </div>
                                           <div class="col-12 col-md-6 col-lg-4">
                                             <div class="form-group">
-                                              <label for="{{form.medida_costas.id_for_label}}">Percentual de Gordura:</label>
+                                              <label for="{{form.percentual_gordura.id_for_label}}">Percentual de Gordura:</label>
                                               {{form.percentual_gordura|add_class:'form-control' }}
                                             </div>
                                           </div>
@@ -66,43 +66,43 @@
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-4">
                                               <div class="form-group">
-                                                <label for="{{form.medida_costas.id_for_label}}">Medida do Peito:</label>
+                                                <label for="{{form.medida_peito.id_for_label}}">Medida do Peito:</label>
                                                 {{form.medida_peito|add_class:'form-control' }}
                                               </div>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-4">
                                               <div class="form-group">
-                                                <label for="{{form.medida_costas.id_for_label}}">Medida do Abdomen:</label>
+                                                <label for="{{form.medida_abdome.id_for_label}}">Medida do Abdomen:</label>
                                                 {{form.medida_abdome|add_class:'form-control' }}
                                               </div>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-4">
                                               <div class="form-group">
-                                                <label for="{{form.medida_costas.id_for_label}}">Medida do Tríceps:</label>
+                                                <label for="{{form.medida_tricpes.id_for_label}}">Medida do Tríceps:</label>
                                                 {{form.medida_tricpes|add_class:'form-control' }}
                                               </div>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-4">
                                               <div class="form-group">
-                                                <label for="{{form.medida_costas.id_for_label}}">Medida do Bíceps:</label>
+                                                <label for="{{form.medida_biceps.id_for_label}}">Medida do Bíceps:</label>
                                                 {{form.medida_biceps|add_class:'form-control' }}
                                               </div>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-4">
                                               <div class="form-group">
-                                                <label for="{{form.medida_costas.id_for_label}}">Medida do Antebraço:</label>
+                                                <label for="{{form.medida_coxa.id_for_label}}">Medida do Antebraço:</label>
                                                 {{form.medida_antibraco|add_class:'form-control' }}
                                               </div>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-4">
                                               <div class="form-group">
-                                                <label for="{{form.medida_costas.id_for_label}}">Medida da Coxa:</label>
+                                                <label for="{{form.medida_coxa.id_for_label}}">Medida da Coxa:</label>
                                                 {{form.medida_coxa|add_class:'form-control' }}
                                               </div>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-4">
                                               <div class="form-group">
-                                                <label for="{{form.medida_costas.id_for_label}}">Medida da Panturrilha:</label>
+                                                <label for="{{form.medida_panturrilha.id_for_label}}">Medida da Panturrilha:</label>
                                                 {{form.medida_panturrilha|add_class:'form-control' }}
                                               </div>
                                             </div>

@@ -12,7 +12,6 @@ def cadastrar_avaliacao_fisica(request, template_name='partials/alunos/add-avali
     if query:
         return redirect(f'/listar-aluno/?campoFilter={query}')
 
-    # aluno = get_object_or_404(Aluno, pk=pk)
     form = CadastroAvaliacaoFisicaAluno(request.POST)
 
     if request.method == "POST":
