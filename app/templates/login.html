@@ -57,6 +57,7 @@ Faça o Login
                         {% for error in form.username.errors %}
                             <p class="text-danger">{{ error }}</p>
                         {% endfor %}
+                        <input type="hidden" name="next" value="{{ next }}">
                         <div class="flex-column pt-4 d-none" id="loginSocial">
                             <p class="mb-3"> Ou faça login com</p>
                             <div class="d-flex">

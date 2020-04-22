@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from ..forms import AlunoForm, CadastroAvaliacaoFisicaAluno, EditarFichaMedicaAluno
+from ..forms import AlunoForm, CadastroAvaliacaoFisicaAluno, EditarFichaMedicaAluno, FilterAluno
 from ..models import Aluno, Ficha_fisica
 
 @login_required
