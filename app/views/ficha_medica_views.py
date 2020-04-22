@@ -30,15 +30,17 @@ def editar_avaliacao(request, pk, template_name='partials/alunos/edit-avaliacao-
     campoFiltro = FilterAluno()
     if query:
         return redirect(f'/listar-aluno/?campoFilter={query}')
-
-    form =  EditarFichaMedicaAluno(request.POST)
+    
     idficha = Ficha_fisica.objects.get(pk=pk)
     if request.method == "POST":
+        form =  EditarFichaMedicaAluno(request.POST, instance=idficha)
         if form.is_valid():
             form.save()
             redirect('/editar-avaliacao/{0}'.format(pk))
         else:
             messages.error(request, 'Os dados foram inseridos de forma incorreta.')
             redirect('/editar-avaliacao/{0}'.format(pk))
+    else: 
+        form =  EditarFichaMedicaAluno(instance=idficha)
     # form = Ficha_fisica.object.get(pk=pk)
     return render(request, template_name, {'form': form, 'filtro': campoFiltro })
