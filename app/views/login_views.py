@@ -101,12 +101,12 @@ def index(request, template_name='dashboard-adm.html'):
     if query:
         return redirect(f'/listar-aluno/?campoFilter={query}')
 
+    # insights
     aluno = Aluno.objects.count()
     fichas = Ficha_fisica.objects.count()
-    id_alunos = Ficha_fisica.objects.values('aluno_id')
-    sem_ficha = Aluno.objects.filter(id__in=id_alunos).count()
-    print(f'Ficha: {sem_ficha}')
-    print(f'Alunos com ficha: {id_alunos}')    
+    sem_ficha = Aluno.objects.filter(id__in=Ficha_fisica.objects.values('aluno_id')).count()    
+
+    
     return render(request, template_name, 
                     { 'aluno' : aluno,
                       'fichas' : fichas,
