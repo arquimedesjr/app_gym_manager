@@ -103,13 +103,15 @@ def index(request, template_name='dashboard-adm.html'):
 
     aluno = Aluno.objects.count()
     fichas = Ficha_fisica.objects.count()
-    # id_aluno = Aluno._meta.get_field('id')
-    # aluno_sem_ficha = Ficha_fisica.objects.exclude(aluno_id=id_aluno)
-    # print('--------------- {0}'.format(id_aluno))    
+    id_alunos = Ficha_fisica.objects.values('aluno_id')
+    sem_ficha = Aluno.objects.filter(id__in=id_alunos).count()
+    print(f'Ficha: {sem_ficha}')
+    print(f'Alunos com ficha: {id_alunos}')    
     return render(request, template_name, 
                     { 'aluno' : aluno,
                       'fichas' : fichas,
-                      'filtro': campoFiltro
+                      'filtro': campoFiltro,
+                      'sem_ficha': sem_ficha
                      })
 
 
