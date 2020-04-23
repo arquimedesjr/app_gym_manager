@@ -34,7 +34,7 @@ def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
         aluno = Aluno.objects.filter(nome__iexact=query)
     else:
         aluno = Aluno.objects.all()
-    paginator = Paginator(aluno, 2)
+    paginator = Paginator(aluno, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     print(f'Query: {query}')
