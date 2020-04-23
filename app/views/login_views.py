@@ -4,9 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
-from django.db.models import Count
+from django.db.models import Count, Sum
 from ..models import Aluno, Ficha_fisica
 from ..forms import FilterAluno
+from django.db.models.expressions import datetime
 # Create your views here.
 @login_required
 def registrar_usuario(request, template_name="registrar.html"):
@@ -106,12 +107,17 @@ def index(request, template_name='dashboard-adm.html'):
     fichas = Ficha_fisica.objects.count()
     sem_ficha = Aluno.objects.filter(id__in=Ficha_fisica.objects.values('aluno_id')).count()    
 
-    
+    # gráficos
+    charts_aluno = Aluno.objects.filter().values('created_at__date').order_by('created_at__date').annotate(sum=Count('id'))
+
+    print(f'Data dos inputs: {charts_aluno}')
+
     return render(request, template_name, 
                     { 'aluno' : aluno,
                       'fichas' : fichas,
                       'filtro': campoFiltro,
-                      'sem_ficha': sem_ficha
+                      'sem_ficha': sem_ficha,
+                      'charts_aluno':charts_aluno
                      })
 
 

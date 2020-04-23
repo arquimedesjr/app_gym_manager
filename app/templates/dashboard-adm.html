@@ -22,6 +22,7 @@ Dashboard Admin
                     <div class="col-12" data-section="insights" id="cards">
                         {% include 'partials/admin/insights.html' %}
                     </div>
+                    {{charts_aluno}}
                     <div class="col-12">
                         <div class="row px-0 pt-4">
                             <div class="col-12 col-md-6">
@@ -86,4 +87,36 @@ Dashboard Admin
 {% block scripts %}
 <script src="{% static 'js/libs/charts.min.js' %}"></script>
 <script src="{% static 'js/admin/chartsInsights.js' %}"></script>
+<script>
+$(document).ready(() => {
+    // Cria o charts de Alunos
+    new Chart(document.getElementById("chartAluno"), {
+    type: 'line',
+    data: {
+      labels: [{% for item in charts_aluno %} '{{item.created_at__date}}',{% endfor %}],
+      datasets: [{ 
+          data: [{% for item in charts_aluno %} {{item.sum}}, {% endfor %}],
+          label: "Cadastro de aluno",
+          borderColor: "rgba(46, 49, 146, .6)",
+        },
+      ]
+    }
+});
+    // Cria o charts de Avaliações
+    new Chart(document.getElementById("chartAvaliacao"), {
+        type: 'line',
+        data: {
+        labels: [300,400, 500, 600, 700],
+        datasets: [{ 
+            data: [310,350, 340, 450, 530],
+            label: "Avaliações Cadastradas",
+            borderColor: "rgba(46, 49, 146, .6)",
+            },
+        ]
+        }
+    });
+
+// {% for item in charts_aluno %} {{item.created_count}}{{item.created_at}}{% endfor %}
+})
+</script>
 {% endblock scripts %}
