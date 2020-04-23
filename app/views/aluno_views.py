@@ -85,9 +85,11 @@ def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html
 
     aluno = Aluno.objects.get(pk=pk)
     entrys = Ficha_fisica.objects.filter(aluno_id=pk).order_by('-created_at')[:5]
-    form = RelatorioFisicoAluno()
     relatorio = RelatorioFisicoAlunov2()
     dados = None
+
+
+    # Filtro de dados
     if request.method == "POST":
         data = request.POST.copy()
         campos = data.get('campos')
@@ -96,13 +98,17 @@ def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html
         print(f'Dados: {dados}')
         redirect('/detalhes-aluno/{0}'.format(pk))
 
+    # Charts Peso
+    peso = Ficha_fisica.objects.filter(aluno_id=pk).order_by('-created_at')[:5]
+    print(f'Peso: {peso}')
+
     return render(request, template_name,
                  {'aluno': aluno,
                   'entrys': entrys,
-                  'form': form,
                   'relatorio': relatorio,
                   'dados': dados,
-                  'filtro': campoFiltro
+                  'filtro': campoFiltro,
+                  'peso': peso
                  })
 
 @login_required
@@ -112,15 +118,15 @@ def historico_avaliacao(request, pk, template_name='partials/alunos/historico-de
     campoFiltro = FilterAluno()
     if query:
         return redirect(f'/listar-aluno/?campoFilter={query}')
-
+    aluno = Aluno.objects.filter(pk=pk).values('nome')
     entrys = Ficha_fisica.objects.filter(aluno_id=pk)
     count = Ficha_fisica.objects.filter(aluno_id=pk).count()
-    print(f'Contador de Fichas: {entrys}')
+    print(f'Dados do aluno: {aluno}')
     if request.method == "POST":
         data = request.POST.copy()
         pkFicha = data.get('pkavaliacao')
         ficha = Ficha_fisica.objects.get(pk=pkFicha)
         ficha.delete()
         return redirect('/historico-de-avaliacoes/{0}'.format(pk))
-    return render(request, template_name, {'avaliacoes': entrys, 'filtro': campoFiltro })
+    return render(request, template_name, {'avaliacoes': entrys, 'filtro': campoFiltro, 'aluno': aluno })
 

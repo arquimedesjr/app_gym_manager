@@ -24,7 +24,9 @@
                                 <i class="fas fa-home pr-3"></i> Lista de alunos
                               </a>
                             </li>
-                            <li class="list-group-item border-0 p-0">Histórico de avaliações</li>
+                            <li class="list-group-item border-0 p-0">
+                              Avaliações do aluno {% for item in aluno  %} {{item.nome}} {% endfor %}
+                            </li>
                         </ul>
                     </div>
                     <div class="col-12" data-section="atalhos" id="">

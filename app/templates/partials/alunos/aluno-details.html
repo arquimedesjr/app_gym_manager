@@ -12,14 +12,6 @@
                 {% include 'partials/menu-topo-dash/topo.html' %}
                 <section class="container-fluid px-0 px-sm-2">
                     <div class="row">
-                        <div class="col-12 text-white d-none" id="sectionTitlePage">
-                            <h1 class="mb-3 mb-lg-4">Detalhes do Aluno</h1>
-                            <ul class="list-group list-group-horizontal text-white bg-transparent">
-                                <li class="list-group-item border-0 p-0"><a href="{% url 'index' %}"><i class="fas fa-home pr-3"></i> Dashboard</a></li>
-                                <li class="list-group-item border-0 p-0"><a href="{% url 'aluno_list' %}">Lista de alunos</a></li>
-                                <li class="list-group-item border-0 p-0">Detalhes do {{ aluno.nome }}</li>
-                            </ul>
-                        </div>
                         <div class="col-12 pt-3 pt-md-5" id="sectionDadosAluno">
                             <div class="row px-0 align-items-center flex-wrap">
                                 <div class="col-md-8 col-lg-9 d-flex align-items-center">
@@ -51,17 +43,54 @@
                                         </form>
                                         </div>
                                     </div>
+                                    <div class="card mt-4">
+                                        <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
+                                            <div class="title d-flex align-items-center">
+                                                <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
+                                                <h2 class="mb-0 h5">Porcentagem de gordura</h2>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="charts-imc"></canvas>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6 col-lg-8 mb-4">
                                     <div class="card">
                                         <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
                                             <div class="title d-flex align-items-center">
                                                 <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
-                                                <h2 class="mb-0 h4">Medidas do músculo</h2>
+                                                <h2 class="mb-0 h5">Medidas do músculo</h2>
                                             </div>
                                         </div>
                                         <div class="card-body">
                                             <canvas id="bar-chart-grouped"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
+                                            <div class="title d-flex align-items-center">
+                                                <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
+                                                <h2 class="mb-0 h5">IMC</h2>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="charts-imc"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
+                                            <div class="title d-flex align-items-center">
+                                                <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
+                                                <h2 class="mb-0 h5">Peso</h2>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="chartPeso"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -80,7 +109,7 @@
 <script>
     $(document).ready(() => {
         let campos = [{% for dic in dados  %} {% for item in dic  %} {{item|stringformat:'f'}}, {% endfor %} {% endfor %}]
-        let datas = [{%for item in entrys%}{{item.medida_peso|stringformat:'f'}},{% endfor %}];
+        let datas = [{%for item in entrys %}{{item.medida_peso|stringformat:'f'}},{% endfor %}];
         new Chart(document.getElementById("bar-chart-grouped"), {
             type: 'bar',
             data: {
@@ -97,6 +126,22 @@
                         data: datas
                     }
                 ]
+            }
+        });
+
+        new Chart(document.getElementById("chartPeso"), {
+            type: 'line',
+            data: {
+            labels: [{% for item in peso %} '{{item.get_created}}', {% endfor %}],
+            datasets: [{ 
+                data: [{%for item in peso %}{{item.medida_peso|stringformat:'f'}},{% endfor %}],
+                borderColor: "rgba(46, 49, 146, .6)",
+                },
+            ]},
+            options: {
+                legend: {
+                    display: false
+                }
             }
         });
     })
