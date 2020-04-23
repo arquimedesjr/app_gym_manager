@@ -22,9 +22,8 @@ Dashboard Admin
                     <div class="col-12" data-section="insights" id="cards">
                         {% include 'partials/admin/insights.html' %}
                     </div>
-                    {{charts_aluno}}
                     <div class="col-12">
-                        <div class="row px-0 pt-4">
+                        <div class="row px-0 pt-4 pt-lg-5">
                             <div class="col-12 col-md-6">
                                 <div class="card bg-shadow">
                                     <div class="card-header d-flex align-items-center">
@@ -61,7 +60,7 @@ Dashboard Admin
                         </div>
                     </div>
                     <div class="col-12" data-section="atalhos" id="">
-                        <div class="row px-0 pt-4">
+                        <div class="row px-0 pt-4 pt-lg-5">
                             <div class="col-12 col-md-6 col-lg-4 mb-4">
                                 <div class="card">
                                     <div class="card-header d-flex align-items-center">
@@ -95,28 +94,23 @@ $(document).ready(() => {
     data: {
       labels: [{% for item in charts_aluno %} '{{item.created_at__date}}',{% endfor %}],
       datasets: [{ 
-          data: [{% for item in charts_aluno %} {{item.sum}}, {% endfor %}],
+          data: [{% for item in charts_aluno %} {{item.count}}, {% endfor %}],
           label: "Cadastro de aluno",
           borderColor: "rgba(46, 49, 146, .6)",
-        },
-      ]
-    }
-});
+        }]}
+    });
     // Cria o charts de Avaliações
     new Chart(document.getElementById("chartAvaliacao"), {
         type: 'line',
         data: {
-        labels: [300,400, 500, 600, 700],
+        labels: [{% for item in charts_avaliacao %} '{{item.created_at__date}}', {% endfor %}],
         datasets: [{ 
-            data: [310,350, 340, 450, 530],
+            data: [{% for item in charts_avaliacao %} {{item.count}}, {% endfor %}],
             label: "Avaliações Cadastradas",
             borderColor: "rgba(46, 49, 146, .6)",
             },
-        ]
-        }
+        ]}
     });
-
-// {% for item in charts_aluno %} {{item.created_count}}{{item.created_at}}{% endfor %}
 })
 </script>
 {% endblock scripts %}

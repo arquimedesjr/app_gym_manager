@@ -108,16 +108,17 @@ def index(request, template_name='dashboard-adm.html'):
     sem_ficha = Aluno.objects.filter(id__in=Ficha_fisica.objects.values('aluno_id')).count()    
 
     # gráficos
-    charts_aluno = Aluno.objects.filter().values('created_at__date').order_by('created_at__date').annotate(sum=Count('id'))
-
-    print(f'Data dos inputs: {charts_aluno}')
+    charts_aluno = Aluno.objects.filter().values('created_at__date').order_by('created_at__date').annotate(count=Count('id'))
+    charts_avaliacao = Ficha_fisica.objects.filter().values('created_at__date').order_by('created_at__date').annotate(count=Count('id'))
+    print(f'Data dos inputs: {charts_avaliacao}')
 
     return render(request, template_name, 
                     { 'aluno' : aluno,
                       'fichas' : fichas,
                       'filtro': campoFiltro,
                       'sem_ficha': sem_ficha,
-                      'charts_aluno':charts_aluno
+                      'charts_aluno':charts_aluno,
+                      'charts_avaliacao': charts_avaliacao
                      })
 
 
