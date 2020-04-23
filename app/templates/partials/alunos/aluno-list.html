@@ -34,7 +34,6 @@
                                             <div class="col-12 col-md-7 col-lg-8">
                                                 <form method="GET" action="">
                                                     <div class="input-group mb-0">
-                                                        
                                                         {{filtro}}
                                                         <div class="input-group-append">
                                                             <button class="btn btn-secondary" type="submit"
@@ -57,6 +56,7 @@
                                                         <a class="btn btn-secondary" style="min-width: auto;" href="?page=1">1</a>
                                                         {% endif %}
                                                         <a class="btn bg-blue text-white" style="min-width: auto;">{{ paginacao.number }} </a>
+                                                        <a class="btn btn-secondary" style="min-width: auto;">...</a>
                                                         <a class="btn btn-secondary" style="min-width: auto;">{{ paginacao.paginator.num_pages }}</a>
                                                     </div>
                                                     <div class="col-auto d-flex px-2">

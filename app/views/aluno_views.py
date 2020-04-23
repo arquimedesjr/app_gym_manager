@@ -34,7 +34,7 @@ def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
         aluno = Aluno.objects.filter(nome__iexact=query)
     else:
         aluno = Aluno.objects.all()
-    paginator = Paginator(aluno, 5)
+    paginator = Paginator(aluno, 2)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     print(f'Query: {query}')
@@ -114,7 +114,8 @@ def historico_avaliacao(request, pk, template_name='partials/alunos/historico-de
         return redirect(f'/listar-aluno/?campoFilter={query}')
 
     entrys = Ficha_fisica.objects.filter(aluno_id=pk)
-    count = Ficha_fisica.objects.annotate(Count('aluno_id'))
+    count = Ficha_fisica.objects.filter(aluno_id=pk).count()
+    print(f'Contador de Fichas: {entrys}')
     if request.method == "POST":
         data = request.POST.copy()
         pkFicha = data.get('pkavaliacao')
