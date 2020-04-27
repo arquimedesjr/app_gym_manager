@@ -57,7 +57,7 @@
                                                         {% endif %}
                                                         <a class="btn bg-blue text-white" style="min-width: auto;">{{ paginacao.number }} </a>
                                                         <a class="btn btn-secondary" style="min-width: auto;">...</a>
-                                                        <a class="btn btn-secondary" style="min-width: auto;">{{ paginacao.paginator.num_pages }}</a>
+                                                        <a class="btn btn-secondary" href="?page={{paginacao.paginator.num_pages}}" style="min-width: auto;">{{ paginacao.paginator.num_pages }}</a>
                                                     </div>
                                                     <div class="col-auto d-flex px-2">
                                                     {% if paginacao.has_next %}

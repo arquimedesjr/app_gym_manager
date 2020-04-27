@@ -92,12 +92,38 @@ $(document).ready(() => {
     new Chart(document.getElementById("chartAluno"), {
     type: 'line',
     data: {
-      labels: [{% for item in charts_aluno %} '{{item.created_at__date}}',{% endfor %}],
+      labels: [{% for item in charts_aluno %} "{{item.created_at__date|date: '%Y'}}",{% endfor %}],
       datasets: [{ 
-          data: [{% for item in charts_aluno %} {{item.count}}, {% endfor %}],
-          label: "Cadastro de aluno",
-          borderColor: "rgba(46, 49, 146, .6)",
-        }]}
+            data: [{% for item in charts_aluno %} {{item.count}}, {% endfor %}],
+            label: "Cadastro de aluno",
+            borderColor: "rgba(46, 49, 146, .6)",
+            backgroundColor: 'rgba(46, 49, 146, .1)',
+            pointBackgroundColor: 'rgba(240, 180, 19, 1)',
+            pointBorderColor: 'rgba(240, 180, 19, 1)',
+        }]},
+        options: {
+        	responsive: true,
+                scaleStartValue: 0,
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            color: "rgba(65, 104, 136, 0.4)",
+                            borderDash: [5, 5],
+                        }
+                    }],
+                    yAxes: [{
+                    gridLines: {
+                        color: "rgba(65, 104, 136, 0.2)",
+                        drawBorder: false,
+                    },
+                    ticks: {
+                        stepSize: 1,
+                        fontColor: "rgba(65, 104, 136, 1)",
+                        fontSize: "12", 
+                        },
+                    }]
+                }
+            }
     });
     // Cria o charts de Avaliações
     new Chart(document.getElementById("chartAvaliacao"), {
@@ -108,8 +134,34 @@ $(document).ready(() => {
             data: [{% for item in charts_avaliacao %} {{item.count}}, {% endfor %}],
             label: "Avaliações Cadastradas",
             borderColor: "rgba(46, 49, 146, .6)",
+            backgroundColor: 'rgba(46, 49, 146, .1)',
+            pointBackgroundColor: 'rgba(240, 180, 19, 1)',
+            pointBorderColor: 'rgba(240, 180, 19, 1)',
             },
-        ]}
+        ]},
+        options: {
+        	responsive: true,
+                scaleStartValue: 0,
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            color: "rgba(65, 104, 136, 0.4)",
+                            borderDash: [5, 5],
+                        }
+                    }],
+                    yAxes: [{
+                    gridLines: {
+                        color: "rgba(65, 104, 136, 0.2)",
+                        drawBorder: false,
+                    },
+                    ticks: {
+                        stepSize: 1,
+                        fontColor: "rgba(65, 104, 136, 1)",
+                        fontSize: "12", 
+                        },
+                    }]
+                }
+            }
     });
 })
 </script>
