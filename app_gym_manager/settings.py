@@ -58,7 +58,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'app_gym_manager.urls'
-LOGIN_URL = 'logar'
+LOGIN_URL = '/'
 LOGOUT_REDIRECT_URL = '/login'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = '' # mail service smtp
