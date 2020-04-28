@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load add_class %}
+{% load filter_date %}
 {% block titlePage %} Detalhes do Aluno {% endblock %}
 {% block content %}
 
@@ -51,7 +52,7 @@
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <canvas id="charts-imc"></canvas>
+                                            <canvas id="chartPercentualDeGordura"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -108,14 +109,14 @@
 <script src="{% static 'js/libs/charts.min.js' %}"></script>
 <script>
     $(document).ready(() => {
-        chartsIMC('1','medida_coxa');
 
-        let campos = [{% for dic in entrys  %} {% for item in dic  %} {{item|stringformat:'f'}}, {% endfor %} {% endfor %}]
-        // let datas = [{%for item in entrys %}{{item.medida_peso|stringformat:'f'}},{% endfor %}];
+        // chartsIMC('1', 'medida_coxa');
+
+        let campos = [{% for i in entrys  %} {{i|stringformat:'f'}}, {% endfor %}]
         new Chart(document.getElementById("bar-chart-grouped"), {
             type: 'bar',
             data: {
-                labels: [{% for dic in entrys  %} {% for item in dic %} '{{item}}', {% endfor %}  {% endfor %}],
+                labels: [{% for dic in dados_entrys  %} '{{dic.created_at|filter_date}}', {% endfor %}],
                 datasets: [
                     {
                         label: "Direito",
@@ -146,12 +147,33 @@
                 }
             }
         });
-    })
+        
+        new Chart(document.getElementById("chartPercentualDeGordura"), {
+            type: 'line',
+            data: {
+            labels: [{% for item in percentual_de_gordura %} '{{item.get_created}}', {% endfor %}],
+            datasets: [{ 
+                data: [{%for item in percentual_de_gordura %} {{item.percentual_gordura|stringformat:'f'}},{% endfor %}],
+                borderColor: "rgba(46, 49, 146, .6)",
+                },
+            ]},
+            options: {
+                legend: {
+                    display: false
+                }
+            }
+        });
+    });
 
-
+    function getValueSelect(e) {
+        let value = $(e).val()
+        console.log(value)
+    }
     function chartsIMC(pk, params) {
         fetch(`/api/${pk}/${params}/`, {
-            method: 'get'
+            method: 'get',
+            data: 'json',
+            dataType: "json",
         })
         .then((response) => {
             response.json()
@@ -159,15 +181,19 @@
             let result = data;
             let campos = []
             let dado = [];
-            $.each(result, (i, chave, value) => {
-                campos.push(`${chave[`${params}`]}`);
-                dado.push(`${chave['created_at']}`);
-            });
+            result.forEach((data, index) => {
+                medida = params;
+                // console.log(`Medida: ${index}`)
+                console.log(`Dias: ${data.fields.params}`);
+                dado.push(data.fields.created_at)
+                campos.push(data.fields.params);
+                debugger;
+            })    
             console.log(campos)
             console.log(dado)
-            debugger;
+            // debugger;
             new Chart(document.getElementById("charts-imc"), {
-                type: 'bar',
+                type: 'line',
                 data: {
                     labels: dado,
                     datasets: [

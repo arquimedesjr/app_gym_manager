@@ -84,8 +84,10 @@ def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html
         return redirect(f'/listar-aluno/?campoFilter={query}')
 
     aluno = Aluno.objects.get(pk=pk)
-    # entrys = Ficha_fisica.objects.filter(aluno_id=pk).order_by('-created_at')[:5]
-    entrys = list(Ficha_fisica.objects.filter(aluno_id=pk).values('medida_biceps').annotate(create_at=Ficha_fisica.objects.filter(aluno_id=pk).values('created_at')))[:5]
+    
+    entrys = Ficha_fisica.objects.filter(aluno_id=pk).values('medida_biceps')[:5]
+    dados_entrys = Ficha_fisica.objects.filter(aluno_id=pk).values('created_at')[:5]
+
     relatorio = RelatorioFisicoAlunov2()
     print(f'Entrys: {entrys}')
 
@@ -93,19 +95,23 @@ def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html
     if request.method == "POST":
         data = request.POST.copy()
         campos = data.get('campos')
-        entrys = list(Ficha_fisica.objects.filter(aluno_id=pk).values_list(f'{campos}', flat=False))[:5]
-        # print(f'Dados: {entrys}')
+        entrys = Ficha_fisica.objects.filter(aluno_id=pk).values(f'{campos}')[:5]
         redirect('/detalhes-aluno/{0}'.format(pk))
 
     # Charts Peso
-    peso = Ficha_fisica.objects.filter(aluno_id=pk).order_by('-created_at')[:5]
+    peso = Ficha_fisica.objects.filter(aluno_id=pk).order_by('created_at')[:5]
+
+    # Charts Peso
+    percentual_de_gordura = Ficha_fisica.objects.filter(aluno_id=pk).order_by('created_at')[:5]
 
     return render(request, template_name,
                  {'aluno': aluno,
                   'entrys': entrys,
+                  'dados_entrys': dados_entrys,
                   'relatorio': relatorio,
                   'filtro': campoFiltro,
-                  'peso': peso
+                  'peso': peso,
+                  'percentual_de_gordura': percentual_de_gordura
                  })
 
 @login_required

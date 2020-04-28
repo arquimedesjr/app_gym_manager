@@ -88,11 +88,12 @@ Dashboard Admin
 <script src="{% static 'js/admin/chartsInsights.js' %}"></script>
 <script>
 $(document).ready(() => {
-    // Cria o charts de Alunos
+    // Cria o charts de alunos
+    
     new Chart(document.getElementById("chartAluno"), {
     type: 'line',
     data: {
-      labels: [{% for item in charts_aluno %} "{{item.created_at__date|date: '%Y'}}",{% endfor %}],
+      labels: [{% for item in charts_aluno %} "{{item.created_at__date}}",{% endfor %}],
       datasets: [{ 
             data: [{% for item in charts_aluno %} {{item.count}}, {% endfor %}],
             label: "Cadastro de aluno",
