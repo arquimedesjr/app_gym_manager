@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load filter_date %}
 {% block titlePage %}
 Dashboard Admin
 {%endblock%}
@@ -93,7 +94,7 @@ $(document).ready(() => {
     new Chart(document.getElementById("chartAluno"), {
     type: 'line',
     data: {
-      labels: [{% for item in charts_aluno %} "{{item.created_at__date}}",{% endfor %}],
+      labels: [{% for item in charts_aluno %} "{{item.created_at__date|filter_date}}",{% endfor %}],
       datasets: [{ 
             data: [{% for item in charts_aluno %} {{item.count}}, {% endfor %}],
             label: "Cadastro de aluno",
@@ -130,7 +131,7 @@ $(document).ready(() => {
     new Chart(document.getElementById("chartAvaliacao"), {
         type: 'line',
         data: {
-        labels: [{% for item in charts_avaliacao %} '{{item.created_at__date}}', {% endfor %}],
+        labels: [{% for item in charts_avaliacao %} '{{item.created_at__date|filter_date}}', {% endfor %}],
         datasets: [{ 
             data: [{% for item in charts_avaliacao %} {{item.count}}, {% endfor %}],
             label: "Avaliações Cadastradas",
