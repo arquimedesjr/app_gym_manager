@@ -22,6 +22,13 @@
                                         <ul class="list-group list-group-horizontal text-white d-block font-italic">
                                             <li class="list-group-item border-0 p-0 bg-transparent d-inline-block">{{aluno.idade}} anos</li>
                                             <li class="list-group-item border-0 p-0 bg-transparent d-inline-block">1,87 de altura</li>
+                                            <li class="list-group-item border-0 p-0 bg-transparent d-inline-block">
+                                            {% if aluno.sexo == 'F' %}
+                                                Feminino
+                                            {% else %}
+                                                Masculino
+                                            {% endif %}
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -53,7 +60,7 @@
                                             </div>
                                         </div>
                                         <div class="card-body">
-                                            <canvas id="bar-chart-grouped"></canvas>
+                                            <canvas id="chartsMedidas"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -67,19 +74,6 @@
                                         </div>
                                         <div class="card-body">
                                             <canvas id="chartPercentualDeGordura"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-5 mb-4 d-none">
-                                    <div class="card">
-                                        <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
-                                            <div class="title d-flex align-items-center">
-                                                <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
-                                                <h2 class="mb-0 h5">IMC</h2>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <canvas id="charts-imc"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +108,7 @@
         chartsIMC('1', 'medida_coxa');
 
         let campos = [{% for i in entrys %} {{i.medida_peito|stringformat:'f'}}, {% endfor %}]
-        new Chart(document.getElementById("bar-chart-grouped"), {
+        new Chart(document.getElementById("chartsMedidas"), {
             type: 'bar',
             data: {
                 labels: [{% for item in entrys  %} '{{item.created_at|filter_date}}', {% endfor %}],
