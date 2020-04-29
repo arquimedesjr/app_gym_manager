@@ -86,7 +86,6 @@ def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html
     aluno = Aluno.objects.get(pk=pk)
     
     entrys = Ficha_fisica.objects.all().filter(aluno_id=pk).values().order_by('created_at')[:5]
-    # dados_entrys = Ficha_fisica.objects.filter(aluno_id=pk).values('created_at')[:5]
 
     relatorio = RelatorioFisicoAlunov2()
     print(f'Entrys: {entrys}')
@@ -95,7 +94,7 @@ def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html
     if request.method == "POST":
         data = request.POST.copy()
         campos = data.get('campos')
-        entrys = Ficha_fisica.objects.filter(aluno_id=pk).values(f'{campos}')[:5]
+        # entrys = Ficha_fisica.objects.all().filter(aluno_id=pk).values(f'{campos}').order_by('created_at')[:5]
         redirect('/detalhes-aluno/{0}'.format(pk))
 
     # Charts Peso

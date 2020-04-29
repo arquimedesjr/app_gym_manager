@@ -104,8 +104,18 @@
 <script src="{% static 'js/libs/charts.min.js' %}"></script>
 <script>
     $(document).ready(() => {
+        
+        // Funções
+        chartPeso();
+        chartPercentualGordura();
 
-        chartsIMC('1', 'medida_coxa');
+        // Função de medidas
+        // chartsMedidcas('1', 'medida_coxa');
+        
+        $('select').on('change', () => {
+            console.log($(this).val());
+        //    chartsMedidcas('1', `${this.value}`);
+        });
 
         let campos = [{% for i in entrys %} {{i.medida_peito|stringformat:'f'}}, {% endfor %}]
         new Chart(document.getElementById("chartsMedidas"), {
@@ -152,7 +162,9 @@
                     }
             }
         });
+    });
 
+    function chartPeso() {
         new Chart(document.getElementById("chartPeso"), {
             type: 'line',
             data: {
@@ -189,8 +201,9 @@
                     }
             }
         });
-        
-        new Chart(document.getElementById("chartPercentualDeGordura"), {
+    }
+    function chartPercentualGordura() {
+                new Chart(document.getElementById("chartPercentualDeGordura"), {
             type: 'line',
             data: {
             labels: [{% for item in percentual_de_gordura %} '{{item.get_created}}', {% endfor %}],
@@ -226,13 +239,13 @@
                     }
             }
         });
-    });
+    }
 
     function getValueSelect(e) {
         let value = $(e).val()
         console.log(value)
     }
-    function chartsIMC(pk, params) {
+    function chartsMedidcas(pk, params) {
         fetch(`/api/${pk}/${params}/`, {
             method: 'get',
             data: 'json',
