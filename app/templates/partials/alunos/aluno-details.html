@@ -22,7 +22,6 @@
                                         <ul class="list-group list-group-horizontal text-white d-block font-italic">
                                             <li class="list-group-item border-0 p-0 bg-transparent d-inline-block">{{aluno.idade}} anos</li>
                                             <li class="list-group-item border-0 p-0 bg-transparent d-inline-block">1,87 de altura</li>
-                                            <li class="list-group-item border-0 p-0 bg-transparent d-inline-block">Iniciante</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -33,7 +32,7 @@
                         </div>
                         <div class="col-12" data-section="atalhos">
                             <div class="row px-0 pt-4">
-                                <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="col-md-6 col-lg-5 mb-4">
                                     <div class="card">
                                         <div class="card-body">
                                         <h2 class="mb-3 h5 text-blue">Selecione o músculo</h2>
@@ -44,19 +43,8 @@
                                         </form>
                                         </div>
                                     </div>
-                                    <div class="card mt-4">
-                                        <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
-                                            <div class="title d-flex align-items-center">
-                                                <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
-                                                <h2 class="mb-0 h5">Porcentagem de gordura</h2>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                            <canvas id="chartPercentualDeGordura"></canvas>
-                                        </div>
-                                    </div>
                                 </div>
-                                <div class="col-md-6 col-lg-8 mb-4">
+                                <div class="col-md-6 col-lg-7 mb-4">
                                     <div class="card">
                                         <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
                                             <div class="title d-flex align-items-center">
@@ -70,6 +58,19 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
+                                            <div class="title d-flex align-items-center">
+                                                <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
+                                                <h2 class="mb-0 h5">Porcentagem de gordura</h2>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <canvas id="chartPercentualDeGordura"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-5 mb-4 d-none">
                                     <div class="card">
                                         <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
                                             <div class="title d-flex align-items-center">
@@ -110,13 +111,13 @@
 <script>
     $(document).ready(() => {
 
-        // chartsIMC('1', 'medida_coxa');
+        chartsIMC('1', 'medida_coxa');
 
-        let campos = [{% for i in entrys  %} {{i|stringformat:'f'}}, {% endfor %}]
+        let campos = [{% for i in entrys %} {{i.medida_peito|stringformat:'f'}}, {% endfor %}]
         new Chart(document.getElementById("bar-chart-grouped"), {
             type: 'bar',
             data: {
-                labels: [{% for dic in dados_entrys  %} '{{dic.created_at|filter_date}}', {% endfor %}],
+                labels: [{% for item in entrys  %} '{{item.created_at|filter_date}}', {% endfor %}],
                 datasets: [
                     {
                         label: "Direito",
@@ -129,6 +130,32 @@
                         data: campos
                     }
                 ]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                responsive: true,
+                    scaleStartValue: 0,
+                    scales: {
+                        xAxes: [{
+                            gridLines: {
+                                color: "rgba(65, 104, 136, 0.4)",
+                                borderDash: [5, 5],
+                            }
+                        }],
+                        yAxes: [{
+                        gridLines: {
+                            color: "rgba(65, 104, 136, 0.2)",
+                            drawBorder: false,
+                        },
+                        ticks: {
+                            stepSize: 2,
+                            fontColor: "rgba(65, 104, 136, 1)",
+                            fontSize: "12", 
+                            },
+                        }]
+                    }
             }
         });
 
@@ -144,7 +171,28 @@
             options: {
                 legend: {
                     display: false
-                }
+                },
+                responsive: true,
+                    scaleStartValue: 0,
+                    scales: {
+                        xAxes: [{
+                            gridLines: {
+                                color: "rgba(65, 104, 136, 0.4)",
+                                borderDash: [5, 5],
+                            }
+                        }],
+                        yAxes: [{
+                        gridLines: {
+                            color: "rgba(65, 104, 136, 0.2)",
+                            drawBorder: false,
+                        },
+                        ticks: {
+                            stepSize: 5,
+                            fontColor: "rgba(65, 104, 136, 1)",
+                            fontSize: "12", 
+                            },
+                        }]
+                    }
             }
         });
         
@@ -160,7 +208,28 @@
             options: {
                 legend: {
                     display: false
-                }
+                },
+                responsive: true,
+                    scaleStartValue: 0,
+                    scales: {
+                        xAxes: [{
+                            gridLines: {
+                                color: "rgba(65, 104, 136, 0.4)",
+                                borderDash: [5, 5],
+                            }
+                        }],
+                        yAxes: [{
+                        gridLines: {
+                            color: "rgba(65, 104, 136, 0.2)",
+                            drawBorder: false,
+                        },
+                        ticks: {
+                            stepSize: 5,
+                            fontColor: "rgba(65, 104, 136, 1)",
+                            fontSize: "12", 
+                            },
+                        }]
+                    }
             }
         });
     });
@@ -181,14 +250,10 @@
             let result = data;
             let campos = []
             let dado = [];
-            result.forEach((data, index) => {
-                medida = params;
-                // console.log(`Medida: ${index}`)
-                console.log(`Dias: ${data.fields.params}`);
-                dado.push(data.fields.created_at)
-                campos.push(data.fields.params);
-                debugger;
-            })    
+            $.each(result, (i, chave, value) => {
+                campos.push(`${chave[`${params}`]}`);
+                dado.push(`${chave['created_at']}`);
+            });   
             console.log(campos)
             console.log(dado)
             // debugger;

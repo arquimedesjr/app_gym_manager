@@ -85,8 +85,8 @@ def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html
 
     aluno = Aluno.objects.get(pk=pk)
     
-    entrys = Ficha_fisica.objects.filter(aluno_id=pk).values('medida_biceps')[:5]
-    dados_entrys = Ficha_fisica.objects.filter(aluno_id=pk).values('created_at')[:5]
+    entrys = Ficha_fisica.objects.all().filter(aluno_id=pk).values().order_by('created_at')[:5]
+    # dados_entrys = Ficha_fisica.objects.filter(aluno_id=pk).values('created_at')[:5]
 
     relatorio = RelatorioFisicoAlunov2()
     print(f'Entrys: {entrys}')
@@ -107,7 +107,6 @@ def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html
     return render(request, template_name,
                  {'aluno': aluno,
                   'entrys': entrys,
-                  'dados_entrys': dados_entrys,
                   'relatorio': relatorio,
                   'filtro': campoFiltro,
                   'peso': peso,
