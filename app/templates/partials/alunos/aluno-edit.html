@@ -4,71 +4,141 @@
 {% load add_class %}
 {% block content %}
 
-  <div class="container-fluid">
-      <div class="row">
-          {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
-          <div class="col-12 col-lg-10" id="content-dashboard">
-              {% include 'partials/menu-topo-dash/topo.html' %}
-              <section class="container-fluid px-0 px-sm-2">
-                  <div class="row">
-                      <div class="col-12 text-white" id="sectionTitlePage">
-                          <h1 class="mb-3 mb-lg-4">Editar Aluno</h1>
-                          <ul class="list-group list-group-horizontal text-white bg-transparent">
-                              <li class="list-group-item border-0 p-0"><a href="{% url 'index' %}"><i class="fas fa-home pr-3"></i> Dashboard</a></li>
-                              <li class="list-group-item border-0 p-0"> Editar aluno</li>
-                          </ul>
-                      </div>
-                      <div class="col-12" data-section="atalhos" id="">
-                          <div class="row px-0 pt-4">
-                              <div class="col-12 col-md-8 col-lg-7 mb-4">
-                                  <div class="card">
-                                      <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
-                                          <div class="title d-flex align-items-center">
-                                              <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
-                                              <h2 class="mb-0 h4">Editar</h2>
-                                          </div>
-                                      </div>
-                                      <div class="card-body">
-                                          <form method="post">
-                                            {% csrf_token %}
-                                              <div class="row">
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                      <label for="{{form.medida_costas.id_for_label}}">Nome:</label>
-                                                      {{form.nome|add_class:'form-control' }}
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-12 col-md-6">
-                                                    <div class="form-group">
-                                                      <label for="{{form.medida_costas.id_for_label}}">CPF:</label>
-                                                      {{form.cpf|add_class:'form-control' }}
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-12 col-md-6">
-                                                    <div class="form-group">
-                                                      <label for="{{form.medida_costas.id_for_label}}">Data de nascimento:</label>
-                                                      {{form.dataNascimento|add_class:'form-control' }}
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-12">
-                                                    <div class="form-group">
-                                                      <label for="{{form.medida_costas.id_for_label}}">E-mail:</label>
-                                                      {{form.email|add_class:'form-control' }}
-                                                    </div>
-                                                  </div>
-                                              </div>
-                                              <button type="submit" class="btn btn-base-blue">Salvar</button>
-                                          </form>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </section>
+<div class="container-fluid">
+  <div class="row">
+    {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
+    <div class="col-12 col-lg-10" id="content-dashboard">
+      {% include 'partials/menu-topo-dash/topo.html' %}
+      <section class="container-fluid px-0 px-sm-2">
+        <div class="row">
+          <div class="col-12 text-white" id="sectionTitlePage">
+            <h1 class="mb-3 mb-lg-4">Editar Aluno</h1>
+            <ul class="list-group list-group-horizontal text-white bg-transparent">
+              <li class="list-group-item border-0 p-0"><a href="{% url 'index' %}"><i class="fas fa-home pr-3"></i>
+                  Dashboard</a></li>
+              <li class="list-group-item border-0 p-0"> Editar aluno</li>
+            </ul>
           </div>
-      </div>
+          <div class="col-12" data-section="atalhos" id="">
+            <div class="row px-0 pt-4">
+              <div class="col-12 mb-4">
+                <div class="card">
+                  <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="title d-flex align-items-center">
+                      <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
+                      <h2 class="mb-0 h4">Editar</h2>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <form method="post">
+                      {% csrf_token %}
+                      <div class="row">
+                        <div class="col-12 col-lg-6">
+                          <div class="form-group">
+                            <label for="{{form.nome.id_for_label}}">Nome:</label>
+                            {{form.nome|add_class:'form-control' }}
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                          <div class="form-group">
+                            <label for="{{form.cpf.id_for_label}}">CPF:</label>
+                            {{form.cpf|add_class:'form-control' }}
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                          <div class="form-group">
+                            <label for="{{form.dataNascimento.id_for_label}}">Data de nascimento:</label>
+                            {{form.dataNascimento|add_class:'form-control' }}
+                          </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                          <div class="form-group">
+                            <label for="{{form.objetivo.id_for_label}}">Objetivo:</label>
+                            {{form.objetivo|add_class:'form-control'}}
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                          <div class="form-group">
+                            <label for="{{form.sexo.id_for_label}}">Sexo:</label>
+                            {{form.sexo|add_class:'form-control'}}
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                          <div class="form-group">
+                            <label for="{{form.idade.id_for_label}}">Idade:</label>
+                            {{form.idade|add_class:'form-control'}}
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label for="{{form.medida_costas.id_for_label}}">E-mail:</label>
+                            {{form.email|add_class:'form-control' }}
+                          </div>
+                        </div>
+                        <div class="col-12 border-bottom mb-2 mb-md-4 pt-3 pb-2 pb-md-3">
+                          <h3 class="mb-0 h5">Informações adicionais</h3>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                          <div class="form-group">
+                            <label for="{{form.problema_de_saude.id_for_label}}">Problemas de saúde?</label>
+                            {{form.problema_de_saude|add_class:'form-control'}}
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                          <div class="form-group">
+                            <label for="{{form.ha_quanto_tempo.id_for_label}}">Há quanto tempo?</label>
+                            {{form.ha_quanto_tempo|add_class:'form-control'}}
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                          <div class="form-group">
+                            <label for="{{form.como_se_encontra.id_for_label}}">Como se encontra?</label>
+                            {{form.como_se_encontra|add_class:'form-control'}}
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                          <div class="form-group">
+                            <label for="{{form.medicamento_utilizado.id_for_label}}">Medicamento utilizado:</label>
+                            {{form.medicamento_utilizado|add_class:'form-control'}}
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                          <div class="form-group">
+                            <label for="{{form.fumante.id_for_label}}">Fumante?</label>
+                            {{form.fumante|add_class:'form-control'}}
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                          <div class="form-group">
+                            <label for="{{form.bebida_alcoolica.id_for_label}}">Bebida alcoólica?</label>
+                            {{form.bebida_alcoolica|add_class:'form-control'}}
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4">
+                          <div class="form-group">
+                            <label for="{{form.habitos_alimentares.id_for_label}}">Hábitos alimentares:</label>
+                            {{form.habitos_alimentares|add_class:'form-control'}}
+                          </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-8">
+                          <div class="form-group">
+                            <label for="{{form.suplementos.id_for_label}}">Suplemento:</label>
+                            {{form.suplementos|add_class:'form-control'}}
+                          </div>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-base-blue">Editar</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   </div>
+</div>
 {% endblock content %}
 
 {% block scripts %}

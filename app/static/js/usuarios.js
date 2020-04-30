@@ -51,7 +51,7 @@ function deleteUser(e) {
     let user = $(e).find('input').val();
     let action = $(e).find('#actionUser').val();
     Swal.fire({
-        html: `<h3 class="mb-3 h4"> Tem certeza que deseja excluir o usuário ${user}?</h3>
+        html: `<h3 class="mb-3 h4"> Tem certeza que deseja excluir o aluno ${user}?</h3>
                 <p class="mb-0"> Você não poderá voltar atrás dessa alteração.</p>`,
         icon: 'warning',
         showCancelButton: true,

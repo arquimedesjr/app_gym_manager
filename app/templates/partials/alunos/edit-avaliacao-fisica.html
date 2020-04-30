@@ -6,119 +6,155 @@
 
 {% if request.user.is_staff %}
 <div class="container-fluid pageEditarAvaliacaoFisica">
-    <div class="row">
-        {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
-        <div class="col-12 col-lg-10" id="content-dashboard">
-            {% include 'partials/menu-topo-dash/topo.html' %}
-            <section class="container-fluid px-0 px-sm-2">
-                <div class="row">
-                    <div class="col-12 text-white" id="sectionTitlePage">
-                        <h1 class="mb-3 mb-lg-4">Editar Avaliação</h1>
-                        <ul class="list-group list-group-horizontal text-white bg-transparent">
-                            <li class="list-group-item border-0 p-0">
-                              <a href="{% url 'index' %}">
-                                <i class="fas fa-home pr-3"></i> Dashboard
-                              </a>
-                            </li>
-                            <li class="list-group-item border-0 p-0">Editar Avaliação</li>
-                        </ul>
+  <div class="row">
+    {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
+    <div class="col-12 col-lg-10" id="content-dashboard">
+      {% include 'partials/menu-topo-dash/topo.html' %}
+      <section class="container-fluid px-0 px-sm-2">
+        <div class="row">
+          <div class="col-12 text-white" id="sectionTitlePage">
+            <h1 class="mb-3 mb-lg-4">Editar Avaliação</h1>
+            <ul class="list-group list-group-horizontal text-white bg-transparent">
+              <li class="list-group-item border-0 p-0">
+                <a href="{% url 'index' %}">
+                  <i class="fas fa-home pr-3"></i> Dashboard
+                </a>
+              </li>
+              <li class="list-group-item border-0 p-0">Editar Avaliação</li>
+            </ul>
+          </div>
+          <div class="col-12" data-section="atalhos" id="">
+            <form method="POST" class="row px-0 pt-4">
+              {% csrf_token %}
+              <div class="col-12 mb-4">
+                <div class="card">
+                  <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="title d-flex align-items-center">
+                      <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
+                      <h2 class="mb-0 h5">Dados da avaliação</h2>
                     </div>
-                    <div class="col-12" data-section="atalhos" id="">
-                      <div class="row px-0 pt-4">
-                          <div class="col-12 mb-4">
-                              <div class="card">
-                                  <div class="card-header d-flex flex-wrap align-items-center justify-content-between">
-                                      <div class="title d-flex align-items-center">
-                                          <img src="{% static 'img/icon-user-run.svg' %}" class="img-fluid pr-3" alt="User">
-                                          <h2 class="mb-0 h4">Dados da avaliação</h2>
-                                      </div>
-                                  </div>
-                                  <div class="card-body">
-                                      <form method="post">
-                                        {% csrf_token %}
-                                        <div class="row">
-                                          {% for message in messages %}
-                                            <div class="col-12">
-                                              <div class="alert alert-warning">
-                                                <a class="close" href="#" data-dismiss="alert">×</a>
-                                                {{ message }}
-                                              </div>
-                                            </div>
-                                          {% endfor %}
-                                        <div class="col-12 col-md-6 col-lg-4">
-                                            <div class="form-group">
-                                              <label for="{{form.medida_peso.id_for_label}}">Peso:</label>
-                                              {{form.medida_peso|add_class:'form-control' }}
-                                            </div>
-                                          </div>
-                                          <div class="col-12 col-md-6 col-lg-4">
-                                            <div class="form-group">
-                                              <label for="{{form.percentual_gordura.id_for_label}}">Percentual de Gordura:</label>
-                                              {{form.percentual_gordura|add_class:'form-control' }}
-                                            </div>
-                                          </div>
-                                            <div class="col-12 col-md-6 col-lg-4">
-                                              <div class="form-group">
-                                                <label for="{{form.medida_costas.id_for_label}}">Medida das Costas:</label>
-                                                {{form.medida_costas|add_class:'form-control' }}
-                                              </div>
-                                            </div>
-                                            <div class="col-12 col-md-6 col-lg-4">
-                                              <div class="form-group">
-                                                <label for="{{form.medida_peito.id_for_label}}">Medida do Peito:</label>
-                                                {{form.medida_peito|add_class:'form-control' }}
-                                              </div>
-                                            </div>
-                                            <div class="col-12 col-md-6 col-lg-4">
-                                              <div class="form-group">
-                                                <label for="{{form.medida_abdome.id_for_label}}">Medida do Abdomen:</label>
-                                                {{form.medida_abdome|add_class:'form-control' }}
-                                              </div>
-                                            </div>
-                                            <div class="col-12 col-md-6 col-lg-4">
-                                              <div class="form-group">
-                                                <label for="{{form.medida_tricpes.id_for_label}}">Medida do Tríceps:</label>
-                                                {{form.medida_tricpes|add_class:'form-control' }}
-                                              </div>
-                                            </div>
-                                            <div class="col-12 col-md-6 col-lg-4">
-                                              <div class="form-group">
-                                                <label for="{{form.medida_biceps.id_for_label}}">Medida do Bíceps:</label>
-                                                {{form.medida_biceps|add_class:'form-control' }}
-                                              </div>
-                                            </div>
-                                            <div class="col-12 col-md-6 col-lg-4">
-                                              <div class="form-group">
-                                                <label for="{{form.medida_coxa.id_for_label}}">Medida do Antebraço:</label>
-                                                {{form.medida_antibraco|add_class:'form-control' }}
-                                              </div>
-                                            </div>
-                                            <div class="col-12 col-md-6 col-lg-4">
-                                              <div class="form-group">
-                                                <label for="{{form.medida_coxa.id_for_label}}">Medida da Coxa:</label>
-                                                {{form.medida_coxa|add_class:'form-control' }}
-                                              </div>
-                                            </div>
-                                            <div class="col-12 col-md-6 col-lg-4">
-                                              <div class="form-group">
-                                                <label for="{{form.medida_panturrilha.id_for_label}}">Medida da Panturrilha:</label>
-                                                {{form.medida_panturrilha|add_class:'form-control' }}
-                                              </div>
-                                            </div>
-                                        </div>
-                                          <button type="submit" class="btn btn-primary btn-base-blue">
-                                              Cadastrar avaliação
-                                          </button>
-                                      </form>
-                                  </div>
-                              </div>
-                          </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      {% for message in messages %}
+                      <div class="col-12">
+                        <div class="alert alert-warning">
+                          <a class="close" href="#" data-dismiss="alert">×</a>
+                          {{ message }}
+                        </div>
                       </div>
+                      {% endfor %}
+                      <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="{{form.aluno.id_for_label}}">Escolha o Aluno:</label>
+                          {{form.aluno|add_class:'form-control' }}
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="{{form.medida_costas.id_for_label}}">Peso:</label>
+                          {{form.medida_peso|add_class:'form-control' }}
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="{{form.medida_costas.id_for_label}}">Percentual de Gordura:</label>
+                          {{form.percentual_gordura|add_class:'form-control' }}
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="{{form.medida_costas.id_for_label}}">Medida das Costas:</label>
+                          {{form.medida_costas|add_class:'form-control' }}
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="{{form.medida_costas.id_for_label}}">Medida do Peito:</label>
+                          {{form.medida_peito|add_class:'form-control' }}
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="{{form.medida_costas.id_for_label}}">Medida do Abdomen:</label>
+                          {{form.medida_abdome|add_class:'form-control' }}
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="{{form.medida_costas.id_for_label}}">Tríceps Esquerdo:</label>
+                          {{form.medida_tricpes_esquerdo|add_class:'form-control' }}
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="{{form.medida_costas.id_for_label}}">Tríceps Direito:</label>
+                          {{form.medida_tricpes_direito|add_class:'form-control' }}
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="{{form.medida_costas.id_for_label}}">Bíceps Esquerdo:</label>
+                          {{form.medida_biceps_esquerdo|add_class:'form-control' }}
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="{{form.medida_costas.id_for_label}}">Bíceps Direito:</label>
+                          {{form.medida_biceps_direito|add_class:'form-control' }}
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="{{form.medida_costas.id_for_label}}">Antebraço Esquerdo:</label>
+                          {{form.medida_antibraco_esquerdo|add_class:'form-control' }}
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="{{form.medida_costas.id_for_label}}">Antebraço Direito:</label>
+                          {{form.medida_antibraco_direito|add_class:'form-control' }}
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="{{form.medida_costas.id_for_label}}">Coxa Esquerda:</label>
+                          {{form.medida_coxa_esquerda|add_class:'form-control' }}
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="{{form.medida_costas.id_for_label}}">Coxa Direita:</label>
+                          {{form.medida_coxa_direita|add_class:'form-control' }}
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="{{form.medida_costas.id_for_label}}">Panturrilha Esquerdo:</label>
+                          {{form.medida_panturrilha_esquerda|add_class:'form-control' }}
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-6 col-lg-4">
+                        <div class="form-group">
+                          <label for="{{form.medida_costas.id_for_label}}">Panturrilha Direita:</label>
+                          {{form.medida_panturrilha_direita|add_class:'form-control' }}
+                        </div>
+                      </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-base-blue">
+                      Cadastrar avaliação
+                    </button>
                   </div>
                 </div>
-            </section>
+              </div>
+            </form>
+          </div>
         </div>
     </div>
+    </section>
+  </div>
+</div>
 </div>
 {% endif %}
 
