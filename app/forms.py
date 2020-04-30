@@ -36,13 +36,11 @@ campos_choices = [
     ('medida_antibraco', 'Medida dos Antebraços'),
     ('medida_coxa', 'Medida das coxas'),
     ('medida_panturrilha', 'Medida Panturrilha'),
-    ('medida_peso', 'Peso'),
-    ('percentual_gordura', 'Percentual de Gordura')
 ]
 
 class RelatorioFisicoAlunov2(forms.Form):
-      campos = forms.ChoiceField(choices=campos_choices, required=False)
-      campos.widget.attrs.update({'class': 'form-control'})
+      filtros = forms.ChoiceField(choices=campos_choices, required=False)
+      filtros.widget.attrs.update({'class': 'form-control'})
 
 
 class FilterAluno(forms.Form):
