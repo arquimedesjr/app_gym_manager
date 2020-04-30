@@ -131,3 +131,17 @@ def historico_avaliacao(request, pk, template_name='partials/alunos/historico-de
         return redirect('/historico-de-avaliacoes/{0}'.format(pk))
     return render(request, template_name, {'avaliacoes': entrys, 'filtro': campoFiltro, 'aluno': aluno })
 
+@login_required
+def details_avaliacao(request, pk, template_name='partials/alunos/avaliacao-detail.html'):
+    # Filtrar Aluno
+    query = request.GET.get("campoFilter")
+    campoFiltro = FilterAluno()
+    if query:
+        return redirect(f'/listar-aluno/?campoFilter={query}')
+
+    aluno = Aluno.objects.filter(pk=pk).values('nome')
+    entrys = Ficha_fisica.objects.filter(id=pk)
+    print(f'Dados do aluno: {aluno}')
+
+    return render(request, template_name, {'avaliacoes': entrys, 'filtro': campoFiltro, 'aluno': aluno })
+

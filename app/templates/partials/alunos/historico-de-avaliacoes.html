@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load filter_date %}
 {% block titlePage %} Histórico de Avaliações {% endblock %}
 {% block content %}
 
@@ -20,9 +21,7 @@
                               </a>
                             </li>
                             <li class="list-group-item border-0 p-0">
-                              <a href="{% url 'aluno_list' %}">
-                                <i class="fas fa-home pr-3"></i> Lista de alunos
-                              </a>
+                              <a href="{% url 'aluno_list' %}">Lista de alunos</a>
                             </li>
                             <li class="list-group-item border-0 p-0">
                               Avaliações do aluno {% for item in aluno  %} {{item.nome}} {% endfor %}
@@ -32,40 +31,36 @@
                     <div class="col-12" data-section="atalhos" id="">
                         <div class="row px-0 pt-4">
                             <div class="col-12 mb-4">
-                              <h2 class="mb-0 h4 text-white">Veja todas as avaliações</h2>
+                              <h2 class="mb-0 h4 text-white">Detalhes da Availação</h2>
                             </div>
-                            {% if form == true %}
+                            {% if avaliacoes %}
                               {% for avaliacao in avaliacoes %}
-                                <div class="col-12 col-sm-6 col-md-4 mb-4">
-                                    <div class="card-group">
-                                      <div class="card">
-                                        <div class="card-header">
-                                        <div class="row">
-                                          <div class="col">
-                                            <h1 class="h5 mb-0">Avaliação {{ avaliacao.id }} </h1>
-                                          </div>
-                                          <div class="col">
-                                            <div class="dropright pl-3 pl-lg-4 d-none d-lg-block">
-                                              <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                  <svg class="float-right" xmlns="http://www.w3.org/2000/svg" width="4" height="20" viewBox="0 0 4 20"><circle cx="2" cy="2" r="2" fill="#828282"/><circle cx="2" cy="2" r="2" transform="translate(0 8)" fill="#828282"/><circle cx="2" cy="2" r="2" transform="translate(0 16)" fill="#828282"/></svg>
-                                              </a>
-                                              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item"  href="{% url 'editar_avaliacao' pk=avaliacao.pk %}">Editar Avaliação</a>
-                                                <a class="dropdown-item" href="#" onclick="deleteAvaliacao($(this))">Deletar
-                                                    <input type="hidden" id="actionUser" value="{{ avaliacao.pk }}">
-                                                </a>
-                                              </div>
-                                            </div>
+                              <div class="col-12 col-sm-6 col-md-4 mb-4">
+                                <div class="card">                                  
+                                  <div class="card-body">
+                                    <div class="row mb-3 mb-lg-4">
+                                      <div class="col">
+                                        <h1 class="h5 mb-0">Avaliação {{ avaliacao.id }} </h1>
+                                      </div>
+                                      <div class="col">
+                                        <div class="dropright pl-3 pl-lg-4 d-none d-lg-block">
+                                          <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                              <svg class="float-right" xmlns="http://www.w3.org/2000/svg" width="4" height="20" viewBox="0 0 4 20"><circle cx="2" cy="2" r="2" fill="#828282"/><circle cx="2" cy="2" r="2" transform="translate(0 8)" fill="#828282"/><circle cx="2" cy="2" r="2" transform="translate(0 16)" fill="#828282"/></svg>
+                                          </a>
+                                          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item"  href="{% url 'editar_avaliacao' pk=avaliacao.pk %}">Editar Avaliação</a>
+                                            <a class="dropdown-item" href="#" onclick="deleteAvaliacao($(this))">Deletar
+                                                <input type="hidden" id="actionUser" value="{{ avaliacao.pk }}">
+                                            </a>
                                           </div>
                                         </div>
-                                      </div>                                   
-                                      <div class="card-body">
-                                        <p class="mb-2">Criada em {{ avaliacao.created_at }}</p> 
-                                        <a href="" class="btn p-0" style="min-width: auto;">Detalhes</a>
                                       </div>
-                                    </div>   
+                                    </div>
+                                    <p class="mb-3">Avaliação cadastrada em {{ avaliacao.created_at|filter_date }}</p> 
+                                    <a href="{% url 'details_avaliacao' pk=avaliacao.pk %}" class="btn p-0" style="min-width: auto;">Detalhes</a>
                                   </div>
-                                </div>                           
+                                </div>
+                              </div>                           
                               {% endfor %}
                             {% else %}
                               <div class="col-12">

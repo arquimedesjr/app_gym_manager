@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filter_date %}
+{% block titlePage %} Detalhes da Avaliação {% endblock %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        {% include 'partials/menu-lateral-dash/menu-lateral.html' %}
+        <div class="col-12 col-lg-10" id="content-dashboard">
+            {% include 'partials/menu-topo-dash/topo.html' %}
+            <section class="container-fluid px-0 px-sm-2">
+                <div class="row">
+                    <div class="col-12 text-white" id="sectionTitlePage">
+                        <h1 class="mb-3 mb-lg-4">Detalhes da Avaliação</h1>
+                        <ul class="list-group list-group-horizontal text-white bg-transparent">
+                            <li class="list-group-item border-0 p-0">
+                              <a href="{% url 'index' %}">
+                                <i class="fas fa-home pr-3"></i> Dashboard
+                              </a>
+                            </li>
+                            <li class="list-group-item border-0 p-0">
+                              <a href="{% url 'aluno_list' %}"> Lista de alunos </a>
+                            </li>
+                            {% for item in avaliacoes  %}
+                                <li class="list-group-item border-0 p-0">
+                                    <a href="{% url 'historico_avaliacao' pk=item.aluno_id %}"> Histórico de avaliações </a>
+                                </li>
+                            {% endfor %}
+                            <li class="list-group-item border-0 p-0"> 
+                              Detalhes da avaliação {% for item in aluno  %} {{item.nome}} {% endfor %}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12" data-section="atalhos" id="">
+                        <div class="row px-0 pt-5">
+                            {% for avaliacao in avaliacoes %}
+                            <div class="col-12 col-sm-6 col-md-4 mb-4">
+                                <div class="card-group">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h1 class="h5 mb-0">Detalhe da Avaliação {{ avaliacao.id }} </h1>
+                                        </div>  
+                                        <div class="card-body">
+                                            <p class="mb-2">Avaliação cadastrada em {{ avaliacao.created_at|filter_date }}</p> 
+                                        </div>                                 
+                                    </div>   
+                                </div>
+                            </div>      
+                            <div class="col-12 d-flex align-items-center">
+                                <a class="btn btn-outline-danger mr-3" href="#" onclick="deleteAvaliacao($(this))">Deletar
+                                    <input type="hidden" id="actionUser" value="{{ avaliacao.pk }}">
+                                </a>
+                                <a href="{% url 'editar_avaliacao' pk=avaliacao.pk %}" class="btn btn-base-yellow">Editar Avaliação</a>
+                            </div>                     
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<form method="POST" class="d-none">
+    {% csrf_token %}
+    <input type="hidden" id="pkavaliacao" value="" name="pkavaliacao">
+</form>
+
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'js/usuarios.js' %}"></script>
+{% endblock %}
