@@ -46,7 +46,8 @@
                                         <form action="" method="POST">
                                             {% csrf_token %}
                                             {{relatorio}}
-                                            <button type="submit" class="btn btn-base-purple-light mt-3">Filtrar</button>
+                                            <input type="hidden" id="idAlunoFiltro" name="{{ aluno.id }}" value="{{aluno.id}}">
+                                            <a href="#" id="filtar_medidas" onClick="FiltrarMedidas($(this))" class="btn btn-base-purple-light mt-3">Filtrar</a>
                                         </form>
                                         </div>
                                     </div>
@@ -59,7 +60,7 @@
                                                 <h2 class="mb-0 h5">Medidas do músculo</h2>
                                             </div>
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body" id="evolucaoMedidas">
                                             <canvas id="chartsMedidas"></canvas>
                                         </div>
                                     </div>
@@ -103,19 +104,17 @@
 {% block scripts %}
 <script src="{% static 'js/libs/charts.min.js' %}"></script>
 <script>
-    $(document).ready(() => {
-        
+    $(document).ready(() => {      
+
+        function FiltrarMedidas(e) {
+            show_selected()
+        }
         // Funções
         chartPeso();
         chartPercentualGordura();
 
         // Função de medidas
         // chartsMedidcas('1', 'medida_coxa');
-        
-        $('select').on('change', () => {
-            console.log($(this).val());
-        //    chartsMedidcas('1', `${this.value}`);
-        });
 
         let campos = [{% for i in entrys %} {{i.medida_peito|stringformat:'f'}}, {% endfor %}]
         new Chart(document.getElementById("chartsMedidas"), {
@@ -164,6 +163,15 @@
         });
     });
 
+
+    function FiltrarMedidas(e) {
+        let selector = document.getElementById('id_campos');
+        let value = selector[selector.selectedIndex].value;
+        let id = $('#idAlunoFiltro').val();
+        chartsMedidcas(id, value);
+        console.log(value);
+    }
+
     function chartPeso() {
         new Chart(document.getElementById("chartPeso"), {
             type: 'line',
@@ -202,8 +210,9 @@
             }
         });
     }
+
     function chartPercentualGordura() {
-                new Chart(document.getElementById("chartPercentualDeGordura"), {
+        new Chart(document.getElementById("chartPercentualDeGordura"), {
             type: 'line',
             data: {
             labels: [{% for item in percentual_de_gordura %} '{{item.get_created}}', {% endfor %}],
@@ -241,10 +250,6 @@
         });
     }
 
-    function getValueSelect(e) {
-        let value = $(e).val()
-        console.log(value)
-    }
     function chartsMedidcas(pk, params) {
         fetch(`/api/${pk}/${params}/`, {
             method: 'get',
@@ -254,18 +259,18 @@
         .then((response) => {
             response.json()
         .then((data) => {
+            $('#chartsMedidas').remove()
+            let novoChartsMedida = '<canvas id="chartsMedidas"></canvas>';
             let result = data;
             let campos = []
             let dado = [];
             $.each(result, (i, chave, value) => {
                 campos.push(`${chave[`${params}`]}`);
                 dado.push(`${chave['created_at']}`);
-            });   
-            console.log(campos)
-            console.log(dado)
-            // debugger;
-            new Chart(document.getElementById("charts-imc"), {
-                type: 'line',
+            });
+            $('#evolucaoMedidas').append(novoChartsMedida);
+            new Chart(document.getElementById("chartsMedidas"), {
+                type: 'bar',
                 data: {
                     labels: dado,
                     datasets: [
@@ -280,6 +285,31 @@
                             data: campos
                         }
                     ]
+                },
+                options: {
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                        scaleStartValue: 0,
+                        scales: {
+                            xAxes: [{
+                                gridLines: {
+                                    color: "rgba(65, 104, 136, 0.4)",
+                                    borderDash: [5, 5],
+                                }
+                            }],
+                            yAxes: [{
+                            gridLines: {
+                                color: "rgba(65, 104, 136, 0.2)",
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                fontColor: "rgba(65, 104, 136, 1)",
+                                fontSize: "12", 
+                                },
+                            }]
+                        }
                 }
             });
         });
