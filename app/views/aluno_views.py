@@ -84,18 +84,10 @@ def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html
         return redirect(f'/listar-aluno/?campoFilter={query}')
 
     aluno = Aluno.objects.get(pk=pk)
-    
+    altura_aluno = Ficha_fisica.objects.filter(aluno_id=pk).values('medida_altura').order_by('created_at')[:1]
     entrys = Ficha_fisica.objects.all().filter(aluno_id=pk).values().order_by('created_at')[:5]
-
-    relatorio = RelatorioFisicoAlunov2()
-    print(f'Entrys: {entrys}')
-
-    # Filtro de dados
-    if request.method == "POST":
-        data = request.POST.copy()
-        campos = data.get('campos')
-        # entrys = Ficha_fisica.objects.all().filter(aluno_id=pk).values(f'{campos}').order_by('created_at')[:5]
-        redirect('/detalhes-aluno/{0}'.format(pk))
+    print(f'Altura do ALuno')
+    filtro_de_musculos = RelatorioFisicoAlunov2()
 
     # Charts Peso
     peso = Ficha_fisica.objects.filter(aluno_id=pk).order_by('created_at')[:5]
@@ -106,10 +98,11 @@ def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html
     return render(request, template_name,
                  {'aluno': aluno,
                   'entrys': entrys,
-                  'relatorio': relatorio,
+                  'filtro_de_musculos': filtro_de_musculos,
                   'filtro': campoFiltro,
                   'peso': peso,
-                  'percentual_de_gordura': percentual_de_gordura
+                  'percentual_de_gordura': percentual_de_gordura,
+                  'altura_aluno': altura_aluno
                  })
 
 @login_required
