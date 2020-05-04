@@ -16,6 +16,11 @@ def api(request, pk, param):
         query_list = MySerializer().serialize(
                                     Ficha_fisica.objects.filter(aluno_id=pk).order_by('-created_at')[:5],
                                     fields=['created_at', '{}_direita'.format(param), '{}_esquerda'.format(param)])
+    
+    elif param == 'medida_peito' or param == 'medida_abdomen' or param == 'medida_costas':
+        query_list = MySerializer().serialize(
+                                    Ficha_fisica.objects.filter(aluno_id=pk).order_by('-created_at')[:5],
+                                    fields=['created_at', '{}'.format(param)])
 
     medidas = []
 

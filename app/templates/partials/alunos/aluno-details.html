@@ -166,11 +166,10 @@
         let selector = document.getElementById('id_filtros');
         let value = selector[selector.selectedIndex].value;
         let id = $('#idAlunoFiltro').val();
-        if( value == 'medida_antebraco' || value == 'medida_triceps' || value == 'medida_biceps') {
-            debugger;
+        if( value == 'medida_antebraco' || value == 'medida_triceps' || value == 'medida_biceps' || value == 'medida_panturrilha' || value == 'medida_coxa') {
             chartsMedidas(id, value);
-        } else {
-
+        } else if (value == 'medida_costas' || value == 'medida_abdomen' || value == 'medida_peito') {
+            chartsMedidasUnica(id, value);
         }
 
         console.log(value);
@@ -269,11 +268,19 @@
             let medida_direita = []
             let medida_esquerda = []
             let dado = [];
-            $.each(result, (i, chave, value) => {
-                medida_direita.push(`${chave[`${params}_direito`]}`);
-                medida_esquerda.push(`${chave[`${params}_esquerdo`]}`);
-                dado.push(`${chave['created_at']}`);
-            });
+            if(params == 'medida_coxa' || params == 'medida_panturrilha' ) {
+                $.each(result, (i, chave, value) => {
+                    medida_direita.push(`${chave[`${params}_direita`]}`);
+                    medida_esquerda.push(`${chave[`${params}_esquerda`]}`);
+                    dado.push(`${chave['created_at']}`);
+                });
+            } else {
+                $.each(result, (i, chave, value) => {
+                    medida_direita.push(`${chave[`${params}_direito`]}`);
+                    medida_esquerda.push(`${chave[`${params}_esquerdo`]}`);
+                    dado.push(`${chave['created_at']}`);
+                });
+            }
             $('#evolucaoMedidas').append(novoChartsMedida);
             new Chart(document.getElementById("chartsMedidas"), {
                 type: 'bar',
@@ -289,6 +296,70 @@
                             label: "Esquerdo",
                             backgroundColor: "#F0B413",
                             data: medida_esquerda
+                        }
+                    ]
+                },
+                options: {
+                    legend: {
+                        display: false
+                    },
+                    responsive: true,
+                        scaleStartValue: 0,
+                        scales: {
+                            xAxes: [{
+                                gridLines: {
+                                    color: "rgba(65, 104, 136, 0.4)",
+                                    borderDash: [5, 5],
+                                }
+                            }],
+                            yAxes: [{
+                            gridLines: {
+                                color: "rgba(65, 104, 136, 0.2)",
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                fontColor: "rgba(65, 104, 136, 1)",
+                                fontSize: "12", 
+                                },
+                            }]
+                        }
+                }
+            });
+        });
+        })
+        .catch(function(error) {
+            console.log('Operação deu erro: ' + error.message);
+        });
+    }
+
+    function chartsMedidasUnica(pk, params) {
+        fetch(`/api/${pk}/${params}/`, {
+            method: 'get',
+            data: 'json',
+            dataType: "json",
+        })
+        .then((response) => {
+            response.json()
+        .then((data) => {   
+            $('#chartsMedidas').remove()
+            let novoChartsMedida = '<canvas id="chartsMedidas"></canvas>';
+            let result = data;
+            let resultado_medidas = []
+            let dado = [];
+            $.each(result, (i, chave, value) => {
+                resultado_medidas.push(`${chave[`${params}`]}`);
+                dado.push(`${chave['created_at']}`);
+            });
+            $('#evolucaoMedidas').append(novoChartsMedida);
+            new Chart(document.getElementById("chartsMedidas"), {
+                type: 'bar',
+                data: {
+                    labels: dado,
+                    datasets: [
+                        {
+                            label: "Direito",
+                            backgroundColor: "#F0B413",
+                            data: resultado_medidas
                         }
                     ]
                 },
