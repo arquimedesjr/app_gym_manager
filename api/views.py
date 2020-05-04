@@ -6,12 +6,16 @@ from .serializer import MySerializer
 # Create your views here.
 @login_required
 def api(request, pk, param):
-    aluno = list(Ficha_fisica.objects.filter(aluno_id=pk).values(param, 'created_at').order_by('-created_at'))[:5]
-    date = Ficha_fisica.objects.filter(aluno_id=pk).values(param).dates('created_at', 'day')
+    print(f'Params: {param}')
+    if param == 'medida_antebraco' or param == 'medida_triceps' or param == 'medida_biceps':
+        query_list = MySerializer().serialize(
+                                    Ficha_fisica.objects.filter(aluno_id=pk).order_by('-created_at')[:5],
+                                    fields=['created_at', '{}_direito'.format(param), '{}_esquerdo'.format(param)])
 
-    query_list = MySerializer().serialize(
-                                Ficha_fisica.objects.filter(aluno_id=pk).order_by('-created_at')[:5],
-                                fields=['created_at', f'{param}'])
+    elif param == 'medida_coxa' or param == 'medida_panturrilha':
+        query_list = MySerializer().serialize(
+                                    Ficha_fisica.objects.filter(aluno_id=pk).order_by('-created_at')[:5],
+                                    fields=['created_at', '{}_direita'.format(param), '{}_esquerda'.format(param)])
 
     medidas = []
 
