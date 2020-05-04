@@ -30,10 +30,10 @@ class RelatorioFisicoAluno(ModelForm):
 campos_choices = [
     ('medida_peito', 'Medida do peito'),
     ('medida_costas', 'Medida das costas'),
-    ('medida_abdome', 'Medida do Abdomem'),
-    ('medida_tricpes', 'Medida dos tríceps'),
+    ('medida_abdomen', 'Medida do Abdomem'),
+    ('medida_triceps', 'Medida dos tríceps'),
     ('medida_biceps', 'Medida dos bíceps'),
-    ('medida_antibraco', 'Medida dos Antebraços'),
+    ('medida_antebraco', 'Medida dos Antebraços'),
     ('medida_coxa', 'Medida das coxas'),
     ('medida_panturrilha', 'Medida Panturrilha'),
 ]

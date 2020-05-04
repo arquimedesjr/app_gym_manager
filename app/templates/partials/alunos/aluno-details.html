@@ -106,9 +106,6 @@
 <script>
     $(document).ready(() => {      
 
-        function FiltrarMedidas(e) {
-            show_selected()
-        }
         // Funções
         chartPeso();
         chartPercentualGordura();
@@ -166,7 +163,7 @@
 
 
     function FiltrarMedidas(e) {
-        let selector = document.getElementById('id_campos');
+        let selector = document.getElementById('id_filtros');
         let value = selector[selector.selectedIndex].value;
         let id = $('#idAlunoFiltro').val();
         chartsMedidcas(id, value);
