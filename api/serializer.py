@@ -8,3 +8,4 @@ class MySerializer(Serializer):
             self._current['created_at'] = value.strftime('%d/%m/%Y')
         else:
             super(MySerializer, self).handle_field(obj, field)
+

@@ -18,8 +18,6 @@ def cadastrar_avaliacao_fisica(request, template_name='partials/alunos/add-avali
         if form.is_valid():
             data = request.POST.copy()
             aluno_id = data.get('aluno')
-            print(f'Dados: {data}')
-            print(f'ID do aluno: {aluno_id}')
             form.save()
             return redirect(f'/historico-de-avaliacoes/{aluno_id}')
         else: 

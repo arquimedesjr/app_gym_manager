@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from app.models import Aluno, Ficha_fisica
 from .serializer import MySerializer
+from .calculos.evolucao_fisica import evolucao_fisica
 
 # Create your views here.
 @login_required
@@ -26,7 +27,13 @@ def api(request, pk, param):
     for item in query_list:
         medidas.append(item['fields'])
 
-    data_medida = medidas[0]
-    print('Data medida: {}'.format(data_medida.get('created_at')))
+    primeira_medida = medidas[0]
+    primeira_medida_direita = primeira_medida.get(f'{param}_direito')
+    primeira_medida_esquerda = primeira_medida.get(f'{param}_esquerdo')
+    evolucao_fisica(primeira_medida_direita, primeira_medida_esquerda)
+    segunda_medida = medidas[1]
+    segunda_medida_direita = primeira_medida.get(f'{param}_direito')
+    segunda_medida_esquerda = primeira_medida.get(f'{param}_esquerdo')
+    evolucao_fisica(segunda_medida_direita, segunda_medida_esquerda)
 
     return JsonResponse(medidas, safe=False)
