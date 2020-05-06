@@ -37,7 +37,6 @@ def listar_aluno(request, template_name="partials/alunos/aluno-list.html"):
     paginator = Paginator(aluno, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    print(f'Query: {query}')
 
     # Excluir Aluno
     if request.method == "POST":
@@ -86,7 +85,6 @@ def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html
     aluno = Aluno.objects.get(pk=pk)
     altura_aluno = Ficha_fisica.objects.filter(aluno_id=pk).values('medida_altura').order_by('created_at')[:1]
     entrys = Ficha_fisica.objects.all().filter(aluno_id=pk).values().order_by('created_at')[:5]
-    print(f'Altura do ALuno')
     filtro_de_musculos = RelatorioFisicoAlunov2()
 
     # Charts Peso
@@ -115,7 +113,7 @@ def historico_avaliacao(request, pk, template_name='partials/alunos/historico-de
     aluno = Aluno.objects.filter(pk=pk).values('nome')
     entrys = Ficha_fisica.objects.filter(aluno_id=pk)
     count = Ficha_fisica.objects.filter(aluno_id=pk).count()
-    print(f'Dados do aluno: {aluno}')
+
     if request.method == "POST":
         data = request.POST.copy()
         pkFicha = data.get('pkavaliacao')
@@ -134,7 +132,6 @@ def details_avaliacao(request, pk, template_name='partials/alunos/avaliacao-deta
 
     aluno = Aluno.objects.filter(pk=pk).values('nome')
     entrys = Ficha_fisica.objects.filter(id=pk)
-    print(f'Dados do aluno: {aluno}')
 
     return render(request, template_name, {'avaliacoes': entrys, 'filtro': campoFiltro, 'aluno': aluno })
 

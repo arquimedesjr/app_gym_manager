@@ -113,8 +113,6 @@ def index(request, template_name='dashboard-adm.html'):
 
     dias = Ficha_fisica.objects.filter().extra({'date_created' : "date(created_at)"}).values('created_at').annotate(created_count=Count('id'))
 
-    print(f'Data: {charts_avaliacao}')
-
     return render(request, template_name, 
                     { 'aluno' : aluno,
                       'fichas' : fichas,

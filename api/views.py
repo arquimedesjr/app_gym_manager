@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from app.models import Aluno, Ficha_fisica
 from .serializer import MySerializer
 from .calculos.evolucao_fisica import evolucao_fisica
+from .calculos.get_medidas import get_medidas
 
 # Create your views here.
 @login_required
@@ -11,6 +12,7 @@ def api(request, pk, param):
         query_list = MySerializer().serialize(
                                     Ficha_fisica.objects.filter(aluno_id=pk).order_by('-created_at')[:5],
                                     fields=['created_at', '{}_direito'.format(param), '{}_esquerdo'.format(param)])
+        param_direito = True
 
     elif param == 'medida_coxa' or param == 'medida_panturrilha':
         query_list = MySerializer().serialize(
@@ -26,14 +28,10 @@ def api(request, pk, param):
 
     for item in query_list:
         medidas.append(item['fields'])
-
-    primeira_medida = medidas[0]
-    primeira_medida_direita = primeira_medida.get(f'{param}_direito')
-    primeira_medida_esquerda = primeira_medida.get(f'{param}_esquerdo')
-    evolucao_fisica(primeira_medida_direita, primeira_medida_esquerda)
-    segunda_medida = medidas[1]
-    segunda_medida_direita = primeira_medida.get(f'{param}_direito')
-    segunda_medida_esquerda = primeira_medida.get(f'{param}_esquerdo')
-    evolucao_fisica(segunda_medida_direita, segunda_medida_esquerda)
+    
+    # if param_direito == True:
+    #     print('param direito')    
+    #     result_get_medidas = get_medidas(medidas, param)
+    #     medidas.append(result_get_medidas)
 
     return JsonResponse(medidas, safe=False)
