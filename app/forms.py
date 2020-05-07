@@ -40,7 +40,9 @@ campos_choices = [
 
 class RelatorioFisicoAlunov2(forms.Form):
       filtros = forms.ChoiceField(choices=campos_choices, required=False)
+      quantidade_de_avaliacoes = forms.IntegerField(required=False, label="Quantidade de visualizações")
       filtros.widget.attrs.update({'class': 'form-control'})
+      quantidade_de_avaliacoes.widget.attrs.update({'class': 'form-control'})
 
 
 class FilterAluno(forms.Form):

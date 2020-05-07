@@ -84,14 +84,14 @@ def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html
 
     aluno = Aluno.objects.get(pk=pk)
     altura_aluno = Ficha_fisica.objects.filter(aluno_id=pk).values('medida_altura').order_by('-created_at')[:1]
-    entrys = Ficha_fisica.objects.all().filter(aluno_id=pk).values().order_by('created_at')[:5]
+    entrys = Ficha_fisica.objects.all().filter(aluno_id=pk).values().order_by('created_at')[:6]
     filtro_de_musculos = RelatorioFisicoAlunov2()
 
     # Charts Peso
-    peso = Ficha_fisica.objects.filter(aluno_id=pk).order_by('created_at')[:5]
+    peso = Ficha_fisica.objects.filter(aluno_id=pk).order_by('created_at')[:6]
 
     # Charts Peso
-    percentual_de_gordura = Ficha_fisica.objects.filter(aluno_id=pk).order_by('created_at')[:5]
+    percentual_de_gordura = Ficha_fisica.objects.filter(aluno_id=pk).order_by('created_at')[:6]
 
     return render(request, template_name,
                  {'aluno': aluno,

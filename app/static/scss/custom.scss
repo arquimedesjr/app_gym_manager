@@ -303,6 +303,14 @@ color: #f0b413 !important;
     }
 }
 
+#alunos_details {
+    form {
+        label[for='id_quantidade_de_avaliacoes'] {
+            padding-top: .8rem;
+        }
+    }
+}
+
 [data-section="listAlunos"] {
     [data-id="listAlunosItem"] {
         transition: .7s all ease-out;

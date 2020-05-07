@@ -16,10 +16,11 @@ class GetMedidas():
 
             musculo_direito = CalculadorEvolucaoFisica().evolucao_fisica(primeira_medida_direita, segunda_medida_direta)
             musculo_esquerdo = CalculadorEvolucaoFisica().evolucao_fisica(primeira_medida_esquerda, segunda_medida_esquerda)
-            return {
-                    'evolucao_musculo_direito': musculo_direito,
-                    'evolucao_musculo_esquerdo': musculo_esquerdo
-                    }
+            return { 'evolucao': {
+                        'evolucao_musculo_direito': musculo_direito,
+                        'evolucao_musculo_esquerdo': musculo_esquerdo
+                        }
+                  }
 
     def get_medidas_esquerda(self, medidas, param):
         if len(medidas) >= 2:
@@ -36,7 +37,8 @@ class GetMedidas():
 
             musculo_direito = CalculadorEvolucaoFisica().evolucao_fisica(primeira_medida_direita, segunda_medida_direta)
             musculo_esquerdo = CalculadorEvolucaoFisica().evolucao_fisica(primeira_medida_esquerda, segunda_medida_esquerda)
-            return {
-                    'evolucao_musculo_direito': musculo_direito,
-                    'evolucao_musculo_esquerdo': musculo_esquerdo
+            return { 'evolucao': {
+                        'evolucao_musculo_direito': musculo_direito,
+                        'evolucao_musculo_esquerdo': musculo_esquerdo
+                        }
                     }

@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12" data-section="atalhos">
+                        <div class="col-12" data-section="atalhos" id="alunos_details">
                             <div class="row px-0 pt-4">
                                 <div class="col-md-6 col-lg-5 mb-4">
                                     <div class="card">
@@ -166,10 +166,12 @@
         let selector = document.getElementById('id_filtros');
         let value = selector[selector.selectedIndex].value;
         let id = $('#idAlunoFiltro').val();
+        let qtd_de_avaliacoes = $('#id_quantidade_de_avaliacoes').val();
+        console.log(`Quantidade de avaliações: ${qtd_de_avaliacoes}`)
         if( value == 'medida_antebraco' || value == 'medida_triceps' || value == 'medida_biceps' || value == 'medida_panturrilha' || value == 'medida_coxa') {
-            chartsMedidas(id, value);
+            chartsMedidas(id, value, qtd_de_avaliacoes);
         } else if (value == 'medida_costas' || value == 'medida_abdomen' || value == 'medida_peito') {
-            chartsMedidasUnica(id, value);
+            chartsMedidasUnica(id, value, qtd_de_avaliacoes);
         }
 
         console.log(value);
@@ -257,8 +259,8 @@
         });
     }
 
-    function chartsMedidas(pk, params) {
-        fetch(`/api/${pk}/${params}/`, {
+    function chartsMedidas(pk, params, qtd_de_avaliacoes) {
+        fetch(`/api/${pk}/${params}/?filter=${qtd_de_avaliacoes}`, {
             method: 'get',
             data: 'json',
             dataType: "json",
@@ -283,8 +285,12 @@
                     medida_direita.push(`${chave[`${params}_direito`]}`);
                     medida_esquerda.push(`${chave[`${params}_esquerdo`]}`);
                     dado.push(`${chave['created_at']}`);
+                    debugger;
                 });
             }
+            console.log(`Medida direita: ${medida_direita}`)
+            console.log(`Medida esquerda: ${medida_esquerda}`)
+            
             $('#evolucaoMedidas').append(novoChartsMedida);
             new Chart(document.getElementById("chartsMedidas"), {
                 type: 'bar',
@@ -336,8 +342,8 @@
         });
     }
 
-    function chartsMedidasUnica(pk, params) {
-        fetch(`/api/${pk}/${params}/`, {
+    function chartsMedidasUnica(pk, params, qtd_de_avaliacoes) {
+        fetch(`/api/${pk}/${params}/?filter=${qtd_de_avaliacoes}`, {
             method: 'get',
             data: 'json',
             dataType: "json",
