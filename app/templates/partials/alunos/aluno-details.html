@@ -361,8 +361,10 @@
             let resultado_medidas = []
             let dado = [];
             $.each(result, (i, chave, value) => {
-                resultado_medidas.push(`${chave[`${params}`]}`);
-                dado.push(`${chave['created_at']}`);
+                if(chave[`${params}`]) {
+                    resultado_medidas.push(`${chave[`${params}`]}`);
+                    dado.push(`${chave['created_at']}`);
+                }
             });
             $('#evolucaoMedidas').append(novoChartsMedida);
             new Chart(document.getElementById("chartsMedidas"), {
