@@ -35,13 +35,13 @@ def api(request, pk, param):
     for item in query_list:
         medidas.append(item['fields'])
     
-    # if len(medidas) >=2:    
-    #     if param_direito == True:
-    #         print('param direito')    
-    #         result_get_medidas = GetMedidas().get_medidas_direita(medidas, param)
-    #         medidas.append(result_get_medidas)
-    #     elif param_esquerdo == True:
-    #         result_get_medidas = GetMedidas().get_medidas_esquerda(medidas, param)
-    #         medidas.append(result_get_medidas)
+    if len(medidas) >=2:    
+        if param_direito == True:
+            print('param direito')    
+            result_get_medidas = GetMedidas().get_medidas_direita(medidas, param)
+            medidas.append(result_get_medidas)
+        elif param_esquerdo == True:
+            result_get_medidas = GetMedidas().get_medidas_esquerda(medidas, param)
+            medidas.append(result_get_medidas)
 
     return JsonResponse(medidas, safe=False)

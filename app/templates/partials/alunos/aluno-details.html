@@ -276,16 +276,19 @@
             let dado = [];
             if(params == 'medida_coxa' || params == 'medida_panturrilha' ) {
                 $.each(result, (i, chave, value) => {
-                    medida_direita.push(`${chave[`${params}_direita`]}`);
-                    medida_esquerda.push(`${chave[`${params}_esquerda`]}`);
-                    dado.push(`${chave['created_at']}`);
+                    if(chave[`${params}_direita`]) {
+                        medida_direita.push(`${chave[`${params}_direita`]}`);
+                        medida_esquerda.push(`${chave[`${params}_esquerda`]}`);
+                        dado.push(`${chave['created_at']}`);
+                    }
                 });
             } else {
                 $.each(result, (i, chave, value) => {
-                    medida_direita.push(`${chave[`${params}_direito`]}`);
-                    medida_esquerda.push(`${chave[`${params}_esquerdo`]}`);
-                    dado.push(`${chave['created_at']}`);
-                    debugger;
+                    if(chave[`${params}_direito`]) {   
+                        medida_direita.push(`${chave[`${params}_direito`]}`);
+                        medida_esquerda.push(`${chave[`${params}_esquerdo`]}`);
+                        dado.push(`${chave['created_at']}`);
+                    }
                 });
             }
             console.log(`Medida direita: ${medida_direita}`)
