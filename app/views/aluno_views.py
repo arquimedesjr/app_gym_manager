@@ -83,7 +83,7 @@ def details_aluno(request, pk, template_name='partials/alunos/aluno-details.html
         return redirect(f'/listar-aluno/?campoFilter={query}')
 
     aluno = Aluno.objects.get(pk=pk)
-    altura_aluno = Ficha_fisica.objects.filter(aluno_id=pk).values('medida_altura').order_by('created_at')[:1]
+    altura_aluno = Ficha_fisica.objects.filter(aluno_id=pk).values('medida_altura').order_by('-created_at')[:1]
     entrys = Ficha_fisica.objects.all().filter(aluno_id=pk).values().order_by('created_at')[:5]
     filtro_de_musculos = RelatorioFisicoAlunov2()
 
