@@ -326,14 +326,15 @@
                                 }
                             }],
                             yAxes: [{
-                            gridLines: {
-                                color: "rgba(65, 104, 136, 0.2)",
-                                drawBorder: false,
-                            },
-                            ticks: {
-                                fontColor: "rgba(65, 104, 136, 1)",
-                                fontSize: "12", 
+                                gridLines: {
+                                    color: "rgba(65, 104, 136, 0.2)",
+                                    drawBorder: false,
                                 },
+                                ticks: {
+                                    fontColor: "rgba(65, 104, 136, 1)",
+                                    fontSize: "12", 
+                                    min: 10,
+                                    },
                             }]
                         }
                 }
@@ -396,7 +397,8 @@
                             },
                             ticks: {
                                 fontColor: "rgba(65, 104, 136, 1)",
-                                fontSize: "12", 
+                                fontSize: "12",
+                                min: 10
                                 },
                             }]
                         }
