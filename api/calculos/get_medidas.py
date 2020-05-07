@@ -16,12 +16,11 @@ class GetMedidas():
 
             musculo_direito = CalculadorEvolucaoFisica().evolucao_fisica(primeira_medida_direita, segunda_medida_direta)
             musculo_esquerdo = CalculadorEvolucaoFisica().evolucao_fisica(primeira_medida_esquerda, segunda_medida_esquerda)
-            return { 'evolucao': {
-                        'evolucao_musculo_direito': musculo_direito,
-                        'evolucao_musculo_esquerdo': musculo_esquerdo
-                        }
-                  }
-
+            return {
+                    'evolucao_musculo_direito': musculo_direito,
+                    'evolucao_musculo_esquerdo': musculo_esquerdo
+                    }
+                    
     def get_medidas_esquerda(self, medidas, param):
         if len(medidas) >= 2:
             segunda_medida = medidas[1]
@@ -37,8 +36,22 @@ class GetMedidas():
 
             musculo_direito = CalculadorEvolucaoFisica().evolucao_fisica(primeira_medida_direita, segunda_medida_direta)
             musculo_esquerdo = CalculadorEvolucaoFisica().evolucao_fisica(primeira_medida_esquerda, segunda_medida_esquerda)
-            return { 'evolucao': {
-                        'evolucao_musculo_direito': musculo_direito,
-                        'evolucao_musculo_esquerdo': musculo_esquerdo
-                        }
+            return {
+                    'evolucao_musculo_direito': musculo_direito,
+                    'evolucao_musculo_esquerdo': musculo_esquerdo
+                    }
+    def get_medidas_unicas(self, medidas, param):
+        if len(medidas) >= 2:
+            segunda_medida = medidas[1]
+            primeira_medida = medidas[0]
+
+            #Primeir medida
+            primeira_medida_unica = primeira_medida.get(f'{param}')
+
+            #Segunda medida
+            segunda_medida_unica = segunda_medida.get(f'{param}')
+
+            musculo_direito = CalculadorEvolucaoFisica().evolucao_fisica(primeira_medida_unica, segunda_medida_unica)
+            return {
+                    'evolucao_musculo': musculo_direito
                     }

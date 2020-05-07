@@ -43,5 +43,8 @@ def api(request, pk, param):
         elif param_esquerdo == True:
             result_get_medidas = GetMedidas().get_medidas_esquerda(medidas, param)
             medidas.append(result_get_medidas)
+        elif param_unico == True:
+            result_get_medidas = GetMedidas().get_medidas_unicas(medidas, param)
+            medidas.append(result_get_medidas)
 
     return JsonResponse(medidas, safe=False)
